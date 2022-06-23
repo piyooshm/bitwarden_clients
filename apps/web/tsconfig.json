@@ -24,6 +24,7 @@
     "src/models/*.ts",
     "src/services/*.ts",
     "src/abstractions/*.ts",
-    "src/**/*.stories.ts"
+    "src/**/*.stories.ts",
+    "../../libs/common/src/workers/*.ts"
   ]
 }
