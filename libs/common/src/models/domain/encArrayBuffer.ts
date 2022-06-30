@@ -1,25 +1,25 @@
 import { EncryptionType } from "@bitwarden/common/enums/encryptionType";
 
 export class EncArrayBuffer {
-  encType: EncryptionType = null;
+  readonly encType: EncryptionType = null;
 
-  ctBytes: ArrayBuffer = null;
-  ivBytes: ArrayBuffer = null;
-  macBytes: ArrayBuffer = null;
+  readonly ctBytes: ArrayBuffer = null;
+  readonly ivBytes: ArrayBuffer = null;
+  readonly macBytes: ArrayBuffer = null;
 
-  constructor(public buffer: ArrayBuffer) {
+  constructor(readonly buffer: ArrayBuffer) {
     const encBytes = new Uint8Array(buffer);
+    const encType = encBytes[0];
 
-    this.encType = encBytes[0];
-
-    switch (this.encType) {
+    switch (encType) {
       case EncryptionType.AesCbc128_HmacSha256_B64:
       case EncryptionType.AesCbc256_HmacSha256_B64:
         if (encBytes.length <= 49) {
           // 1 + 16 + 32 + ctLength
-          return null;
+          return;
         }
 
+        this.encType = encType;
         this.ivBytes = encBytes.slice(1, 17).buffer;
         this.macBytes = encBytes.slice(17, 49).buffer;
         this.ctBytes = encBytes.slice(49).buffer;
@@ -27,14 +27,15 @@ export class EncArrayBuffer {
       case EncryptionType.AesCbc256_B64:
         if (encBytes.length <= 17) {
           // 1 + 16 + ctLength
-          return null;
+          return;
         }
 
+        this.encType = encType;
         this.ivBytes = encBytes.slice(1, 17).buffer;
         this.ctBytes = encBytes.slice(17).buffer;
         break;
       default:
-        return null;
+        return;
     }
   }
 }

@@ -52,4 +52,15 @@ describe("encArrayBuffer", () => {
       expect(actual.macBytes).toBeNull();
     });
   });
+
+  it("doesn't parse the buffer if invalid", () => {
+    const invalidBuffer = makeStaticByteArray(10, 1);
+    const actual = new EncArrayBuffer(invalidBuffer.buffer);
+
+    expect(actual.buffer).not.toBeNull();
+    expect(actual.ctBytes).toBeNull();
+    expect(actual.encType).toBeNull();
+    expect(actual.ivBytes).toBeNull();
+    expect(actual.macBytes).toBeNull();
+  });
 });
