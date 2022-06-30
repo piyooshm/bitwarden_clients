@@ -8,7 +8,6 @@ import { EncryptService } from "@bitwarden/common/services/encrypt.service";
 
 import { makeStaticByteArray } from "../utils";
 
-
 describe("EncryptService", () => {
   const cryptoFunctionService = mock<CryptoFunctionService>();
   const logService = mock<LogService>();
