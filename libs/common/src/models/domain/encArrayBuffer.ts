@@ -38,4 +38,16 @@ export class EncArrayBuffer {
         return;
     }
   }
+
+  get iv() {
+    return new Uint8Array(this.ivBytes);
+  }
+
+  get mac() {
+    return new Uint8Array(this.macBytes);
+  }
+
+  get ct() {
+    return new Uint8Array(this.ctBytes);
+  }
 }
