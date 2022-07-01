@@ -1,3 +1,19 @@
-<div>
-  <div class="tw-mb-3"></div>
+<div class="tw-container tw-mb-3">
+  <h2 class="tw-text-base tw-mb-3">Billing Plan</h2>
+  <div class="tw-flex tw-items-center tw-mb-3">
+    <label class="tw-block tw-text-main" for="billingPlan">
+      <input
+        checked
+        class="tw-w-4 tw-h-4 tw-align-middle"
+        id="billingPlan"
+        name="BillingPlan"
+        type="radio"
+      />
+      <span class="tw-ml-1">{{ billingPlan }}</span>
+    </label>
+  </div>
+
+  <h2 class="tw-text-base tw-mb-3">Payment Type</h2>
+  <app-payment [hideCredit]="true"></app-payment>
+  <app-tax-info></app-tax-info>
 </div>

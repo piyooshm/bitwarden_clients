@@ -9,6 +9,7 @@ import { first } from "rxjs";
 export class TrialInitiationComponent implements OnInit {
   email = "";
   org = "teams";
+  plan = "Annual - $36.00/yr";
 
   constructor(private route: ActivatedRoute) {}
 
