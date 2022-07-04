@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { LayoutComponent } from "./layout.component";
-import { NavigationComponent } from "./navigation.component";
-import { SecretsComponent } from "./secrets/secrets.component";
+import { LayoutComponent } from "./layout/layout.component";
+import { NavigationComponent } from "./layout/navigation.component";
+import { SecretsModule } from "./secrets/secrets.module";
 
 const routes: Routes = [
   {
@@ -16,8 +16,12 @@ const routes: Routes = [
         outlet: "sidebar",
       },
       {
+        path: "secrets",
+        loadChildren: () => SecretsModule,
+      },
+      {
         path: "",
-        component: SecretsComponent,
+        redirectTo: "secrets",
       },
     ],
   },

@@ -6,14 +6,13 @@ import { JslibModule } from "@bitwarden/angular/jslib.module";
 
 import { OssModule } from "src/app/oss.module";
 
-import { LayoutComponent } from "./layout.component";
-import { NavigationComponent } from "./navigation.component";
-import { SecretsComponent } from "./secrets/secrets.component";
+import { LayoutComponent } from "./layout/layout.component";
+import { NavigationComponent } from "./layout/navigation.component";
 import { SecretsManagerRoutingModule } from "./sm-routing.module";
 
 @NgModule({
   imports: [CommonModule, FormsModule, OssModule, JslibModule, SecretsManagerRoutingModule],
-  declarations: [LayoutComponent, NavigationComponent, SecretsComponent],
+  declarations: [LayoutComponent, NavigationComponent],
   providers: [],
 })
 export class SecretsManagerModule {}
