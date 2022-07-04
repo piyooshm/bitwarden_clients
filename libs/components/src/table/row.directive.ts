@@ -1,4 +1,4 @@
-import { HostBinding, Directive, Input } from "@angular/core";
+import { HostBinding, Directive } from "@angular/core";
 
 @Directive({
   selector: "tr[bitRow]",
