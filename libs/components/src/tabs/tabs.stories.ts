@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { RouterTestingModule } from "@angular/router/testing";
+import { RouterModule } from "@angular/router";
 import { Meta, moduleMetadata, Story } from "@storybook/angular";
 
 import { TabGroupComponent } from "./tab-group.component";
@@ -45,13 +45,16 @@ export default {
       ],
       imports: [
         CommonModule,
-        RouterTestingModule.withRoutes([
-          { path: "", redirectTo: "active", pathMatch: "full" },
-          { path: "active", component: ActiveDummyComponent },
-          { path: "item-2", component: ItemTwoDummyComponent },
-          { path: "item-3", component: ItemThreeDummyComponent },
-          { path: "disabled", component: DisabledDummyComponent },
-        ]),
+        RouterModule.forRoot(
+          [
+            { path: "", redirectTo: "active", pathMatch: "full" },
+            { path: "active", component: ActiveDummyComponent },
+            { path: "item-2", component: ItemTwoDummyComponent },
+            { path: "item-3", component: ItemThreeDummyComponent },
+            { path: "disabled", component: DisabledDummyComponent },
+          ],
+          { useHash: true }
+        ),
       ],
     }),
   ],
