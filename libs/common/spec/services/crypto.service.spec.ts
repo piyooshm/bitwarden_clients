@@ -6,6 +6,8 @@ import { LogService } from "@bitwarden/common/abstractions/log.service";
 import { PlatformUtilsService } from "@bitwarden/common/abstractions/platformUtils.service";
 import { StateService } from "@bitwarden/common/abstractions/state.service";
 import { EncryptionType } from "@bitwarden/common/enums/encryptionType";
+import { Utils } from "@bitwarden/common/misc/utils";
+import { EncString } from "@bitwarden/common/models/domain/encString";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
 import { CryptoService } from "@bitwarden/common/services/crypto.service";
 
@@ -150,6 +152,34 @@ describe("cryptoService", () => {
       const actual = await cryptoService.decryptFromBytes(encArray.buffer, key);
 
       expect(actual).toBeNull();
+    });
+  });
+
+  describe("aesDecryptToBytes", () => {
+    it("decrypts correctly", async () => {
+      const encType = EncryptionType.AesCbc256_HmacSha256_B64;
+      const key = mock<SymmetricCryptoKey>();
+      key.macKey = makeStaticByteArray(16, 40);
+      key.encKey = makeStaticByteArray(10, 50);
+      key.encType = encType;
+
+      const encString = new EncString(encType + ".iv|data|mac");
+
+      const decryptedBytes = makeStaticByteArray(10, 100);
+
+      cryptoFunctionService.hmac.mockResolvedValue(makeStaticByteArray(1).buffer);
+      cryptoFunctionService.compare.mockResolvedValue(true);
+      cryptoFunctionService.aesDecrypt.mockResolvedValueOnce(decryptedBytes);
+
+      const actual = await cryptoService.decryptToBytes(encString, key);
+
+      expect(cryptoFunctionService.aesDecrypt).toBeCalledWith(
+        (expect as any).isBufferEqualTo(Utils.fromB64ToArray(encString.data)),
+        (expect as any).isBufferEqualTo(Utils.fromB64ToArray(encString.iv)),
+        (expect as any).isBufferEqualTo(key.encKey)
+      );
+
+      expect(new Uint8Array(actual)).toEqual(decryptedBytes);
     });
   });
 });
