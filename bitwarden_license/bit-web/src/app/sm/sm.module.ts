@@ -9,10 +9,11 @@ import { OssModule } from "src/app/oss.module";
 import { LayoutComponent } from "./layout/layout.component";
 import { NavigationComponent } from "./layout/navigation.component";
 import { SecretsManagerRoutingModule } from "./sm-routing.module";
+import { SMGuard } from "./sm.guard";
 
 @NgModule({
   imports: [CommonModule, FormsModule, OssModule, JslibModule, SecretsManagerRoutingModule],
   declarations: [LayoutComponent, NavigationComponent],
-  providers: [],
+  providers: [SMGuard],
 })
 export class SecretsManagerModule {}
