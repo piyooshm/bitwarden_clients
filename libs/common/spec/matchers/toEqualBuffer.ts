@@ -1,4 +1,4 @@
-export const isBufferEqualTo: jest.CustomMatcher = function (
+export const toEqualBuffer: jest.CustomMatcher = function (
   received: ArrayBuffer,
   expected: Uint8Array | ArrayBuffer
 ) {

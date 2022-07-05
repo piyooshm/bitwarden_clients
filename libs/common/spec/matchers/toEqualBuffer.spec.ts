@@ -1,25 +1,25 @@
 import { makeStaticByteArray } from "../utils";
 
-describe("isBufferEqualTo custom matcher", () => {
+describe("toEqualBuffer custom matcher", () => {
   it("matches identical ArrayBuffers", () => {
     const array = makeStaticByteArray(10);
-    expect(array.buffer).isBufferEqualTo(array.buffer);
+    expect(array.buffer).toEqualBuffer(array.buffer);
   });
 
   it("matches an identical ArrayBuffer and Uint8Array", () => {
     const array = makeStaticByteArray(10);
-    expect(array.buffer).isBufferEqualTo(array);
+    expect(array.buffer).toEqualBuffer(array);
   });
 
   it("doesn't match different ArrayBuffers", () => {
     const array1 = makeStaticByteArray(10);
     const array2 = makeStaticByteArray(10, 11);
-    expect(array1.buffer).not.isBufferEqualTo(array2.buffer);
+    expect(array1.buffer).not.toEqualBuffer(array2.buffer);
   });
 
   it("doesn't match a different ArrayBuffer and Uint8Array", () => {
     const array1 = makeStaticByteArray(10);
     const array2 = makeStaticByteArray(10, 11);
-    expect(array1.buffer).not.isBufferEqualTo(array2);
+    expect(array1.buffer).not.toEqualBuffer(array2);
   });
 });

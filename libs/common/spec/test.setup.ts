@@ -1,6 +1,6 @@
 import { webcrypto } from "crypto";
 
-import { isBufferEqualTo } from "../spec/matchers/isBufferEqualTo";
+import { toEqualBuffer } from "./matchers/toEqualBuffer";
 
 Object.defineProperty(window, "crypto", {
   value: webcrypto,
@@ -9,11 +9,11 @@ Object.defineProperty(window, "crypto", {
 // Add custom matchers
 
 expect.extend({
-  isBufferEqualTo,
+  toEqualBuffer: toEqualBuffer,
 });
 
 interface CustomMatchers<R = unknown> {
-  isBufferEqualTo(expected: Uint8Array | ArrayBuffer): R;
+  toEqualBuffer(expected: Uint8Array | ArrayBuffer): R;
 }
 
 /* eslint-disable */

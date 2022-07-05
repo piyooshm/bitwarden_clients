@@ -79,12 +79,12 @@ describe("EncryptService", () => {
       const actual = await encryptService.decryptToBytes(encBuffer, key);
 
       expect(cryptoFunctionService.aesDecrypt).toBeCalledWith(
-        expect.isBufferEqualTo(encBuffer.ctBytes),
-        expect.isBufferEqualTo(encBuffer.ivBytes),
-        expect.isBufferEqualTo(key.encKey)
+        expect.toEqualBuffer(encBuffer.ctBytes),
+        expect.toEqualBuffer(encBuffer.ivBytes),
+        expect.toEqualBuffer(key.encKey)
       );
 
-      expect(actual).isBufferEqualTo(decryptedBytes);
+      expect(actual).toEqualBuffer(decryptedBytes);
     });
 
     it("compares macs", async () => {
@@ -97,14 +97,14 @@ describe("EncryptService", () => {
       await encryptService.decryptToBytes(encBuffer, key);
 
       expect(cryptoFunctionService.hmac).toBeCalledWith(
-        expect.isBufferEqualTo(expectedMacData),
+        expect.toEqualBuffer(expectedMacData),
         key.macKey,
         "sha256"
       );
 
       expect(cryptoFunctionService.compare).toBeCalledWith(
-        expect.isBufferEqualTo(encBuffer.macBytes),
-        expect.isBufferEqualTo(computedMac)
+        expect.toEqualBuffer(encBuffer.macBytes),
+        expect.toEqualBuffer(computedMac)
       );
     });
 
