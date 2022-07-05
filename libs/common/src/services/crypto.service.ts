@@ -15,7 +15,6 @@ import { Utils } from "../misc/utils";
 import { EEFLongWordList } from "../misc/wordlist";
 import { EncArrayBuffer } from "../models/domain/encArrayBuffer";
 import { EncString } from "../models/domain/encString";
-import { EncryptedObject } from "../models/domain/encryptedObject";
 import { SymmetricCryptoKey } from "../models/domain/symmetricCryptoKey";
 import { ProfileOrganizationResponse } from "../models/response/profileOrganizationResponse";
 import { ProfileProviderOrganizationResponse } from "../models/response/profileProviderOrganizationResponse";
@@ -505,25 +504,16 @@ export class CryptoService implements CryptoServiceAbstraction {
     return this.buildEncKey(key, encKey.key);
   }
 
-  /**
-   * ENCRYPT METHODS
-   */
+  // ---ENCRYPTION---
+  // These methods resolve the key and then call encryptService.
+  // This should be refactored so that callers get their own key and give it to encryptService directly,
+  // then these methods should be removed.
 
-  /**
-   * @deprecated June 22 2022: This method has been moved to encryptService.
-   * If possible, call encryptService directly with the key you want to use.
-   * This method will be removed once all existing code has been refactored to use encryptService.
-   */
   async encrypt(plainValue: string | ArrayBuffer, key?: SymmetricCryptoKey): Promise<EncString> {
     key = await this.getKeyForEncryption(key);
     return await this.encryptService.encrypt(plainValue, key);
   }
 
-  /**
-   * @deprecated July 5, 2022: This method has been moved to encryptService.
-   * If possible, call encryptService directly with the key you want to use.
-   * This method will be removed once all existing code has been refactored to use encryptService.
-   */
   async encryptToBytes(plainValue: ArrayBuffer, key?: SymmetricCryptoKey): Promise<EncArrayBuffer> {
     key = await this.getKeyForEncryption(key);
     return this.encryptService.encryptToBytes(plainValue, key);
@@ -541,9 +531,10 @@ export class CryptoService implements CryptoServiceAbstraction {
     return new EncString(EncryptionType.Rsa2048_OaepSha1_B64, Utils.fromBufferToB64(encBytes));
   }
 
-  /**
-   * DECRYPT METHODS
-   */
+  // ---DECRYPTION---
+  // These methods resolve the key and then call encryptService.
+  // This should be refactored so that callers get their own key and give it to encryptService directly,
+  // then these methods should be removed.
 
   async rsaDecrypt(encValue: string, privateKeyValue?: ArrayBuffer): Promise<ArrayBuffer> {
     const headerPieces = encValue.split(".");
@@ -598,33 +589,18 @@ export class CryptoService implements CryptoServiceAbstraction {
     return this.cryptoFunctionService.rsaDecrypt(data, privateKey, alg);
   }
 
-  /**
-   * @deprecated July 5, 2022: This method has been moved to encryptService.
-   * If possible, call encryptService directly with the key you want to use.
-   * This method will be removed once all existing code has been refactored to use encryptService.
-   */
   async decryptToBytes(encString: EncString, key?: SymmetricCryptoKey): Promise<ArrayBuffer> {
     const keyForEnc = await this.getKeyForEncryption(key);
     const theKey = await this.resolveLegacyKey(encString.encryptionType, keyForEnc);
     return this.encryptService.decryptToBytes(encString, theKey);
   }
 
-  /**
-   * @deprecated July 5, 2022: This method has been moved to encryptService.
-   * If possible, call encryptService directly with the key you want to use.
-   * This method will be removed once all existing code has been refactored to use encryptService.
-   */
   async decryptToUtf8(encString: EncString, key?: SymmetricCryptoKey): Promise<string> {
     key = await this.getKeyForEncryption(key);
     key = await this.resolveLegacyKey(encString.encryptionType, key);
     return await this.encryptService.decryptToUtf8(encString, key);
   }
 
-  /**
-   * @deprecated July 5, 2022: This method has been moved to encryptService.
-   * If possible, call encryptService directly with the key you want to use.
-   * This method will be removed once all existing code has been refactored to use encryptService.
-   */
   async decryptFromBytes(buffer: ArrayBuffer, key: SymmetricCryptoKey): Promise<ArrayBuffer> {
     if (buffer == null) {
       throw new Error("No buffer provided for decryption.");
@@ -690,7 +666,8 @@ export class CryptoService implements CryptoServiceAbstraction {
     return true;
   }
 
-  // Helpers
+  // ---HELPERS---
+
   protected async storeKey(key: SymmetricCryptoKey, userId?: string) {
     if (await this.shouldStoreKey(KeySuffixOptions.Auto, userId)) {
       await this.stateService.setCryptoMasterKeyAuto(key.keyB64, { userId: userId });
