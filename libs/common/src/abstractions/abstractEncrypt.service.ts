@@ -9,5 +9,6 @@ export abstract class AbstractEncryptService {
     plainValue: ArrayBuffer,
     key?: SymmetricCryptoKey
   ) => Promise<EncArrayBuffer>;
-  abstract decryptToUtf8(encString: EncString, key: SymmetricCryptoKey): Promise<string>;
+  abstract decryptToUtf8: (encString: EncString, key: SymmetricCryptoKey) => Promise<string>;
+  abstract decryptToBytes: (encString: EncString, key: SymmetricCryptoKey) => Promise<ArrayBuffer>;
 }

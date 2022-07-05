@@ -10,6 +10,7 @@ import { Utils } from "@bitwarden/common/misc/utils";
 import { EncString } from "@bitwarden/common/models/domain/encString";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
 import { CryptoService } from "@bitwarden/common/services/crypto.service";
+import { EncryptService } from "@bitwarden/common/services/encrypt.service";
 
 import { makeStaticByteArray } from "../utils";
 
@@ -44,20 +45,21 @@ ${expected}`,
 });
 
 describe("cryptoService", () => {
+  let encryptService: EncryptService;
   let cryptoService: CryptoService;
 
   const cryptoFunctionService = mock<CryptoFunctionService>();
-  const encryptService = mock<AbstractEncryptService>();
   const platformUtilService = mock<PlatformUtilsService>();
   const logService = mock<LogService>();
   const stateService = mock<StateService>();
 
   beforeEach(() => {
     mockReset(cryptoFunctionService);
-    mockReset(encryptService);
     mockReset(platformUtilService);
     mockReset(logService);
     mockReset(stateService);
+
+    encryptService = new EncryptService(cryptoFunctionService, logService, false);
 
     cryptoService = new CryptoService(
       cryptoFunctionService,

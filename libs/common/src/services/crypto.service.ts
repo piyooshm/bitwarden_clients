@@ -595,15 +595,10 @@ export class CryptoService implements CryptoServiceAbstraction {
   }
 
   async decryptToBytes(encString: EncString, key?: SymmetricCryptoKey): Promise<ArrayBuffer> {
-    const iv = Utils.fromB64ToArray(encString.iv).buffer;
-    const data = Utils.fromB64ToArray(encString.data).buffer;
-    const mac = encString.mac ? Utils.fromB64ToArray(encString.mac).buffer : null;
-    const decipher = await this.aesDecryptToBytes(encString.encryptionType, data, iv, mac, key);
-    if (decipher == null) {
-      return null;
-    }
+    const keyForEnc = await this.getKeyForEncryption(key);
+    const theKey = await this.resolveLegacyKey(encString.encryptionType, keyForEnc);
 
-    return decipher;
+    return this.encryptService.decryptToBytes(encString, theKey);
   }
 
   async decryptToUtf8(encString: EncString, key?: SymmetricCryptoKey): Promise<string> {
