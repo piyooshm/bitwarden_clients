@@ -14,6 +14,8 @@ export class TabItemComponent {
   get baseClassList(): string {
     return [
       "tw-block",
+      "tw-relative",
+      this.disabled ? "tw-z-0" : "tw-z-20",
       "tw-py-2",
       "tw-px-4",
       "tw-leading-5",
