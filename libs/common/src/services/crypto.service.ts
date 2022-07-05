@@ -607,49 +607,17 @@ export class CryptoService implements CryptoServiceAbstraction {
     return await this.encryptService.decryptToUtf8(encString, key);
   }
 
-  async decryptFromBytes(encBuf: ArrayBuffer, key: SymmetricCryptoKey): Promise<ArrayBuffer> {
-    if (encBuf == null) {
-      throw new Error("no encBuf.");
+  async decryptFromBytes(buffer: ArrayBuffer, key: SymmetricCryptoKey): Promise<ArrayBuffer> {
+    if (buffer == null) {
+      throw new Error("No buffer provided for decryption.");
     }
 
-    const encBytes = new Uint8Array(encBuf);
-    const encType = encBytes[0];
-    let ctBytes: Uint8Array = null;
-    let ivBytes: Uint8Array = null;
-    let macBytes: Uint8Array = null;
+    const encBuffer = new EncArrayBuffer(buffer);
 
-    switch (encType) {
-      case EncryptionType.AesCbc128_HmacSha256_B64:
-      case EncryptionType.AesCbc256_HmacSha256_B64:
-        if (encBytes.length <= 49) {
-          // 1 + 16 + 32 + ctLength
-          return null;
-        }
+    key = await this.getKeyForEncryption(key);
+    key = await this.resolveLegacyKey(encBuffer.encType, key);
 
-        ivBytes = encBytes.slice(1, 17);
-        macBytes = encBytes.slice(17, 49);
-        ctBytes = encBytes.slice(49);
-        break;
-      case EncryptionType.AesCbc256_B64:
-        if (encBytes.length <= 17) {
-          // 1 + 16 + ctLength
-          return null;
-        }
-
-        ivBytes = encBytes.slice(1, 17);
-        ctBytes = encBytes.slice(17);
-        break;
-      default:
-        return null;
-    }
-
-    return await this.aesDecryptToBytes(
-      encType,
-      ctBytes.buffer,
-      ivBytes.buffer,
-      macBytes != null ? macBytes.buffer : null,
-      key
-    );
+    return this.encryptService.decryptFromBytes(encBuffer, key);
   }
 
   // EFForg/OpenWireless

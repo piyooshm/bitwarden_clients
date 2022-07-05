@@ -114,6 +114,20 @@ export class EncryptService implements AbstractEncryptService {
     return decipher;
   }
 
+  async decryptFromBytes(encBuffer: EncArrayBuffer, key: SymmetricCryptoKey): Promise<ArrayBuffer> {
+    if (key == null) {
+      throw new Error("No key provided for decryption.");
+    }
+
+    return this.aesDecryptToBytes(
+      encBuffer.encType,
+      encBuffer.ctBytes,
+      encBuffer.ivBytes,
+      encBuffer.macBytes != null ? encBuffer.macBytes : null,
+      key
+    );
+  }
+
   private async aesEncrypt(data: ArrayBuffer, key: SymmetricCryptoKey): Promise<EncryptedObject> {
     const obj = new EncryptedObject();
     obj.key = key;
