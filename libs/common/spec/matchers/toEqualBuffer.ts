@@ -1,3 +1,9 @@
+/**
+ * The inbuilt toEqual() matcher will always return TRUE when provided with 2 ArrayBuffers.
+ * This is because an ArrayBuffer must be wrapped in a new Uint8Array to be accessible.
+ * This custom matcher will automatically instantiate a new Uint8Array on the recieved value
+ * (and optionally, the expected value) and then call toEqual() on the resulting Uint8Arrays.
+ */
 export const toEqualBuffer: jest.CustomMatcher = function (
   received: ArrayBuffer,
   expected: Uint8Array | ArrayBuffer
