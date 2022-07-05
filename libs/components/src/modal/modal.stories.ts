@@ -3,6 +3,7 @@ import { Meta, Story, moduleMetadata } from "@storybook/angular";
 
 import { ModalBodyComponent } from "./modal-body.component";
 import { ModalContainerComponent } from "./modal-container.component";
+import { ModalFooterComponent } from "./modal-footer.component";
 import { ModalTitleComponent } from "./modal-title.component";
 
 export default {
@@ -10,7 +11,12 @@ export default {
   component: ModalContainerComponent,
   decorators: [
     moduleMetadata({
-      declarations: [ModalContainerComponent, ModalBodyComponent, ModalTitleComponent],
+      declarations: [
+        ModalContainerComponent,
+        ModalBodyComponent,
+        ModalTitleComponent,
+        ModalFooterComponent,
+      ],
       imports: [CommonModule],
     }),
   ],
@@ -22,11 +28,15 @@ const Template: Story<ModalContainerComponent> = (args: ModalContainerComponent)
   <bit-modal-container>
 
     <bit-modal-title>
-     <p>Modal Title</p>
+     Modal Title
     </bit-modal-title>
     <bit-modal-body>
       Modal body text goes here.
     </bit-modal-body>
+    <bit-modal-footer>
+      <button> Save </button>
+      <button> Cancel </button>
+    </bit-modal-footer>
   </bit-modal-container>
   `,
 });

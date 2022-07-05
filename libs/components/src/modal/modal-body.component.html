@@ -1,7 +1,11 @@
-<!--Need to add tw-absolute for actual popup  -->
-<!-- Popup shell -->
+<!-- Modal Body-->
 <div
-  class="tw-top-4 tw-left-4 tw-mt-20 tw-ml-4 tw-w-64 tw-h-12 tw-font-normal tw-text-base tw-text-main tw-flex-none tw-order-none tw-self-stretch tw-grow-0"
+  class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-4 tw-w-[300px] tw-h-20 tw-flex-none tw-order-1 tw-self-stretch tw-grow-0"
 >
-  <ng-content></ng-content>
+  <!-- Modal Body Text-->
+  <div
+    class="tw-w-[268px] tw-h-12 tw-font-sans tw-not-italic tw-font-normal tw-text-base tw-text-main tw-flex-none tw-order-none tw-self-stretch tw-grow-0"
+  >
+    <ng-content></ng-content>
+  </div>
 </div>
