@@ -1,7 +1,7 @@
 import { EncryptionType } from "@bitwarden/common/enums/encryptionType";
 
 export class EncArrayBuffer {
-  readonly encType: EncryptionType = null;
+  readonly encryptionType: EncryptionType = null;
 
   readonly ctBytes: ArrayBuffer = null;
   readonly ivBytes: ArrayBuffer = null;
@@ -19,7 +19,7 @@ export class EncArrayBuffer {
           return;
         }
 
-        this.encType = encType;
+        this.encryptionType = encType;
         this.ivBytes = encBytes.slice(1, 17).buffer;
         this.macBytes = encBytes.slice(17, 49).buffer;
         this.ctBytes = encBytes.slice(49).buffer;
@@ -30,7 +30,7 @@ export class EncArrayBuffer {
           return;
         }
 
-        this.encType = encType;
+        this.encryptionType = encType;
         this.ivBytes = encBytes.slice(1, 17).buffer;
         this.ctBytes = encBytes.slice(17).buffer;
         break;

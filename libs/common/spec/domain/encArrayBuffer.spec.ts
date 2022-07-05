@@ -25,7 +25,7 @@ describe("encArrayBuffer", () => {
       const actualMac = new Uint8Array(actual.macBytes);
       const actualCipherText = new Uint8Array(actual.ctBytes);
 
-      expect(actual.encType).toEqual(encType);
+      expect(actual.encryptionType).toEqual(encType);
       expect(actualIv).toEqual(iv);
       expect(actualMac).toEqual(mac);
       expect(actualCipherText).toEqual(cipherText);
@@ -46,7 +46,7 @@ describe("encArrayBuffer", () => {
       const actualIv = new Uint8Array(actual.ivBytes);
       const actualCipherText = new Uint8Array(actual.ctBytes);
 
-      expect(actual.encType).toEqual(encType);
+      expect(actual.encryptionType).toEqual(encType);
       expect(actualIv).toEqual(iv);
       expect(actualCipherText).toEqual(cipherText);
       expect(actual.macBytes).toBeNull();
@@ -59,7 +59,7 @@ describe("encArrayBuffer", () => {
 
     expect(actual.buffer).not.toBeNull();
     expect(actual.ctBytes).toBeNull();
-    expect(actual.encType).toBeNull();
+    expect(actual.encryptionType).toBeNull();
     expect(actual.ivBytes).toBeNull();
     expect(actual.macBytes).toBeNull();
   });

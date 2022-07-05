@@ -119,4 +119,16 @@ export class EncString {
     }
     return this.decryptedValue;
   }
+
+  get ivBytes(): ArrayBuffer {
+    return this.iv == null ? null : Utils.fromB64ToArray(this.iv).buffer;
+  }
+
+  get macBytes(): ArrayBuffer {
+    return this.mac == null ? null : Utils.fromB64ToArray(this.mac).buffer;
+  }
+
+  get ctBytes(): ArrayBuffer {
+    return this.data == null ? null : Utils.fromB64ToArray(this.data).buffer;
+  }
 }

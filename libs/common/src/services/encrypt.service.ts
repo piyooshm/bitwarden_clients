@@ -98,20 +98,27 @@ export class EncryptService implements AbstractEncryptService {
     return this.cryptoFunctionService.aesDecryptFast(fastParams);
   }
 
-  async decryptToBytes(encString: EncString, key: SymmetricCryptoKey): Promise<ArrayBuffer> {
+  async decryptToBytes(
+    encStringOrBuffer: EncString | EncArrayBuffer,
+    key: SymmetricCryptoKey
+  ): Promise<ArrayBuffer> {
     if (key == null) {
       throw new Error("No key provided for decryption.");
     }
 
-    const iv = Utils.fromB64ToArray(encString.iv).buffer;
-    const data = Utils.fromB64ToArray(encString.data).buffer;
-    const mac = encString.mac ? Utils.fromB64ToArray(encString.mac).buffer : null;
-    const decipher = await this.aesDecryptToBytes(encString.encryptionType, data, iv, mac, key);
-    if (decipher == null) {
+    const result = this.aesDecryptToBytes(
+      encStringOrBuffer.encryptionType,
+      encStringOrBuffer.ctBytes,
+      encStringOrBuffer.ivBytes,
+      encStringOrBuffer.macBytes != null ? encStringOrBuffer.macBytes : null,
+      key
+    );
+
+    if (result == null) {
       return null;
     }
 
-    return decipher;
+    return result;
   }
 
   async decryptFromBytes(encBuffer: EncArrayBuffer, key: SymmetricCryptoKey): Promise<ArrayBuffer> {
@@ -120,7 +127,7 @@ export class EncryptService implements AbstractEncryptService {
     }
 
     return this.aesDecryptToBytes(
-      encBuffer.encType,
+      encBuffer.encryptionType,
       encBuffer.ctBytes,
       encBuffer.ivBytes,
       encBuffer.macBytes != null ? encBuffer.macBytes : null,
