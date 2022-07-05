@@ -1,4 +1,4 @@
-import { mock, mockClear } from "jest-mock-extended";
+import { mock, mockReset } from "jest-mock-extended";
 
 import { AbstractEncryptService } from "@bitwarden/common/abstractions/abstractEncrypt.service";
 import { CryptoFunctionService } from "@bitwarden/common/abstractions/cryptoFunction.service";
@@ -53,11 +53,11 @@ describe("cryptoService", () => {
   const stateService = mock<StateService>();
 
   beforeEach(() => {
-    mockClear(cryptoFunctionService);
-    mockClear(encryptService);
-    mockClear(platformUtilService);
-    mockClear(logService);
-    mockClear(stateService);
+    mockReset(cryptoFunctionService);
+    mockReset(encryptService);
+    mockReset(platformUtilService);
+    mockReset(logService);
+    mockReset(stateService);
 
     cryptoService = new CryptoService(
       cryptoFunctionService,
@@ -68,7 +68,7 @@ describe("cryptoService", () => {
     );
   });
 
-  describe("aesDecryptFromBytes", () => {
+  describe("decryptFromBytes", () => {
     const encType = EncryptionType.AesCbc256_HmacSha256_B64;
     let iv: Uint8Array;
     let mac: Uint8Array;
@@ -77,7 +77,8 @@ describe("cryptoService", () => {
 
     let key: SymmetricCryptoKey;
 
-    let computedMac: ArrayBuffer;
+    const computedMac = new Uint8Array(1).buffer;
+    const decryptedBytes = makeStaticByteArray(10, 100);
 
     beforeEach(() => {
       iv = makeStaticByteArray(16, 10);
@@ -95,15 +96,10 @@ describe("cryptoService", () => {
       key.encKey = makeStaticByteArray(10, 50);
       key.encType = encType;
 
-      computedMac = new Uint8Array(1).buffer;
-
       cryptoFunctionService.hmac.mockResolvedValue(computedMac);
-      cryptoFunctionService.aesDecrypt.mockResolvedValue(new Uint8Array(2));
     });
 
     it("decrypts correctly", async () => {
-      const decryptedBytes = makeStaticByteArray(10, 100);
-
       cryptoFunctionService.hmac.mockResolvedValue(makeStaticByteArray(1).buffer);
       cryptoFunctionService.compare.mockResolvedValue(true);
       cryptoFunctionService.aesDecrypt.mockResolvedValueOnce(decryptedBytes);
@@ -143,33 +139,48 @@ describe("cryptoService", () => {
 
       const actual = await cryptoService.decryptFromBytes(encArray.buffer, key);
       expect(cryptoFunctionService.compare).toHaveBeenCalled();
+      expect(cryptoFunctionService.aesDecrypt).not.toHaveBeenCalled();
       expect(actual).toBeNull();
     });
 
     it("returns null if encTypes don't match", async () => {
       key.encType = EncryptionType.AesCbc256_B64;
+      cryptoFunctionService.compare.mockResolvedValue(true);
 
       const actual = await cryptoService.decryptFromBytes(encArray.buffer, key);
 
       expect(actual).toBeNull();
+      expect(cryptoFunctionService.aesDecrypt).not.toHaveBeenCalled();
     });
   });
 
-  describe("aesDecryptToBytes", () => {
-    it("decrypts correctly", async () => {
-      const encType = EncryptionType.AesCbc256_HmacSha256_B64;
-      const key = mock<SymmetricCryptoKey>();
+  describe("decryptToBytes", () => {
+    const encType = EncryptionType.AesCbc256_HmacSha256_B64;
+
+    let key: SymmetricCryptoKey;
+    let encString: EncString;
+
+    const iv = Utils.fromBufferToB64(makeStaticByteArray(16, 10));
+    const mac = Utils.fromBufferToB64(makeStaticByteArray(32, 20));
+    const cipherText = Utils.fromBufferToB64(makeStaticByteArray(20, 30));
+
+    const decryptedBytes = makeStaticByteArray(10, 100);
+    const computedMac = new Uint8Array(1).buffer;
+
+    beforeEach(() => {
+      encString = new EncString(encType, cipherText, iv, mac);
+
+      key = mock<SymmetricCryptoKey>();
       key.macKey = makeStaticByteArray(16, 40);
       key.encKey = makeStaticByteArray(10, 50);
       key.encType = encType;
 
-      const encString = new EncString(encType + ".iv|data|mac");
+      cryptoFunctionService.hmac.mockResolvedValue(computedMac);
+      cryptoFunctionService.aesDecrypt.mockResolvedValue(decryptedBytes);
+    });
 
-      const decryptedBytes = makeStaticByteArray(10, 100);
-
-      cryptoFunctionService.hmac.mockResolvedValue(makeStaticByteArray(1).buffer);
+    it("decrypts correctly", async () => {
       cryptoFunctionService.compare.mockResolvedValue(true);
-      cryptoFunctionService.aesDecrypt.mockResolvedValueOnce(decryptedBytes);
 
       const actual = await cryptoService.decryptToBytes(encString, key);
 
@@ -180,6 +191,49 @@ describe("cryptoService", () => {
       );
 
       expect(new Uint8Array(actual)).toEqual(decryptedBytes);
+    });
+
+    it("compares macs", async () => {
+      const iv = Utils.fromB64ToArray(encString.iv);
+      const mac = Utils.fromB64ToArray(encString.mac);
+      const cipherText = Utils.fromB64ToArray(encString.data);
+
+      const expectedMacData = new Uint8Array(iv.buffer.byteLength + cipherText.buffer.byteLength);
+      expectedMacData.set(iv);
+      expectedMacData.set(cipherText, iv.buffer.byteLength);
+
+      await cryptoService.decryptToBytes(encString, key);
+
+      expect(cryptoFunctionService.hmac).toBeCalledWith(
+        (expect as any).isBufferEqualTo(expectedMacData),
+        key.macKey,
+        "sha256"
+      );
+
+      expect(cryptoFunctionService.compare).toBeCalledWith(
+        (expect as any).isBufferEqualTo(mac),
+        (expect as any).isBufferEqualTo(computedMac)
+      );
+    });
+
+    it("returns null if macs don't match", async () => {
+      cryptoFunctionService.compare.mockResolvedValue(false);
+
+      const actual = await cryptoService.decryptToBytes(encString, key);
+
+      expect(cryptoFunctionService.compare).toHaveBeenCalled();
+      expect(cryptoFunctionService.aesDecrypt).not.toHaveBeenCalled();
+      expect(actual).toBeNull();
+    });
+
+    it("returns null if encTypes don't match", async () => {
+      encString.encryptionType = EncryptionType.AesCbc256_B64;
+      cryptoFunctionService.compare.mockResolvedValue(true);
+
+      const actual = await cryptoService.decryptToBytes(encString, key);
+
+      expect(cryptoFunctionService.aesDecrypt).not.toHaveBeenCalled();
+      expect(actual).toBeNull();
     });
   });
 });
