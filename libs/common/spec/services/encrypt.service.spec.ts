@@ -11,34 +11,6 @@ import { EncryptService } from "@bitwarden/common/services/encrypt.service";
 
 import { makeStaticByteArray } from "../utils";
 
-expect.extend({
-  isBufferEqualTo(received, expected: Uint8Array | ArrayBuffer) {
-    received = new Uint8Array(received);
-
-    if (expected instanceof ArrayBuffer) {
-      expected = new Uint8Array(expected);
-    }
-
-    if (this.equals(received, expected)) {
-      return {
-        message: () => `expected
-${received}
-not to match
-${expected}`,
-        pass: true,
-      };
-    }
-
-    return {
-      message: () => `expected
-${received}
-to match
-${expected}`,
-      pass: false,
-    };
-  },
-});
-
 describe("EncryptService", () => {
   const cryptoFunctionService = mock<CryptoFunctionService>();
   const logService = mock<LogService>();
@@ -123,9 +95,9 @@ describe("EncryptService", () => {
         const actual = await encryptService.decryptToBytes(encBuffer, key);
 
         expect(cryptoFunctionService.aesDecrypt).toBeCalledWith(
-          (expect as any).isBufferEqualTo(cipherText),
-          (expect as any).isBufferEqualTo(iv),
-          (expect as any).isBufferEqualTo(key.encKey)
+          expect.isBufferEqualTo(cipherText),
+          expect.isBufferEqualTo(iv),
+          expect.isBufferEqualTo(key.encKey)
         );
 
         expect(new Uint8Array(actual)).toEqual(decryptedBytes);
@@ -139,14 +111,14 @@ describe("EncryptService", () => {
         await encryptService.decryptToBytes(encBuffer, key);
 
         expect(cryptoFunctionService.hmac).toBeCalledWith(
-          (expect as any).isBufferEqualTo(expectedMacData),
+          expect.isBufferEqualTo(expectedMacData),
           key.macKey,
           "sha256"
         );
 
         expect(cryptoFunctionService.compare).toBeCalledWith(
-          (expect as any).isBufferEqualTo(mac),
-          (expect as any).isBufferEqualTo(computedMac)
+          expect.isBufferEqualTo(mac),
+          expect.isBufferEqualTo(computedMac)
         );
       });
 
@@ -201,9 +173,9 @@ describe("EncryptService", () => {
         const actual = await encryptService.decryptToBytes(encString, key);
 
         expect(cryptoFunctionService.aesDecrypt).toBeCalledWith(
-          (expect as any).isBufferEqualTo(Utils.fromB64ToArray(encString.data)),
-          (expect as any).isBufferEqualTo(Utils.fromB64ToArray(encString.iv)),
-          (expect as any).isBufferEqualTo(key.encKey)
+          expect.isBufferEqualTo(Utils.fromB64ToArray(encString.data)),
+          expect.isBufferEqualTo(Utils.fromB64ToArray(encString.iv)),
+          expect.isBufferEqualTo(key.encKey)
         );
 
         expect(new Uint8Array(actual)).toEqual(decryptedBytes);
@@ -221,14 +193,14 @@ describe("EncryptService", () => {
         await encryptService.decryptToBytes(encString, key);
 
         expect(cryptoFunctionService.hmac).toBeCalledWith(
-          (expect as any).isBufferEqualTo(expectedMacData),
+          expect.isBufferEqualTo(expectedMacData),
           key.macKey,
           "sha256"
         );
 
         expect(cryptoFunctionService.compare).toBeCalledWith(
-          (expect as any).isBufferEqualTo(mac),
-          (expect as any).isBufferEqualTo(computedMac)
+          expect.isBufferEqualTo(mac),
+          expect.isBufferEqualTo(computedMac)
         );
       });
 
