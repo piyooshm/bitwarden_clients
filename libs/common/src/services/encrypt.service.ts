@@ -167,7 +167,7 @@ export class EncryptService implements AbstractEncryptService {
 
       const macsMatch = await this.cryptoFunctionService.compare(mac, computedMac);
       if (!macsMatch) {
-        this.logService.error("mac failed.");
+        this.logMacFailed("mac failed.");
         return null;
       }
     }
