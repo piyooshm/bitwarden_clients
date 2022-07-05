@@ -103,7 +103,7 @@ export class EncryptService implements AbstractEncryptService {
     key: SymmetricCryptoKey
   ): Promise<ArrayBuffer> {
     if (key == null) {
-      throw new Error("No key provided for decryption.");
+      throw new Error("No encryption key provided.");
     }
 
     const result = this.aesDecryptToBytes(
