@@ -702,47 +702,6 @@ export class CryptoService implements CryptoServiceAbstraction {
       : await this.stateService.getCryptoMasterKeyBiometric({ userId: userId });
   }
 
-  private async aesDecryptToBytes(
-    encType: EncryptionType,
-    data: ArrayBuffer,
-    iv: ArrayBuffer,
-    mac: ArrayBuffer,
-    key: SymmetricCryptoKey
-  ): Promise<ArrayBuffer> {
-    const keyForEnc = await this.getKeyForEncryption(key);
-    const theKey = await this.resolveLegacyKey(encType, keyForEnc);
-
-    if (theKey.macKey != null && mac == null) {
-      return null;
-    }
-
-    if (theKey.encType !== encType) {
-      return null;
-    }
-
-    if (theKey.macKey != null && mac != null) {
-      const macData = new Uint8Array(iv.byteLength + data.byteLength);
-      macData.set(new Uint8Array(iv), 0);
-      macData.set(new Uint8Array(data), iv.byteLength);
-      const computedMac = await this.cryptoFunctionService.hmac(
-        macData.buffer,
-        theKey.macKey,
-        "sha256"
-      );
-      if (computedMac === null) {
-        return null;
-      }
-
-      const macsMatch = await this.cryptoFunctionService.compare(mac, computedMac);
-      if (!macsMatch) {
-        this.logService.error("mac failed.");
-        return null;
-      }
-    }
-
-    return await this.cryptoFunctionService.aesDecrypt(data, iv, theKey.encKey);
-  }
-
   private async getKeyForEncryption(key?: SymmetricCryptoKey): Promise<SymmetricCryptoKey> {
     if (key != null) {
       return key;
