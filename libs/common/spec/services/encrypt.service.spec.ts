@@ -56,34 +56,19 @@ describe("EncryptService", () => {
   describe("decryptToBytes", () => {
     describe("given an EncArrayBuffer", () => {
       const encType = EncryptionType.AesCbc256_HmacSha256_B64;
-      let iv: Uint8Array;
-      let mac: Uint8Array;
-      let cipherText: Uint8Array;
-      let encArray: Uint8Array;
-      let encBuffer: EncArrayBuffer;
 
-      let key: SymmetricCryptoKey;
+      const encryptedBytes = makeStaticByteArray(60);
+      const tempArray = new Uint8Array(1 + encryptedBytes.buffer.byteLength);
+      tempArray.set([encType]);
+      tempArray.set(encryptedBytes, 1);
+      const encBuffer = new EncArrayBuffer(tempArray.buffer);
 
+      const key = new SymmetricCryptoKey(makeStaticByteArray(64, 100), encType);
+
+      const decryptedBytes = makeStaticByteArray(10, 200).buffer;
       const computedMac = new Uint8Array(1).buffer;
-      const decryptedBytes = makeStaticByteArray(10, 100);
 
       beforeEach(() => {
-        iv = makeStaticByteArray(16, 10);
-        mac = makeStaticByteArray(32, 20);
-        cipherText = makeStaticByteArray(20, 30);
-
-        encArray = new Uint8Array(1 + iv.byteLength + mac.byteLength + cipherText.byteLength);
-        encArray.set([encType]);
-        encArray.set(iv, 1);
-        encArray.set(mac, 1 + iv.byteLength);
-        encArray.set(cipherText, 1 + iv.byteLength + mac.byteLength);
-        encBuffer = new EncArrayBuffer(encArray);
-
-        key = mock<SymmetricCryptoKey>();
-        key.macKey = makeStaticByteArray(16, 40);
-        key.encKey = makeStaticByteArray(10, 50);
-        key.encType = encType;
-
         cryptoFunctionService.hmac.mockResolvedValue(computedMac);
       });
 
@@ -95,18 +80,20 @@ describe("EncryptService", () => {
         const actual = await encryptService.decryptToBytes(encBuffer, key);
 
         expect(cryptoFunctionService.aesDecrypt).toBeCalledWith(
-          expect.isBufferEqualTo(cipherText),
-          expect.isBufferEqualTo(iv),
+          expect.isBufferEqualTo(encBuffer.ctBytes),
+          expect.isBufferEqualTo(encBuffer.ivBytes),
           expect.isBufferEqualTo(key.encKey)
         );
 
-        expect(new Uint8Array(actual)).toEqual(decryptedBytes);
+        expect(actual).isBufferEqualTo(decryptedBytes);
       });
 
       it("compares macs", async () => {
-        const expectedMacData = new Uint8Array(iv.buffer.byteLength + cipherText.buffer.byteLength);
-        expectedMacData.set(iv);
-        expectedMacData.set(cipherText, iv.buffer.byteLength);
+        const expectedMacData = new Uint8Array(
+          encBuffer.ivBytes.byteLength + encBuffer.ctBytes.byteLength
+        );
+        expectedMacData.set(encBuffer.iv);
+        expectedMacData.set(encBuffer.ct, encBuffer.ivBytes.byteLength);
 
         await encryptService.decryptToBytes(encBuffer, key);
 
@@ -117,7 +104,7 @@ describe("EncryptService", () => {
         );
 
         expect(cryptoFunctionService.compare).toBeCalledWith(
-          expect.isBufferEqualTo(mac),
+          expect.isBufferEqualTo(encBuffer.macBytes),
           expect.isBufferEqualTo(computedMac)
         );
       });
