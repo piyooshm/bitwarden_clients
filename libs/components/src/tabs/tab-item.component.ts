@@ -5,17 +5,14 @@ import { Component, Input } from "@angular/core";
   templateUrl: "./tab-item.component.html",
 })
 export class TabItemComponent {
-  @Input()
-  route: string; // ['/route']
+  @Input() route: string; // ['/route']
+  @Input() disabled = false;
 
-  @Input()
-  disabled = false;
-
-  get baseClassList(): string {
+  get baseClassList(): string[] {
     return [
       "tw-block",
       "tw-relative",
-      this.disabled ? "tw-z-0" : "tw-z-20",
+      this.disabled ? "tw-z-0" : "tw-z-10",
       "tw-py-2",
       "tw-px-4",
       "tw-leading-5",
@@ -41,9 +38,8 @@ export class TabItemComponent {
       "disabled:tw-bg-secondary-100",
       "disabled:tw-text-muted",
       "disabled:tw-no-underline",
-      "disabled:tw-border-t-transparent",
       "disabled:tw-cursor-not-allowed",
-    ].join(" ");
+    ];
   }
 
   get activeClassList(): string {
