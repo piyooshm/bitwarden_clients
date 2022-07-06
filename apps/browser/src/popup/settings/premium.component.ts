@@ -1,4 +1,4 @@
-import { CurrencyPipe , Location } from "@angular/common";
+import { CurrencyPipe, Location } from "@angular/common";
 import { Component } from "@angular/core";
 
 import { PremiumComponent as BasePremiumComponent } from "@bitwarden/angular/components/premium.component";
