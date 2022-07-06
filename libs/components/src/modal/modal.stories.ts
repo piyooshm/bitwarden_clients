@@ -1,33 +1,45 @@
-import { CommonModule } from "@angular/common";
-import { Meta, Story, moduleMetadata } from "@storybook/angular";
+import { Meta, Story } from "@storybook/angular";
 
 import { ModalComponent } from "./modal.component";
 
 export default {
-  title: "Component Library/Modal",
+  title: "Component Library/Modals/Modal",
   component: ModalComponent,
-  decorators: [
-    moduleMetadata({
-      declarations: [ModalComponent],
-      imports: [CommonModule],
-    }),
-  ],
+  args: {
+    modalSize: "small",
+  },
 } as Meta;
 
 const Template: Story<ModalComponent> = (args: ModalComponent) => ({
   props: args,
   template: `
-  <bit-modal>
-     Modal Title
-
-    <p body>
-      Modal body text goes here.
-    </p>
-
-      <button footer> Save </button>
-      <button footer> Cancel </button>
+  <bit-modal [modalSize]="modalSize">
+    <span title> Modal Title </span>
+    <span body>
+      Modal body text goes here.<br>
+    </span>
+    <button footer> Save </button>
+    <button footer> Cancel </button>
   </bit-modal>
   `,
 });
 
-export const TestModal = Template.bind({});
+export const ExampleModal = Template.bind({});
+ExampleModal.args = {
+  modalSize: "default",
+};
+
+export const SmallModal = Template.bind({});
+SmallModal.args = {
+  modalSize: "small",
+};
+
+export const DefaultModal = Template.bind({});
+DefaultModal.args = {
+  modalSize: "default",
+};
+
+export const LargeModal = Template.bind({});
+LargeModal.args = {
+  modalSize: "large",
+};
