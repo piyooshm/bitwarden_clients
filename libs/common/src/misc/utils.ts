@@ -191,8 +191,8 @@ export class Utils {
   }
 
   static getHostname(uriString: string): string {
-    if (uriString.toLowerCase() == this.localHostDomain) {
-      uriString = "http://" + uriString;
+    if (uriString?.toLowerCase() === this.localHostDomain) {
+      return this.localHostDomain;
     }
     const url = Utils.getUrl(uriString);
     try {

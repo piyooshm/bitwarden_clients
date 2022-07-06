@@ -59,6 +59,10 @@ describe("Utils Service", () => {
 
     it("should support localhost and IP", () => {
       expect(Utils.getHostname("https://localhost")).toBe("localhost");
+      expect(Utils.getHostname("localhost")).toBe("localhost");
+      expect(Utils.getHostname("LOCALHOST")).toBe("localhost");
+      expect(Utils.getHostname("LocalHost")).toBe("localhost");
+      expect(Utils.getHostname("https://localhost:8080")).toBe("localhost");
       expect(Utils.getHostname("https://192.168.1.1")).toBe("192.168.1.1");
     });
   });
