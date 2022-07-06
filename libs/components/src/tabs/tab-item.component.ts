@@ -12,7 +12,6 @@ export class TabItemComponent {
     return [
       "tw-block",
       "tw-relative",
-      this.disabled ? "tw-z-0" : "tw-z-10",
       "tw-py-2",
       "tw-px-4",
       "tw-leading-5",
@@ -32,6 +31,7 @@ export class TabItemComponent {
       "tw-text-main",
       "hover:tw-underline",
       "hover:tw-text-main",
+      "focus:tw-z-10",
       "focus:tw-outline-none",
       "focus:tw-ring-2",
       "focus:tw-ring-primary-700",
