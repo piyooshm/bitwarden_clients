@@ -156,7 +156,6 @@ export class AddEditComponent extends BaseAddEditComponent {
     if (this.canAccessPremium) {
       return;
     }
-
     if (this.cipher.organizationUseTotp) {
       this.upgradeOrganization();
     } else {
