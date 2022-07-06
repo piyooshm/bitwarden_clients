@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { PlanType } from "@bitwarden/common/enums/planType";
 import { first } from "rxjs";
 
 @Component({
@@ -9,7 +10,7 @@ import { first } from "rxjs";
 export class TrialInitiationComponent implements OnInit {
   email = "";
   org = "teams";
-  plan = "Annual - $36.00/yr";
+  plan = PlanType.EnterpriseAnnually;
 
   constructor(private route: ActivatedRoute) {}
 

@@ -78,6 +78,7 @@ export class OrganizationPlansComponent implements OnInit {
   async ngOnInit() {
     if (!this.selfHosted) {
       const plans = await this.apiService.getPlans();
+      console.log("Plans::", plans);
       this.plans = plans.data;
       if (this.product === ProductType.Enterprise || this.product === ProductType.Teams) {
         this.ownedBusiness = true;
