@@ -70,7 +70,6 @@ jobs:
           echo "GitHub event: $GITHUB_EVENT"
           echo "Github Release Option: $_RELEASE_OPTION"
 
-
       - name: Checkout repo
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b  # v3.0.2
 
