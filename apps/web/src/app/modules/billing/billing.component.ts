@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+
 import { ApiService } from "@bitwarden/common/abstractions/api.service";
 import { CryptoService } from "@bitwarden/common/abstractions/crypto.service";
 import { I18nService } from "@bitwarden/common/abstractions/i18n.service";
@@ -17,7 +18,7 @@ import { OrganizationPlansComponent } from "src/app/settings/organization-plans.
   selector: "app-billing",
   templateUrl: "./billing.component.html",
 })
-export class BillingComponent extends OrganizationPlansComponent implements OnInit {
+export class BillingComponent extends OrganizationPlansComponent {
   constructor(
     apiService: ApiService,
     i18nService: I18nService,
@@ -43,11 +44,5 @@ export class BillingComponent extends OrganizationPlansComponent implements OnIn
       messagingService
     );
     this.plan = PlanType.EnterpriseAnnually;
-  }
-
-  async ngOnInit() {}
-
-  check() {
-    console.log("Here::", this.selectablePlans);
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { PlanType } from "@bitwarden/common/enums/planType";
 import { first } from "rxjs";
+
+import { PlanType } from "@bitwarden/common/enums/planType";
 
 @Component({
   selector: "app-trial",

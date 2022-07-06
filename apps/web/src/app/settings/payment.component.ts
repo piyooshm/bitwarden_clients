@@ -55,7 +55,6 @@ export class PaymentComponent implements OnInit, OnDestroy {
     private logService: LogService,
     private themingService: AbstractThemingService
   ) {
-    console.log("Here");
     this.stripeScript = window.document.createElement("script");
     this.stripeScript.src = "https://js.stripe.com/v3/";
     this.stripeScript.async = true;
