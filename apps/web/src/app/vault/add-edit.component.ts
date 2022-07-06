@@ -152,6 +152,18 @@ export class AddEditComponent extends BaseAddEditComponent {
     });
   }
 
+  showGetPremium() {
+    if (this.canAccessPremium) {
+      return;
+    }
+
+    if (this.cipher.organizationUseTotp) {
+      this.upgradeOrganization();
+    } else {
+      this.premiumRequired();
+    }
+  }
+
   viewHistory() {
     this.viewingPasswordHistory = !this.viewingPasswordHistory;
   }

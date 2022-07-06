@@ -1964,5 +1964,8 @@
   },
   "ssoKeyConnectorError": {
     "message": "Key Connector error: make sure Key Connector is available and working correctly."
+  },
+  "premiumSubscription": {
+    "message": "Premium subscription"
   }
 }

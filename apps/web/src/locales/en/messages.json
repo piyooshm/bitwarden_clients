@@ -5165,5 +5165,8 @@
         "example": "My Email"
       }
     }
+  },
+  "premiumSubcription": {
+    "message": "Premium subscription"
   }
 }

@@ -112,4 +112,10 @@ export class ViewComponent extends BaseViewComponent implements OnChanges {
       });
     }
   }
+
+  showGetPremium() {
+    if (!this.canAccessPremium) {
+      this.messagingService.send("premiumRequired");
+    }
+  }
 }

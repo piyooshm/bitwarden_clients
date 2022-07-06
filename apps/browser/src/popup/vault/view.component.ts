@@ -57,7 +57,7 @@ export class ViewComponent extends BaseViewComponent {
     stateService: StateService,
     eventService: EventService,
     private autofillService: AutofillService,
-    private messagingService: MessagingService,
+    messagingService: MessagingService,
     private popupUtilsService: PopupUtilsService,
     apiService: ApiService,
     passwordRepromptService: PasswordRepromptService,
@@ -79,7 +79,8 @@ export class ViewComponent extends BaseViewComponent {
       apiService,
       passwordRepromptService,
       logService,
-      stateService
+      stateService,
+      messagingService
     );
   }
 

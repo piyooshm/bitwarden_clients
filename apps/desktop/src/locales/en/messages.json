@@ -1960,5 +1960,8 @@
   },
   "apiKey": {
     "message": "API Key"
+  },
+  "premiumSubcriptionRequired": {
+    "message": "Premium subscription required"
   }
 }
