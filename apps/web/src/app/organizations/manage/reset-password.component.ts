@@ -10,7 +10,7 @@ import { PolicyService } from "@bitwarden/common/abstractions/policy.service";
 import { EncString } from "@bitwarden/common/models/domain/encString";
 import { MasterPasswordPolicyOptions } from "@bitwarden/common/models/domain/masterPasswordPolicyOptions";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
-import { OrganizationUserResetPasswordRequest } from "@bitwarden/common/models/request/organizationUserResetPasswordRequest";
+import { OrganizationUserResetPasswordRequest } from "@bitwarden/common/models/request";
 
 @Component({
   selector: "app-reset-password",

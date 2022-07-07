@@ -15,7 +15,7 @@ import { VerificationType } from "@bitwarden/common/enums/verificationType";
 import { EncString } from "@bitwarden/common/models/domain/encString";
 import { MasterPasswordPolicyOptions } from "@bitwarden/common/models/domain/masterPasswordPolicyOptions";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
-import { PasswordRequest } from "@bitwarden/common/models/request/passwordRequest";
+import { PasswordRequest } from "@bitwarden/common/models/request";
 import { Verification } from "@bitwarden/common/types/verification";
 
 import { ChangePasswordComponent as BaseChangePasswordComponent } from "./change-password.component";

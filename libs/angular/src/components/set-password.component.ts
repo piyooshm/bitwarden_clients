@@ -16,9 +16,11 @@ import { DEFAULT_KDF_ITERATIONS, DEFAULT_KDF_TYPE } from "@bitwarden/common/enum
 import { Utils } from "@bitwarden/common/misc/utils";
 import { EncString } from "@bitwarden/common/models/domain/encString";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
-import { KeysRequest } from "@bitwarden/common/models/request/keysRequest";
-import { OrganizationUserResetPasswordEnrollmentRequest } from "@bitwarden/common/models/request/organizationUserResetPasswordEnrollmentRequest";
-import { SetPasswordRequest } from "@bitwarden/common/models/request/setPasswordRequest";
+import {
+  KeysRequest,
+  OrganizationUserResetPasswordEnrollmentRequest,
+  SetPasswordRequest,
+} from "@bitwarden/common/models/request";
 
 import { ChangePasswordComponent as BaseChangePasswordComponent } from "./change-password.component";
 

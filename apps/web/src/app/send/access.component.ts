@@ -12,7 +12,7 @@ import { SendType } from "@bitwarden/common/enums/sendType";
 import { Utils } from "@bitwarden/common/misc/utils";
 import { SendAccess } from "@bitwarden/common/models/domain/sendAccess";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
-import { SendAccessRequest } from "@bitwarden/common/models/request/sendAccessRequest";
+import { SendAccessRequest } from "@bitwarden/common/models/request";
 import { ErrorResponse } from "@bitwarden/common/models/response/errorResponse";
 import { SendAccessResponse } from "@bitwarden/common/models/response/sendAccessResponse";
 import { SendAccessView } from "@bitwarden/common/models/view/sendAccessView";

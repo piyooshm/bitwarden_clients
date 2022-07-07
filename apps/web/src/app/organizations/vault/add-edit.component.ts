@@ -19,8 +19,7 @@ import { TotpService } from "@bitwarden/common/abstractions/totp.service";
 import { CipherData } from "@bitwarden/common/models/data/cipherData";
 import { Cipher } from "@bitwarden/common/models/domain/cipher";
 import { Organization } from "@bitwarden/common/models/domain/organization";
-import { CipherCreateRequest } from "@bitwarden/common/models/request/cipherCreateRequest";
-import { CipherRequest } from "@bitwarden/common/models/request/cipherRequest";
+import { CipherCreateRequest, CipherRequest } from "@bitwarden/common/models/request";
 
 import { AddEditComponent as BaseAddEditComponent } from "../../vault/add-edit.component";
 

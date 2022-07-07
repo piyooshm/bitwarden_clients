@@ -25,8 +25,7 @@ import {
   SsoLogInCredentials,
 } from "../models/domain/logInCredentials";
 import { SymmetricCryptoKey } from "../models/domain/symmetricCryptoKey";
-import { TokenRequestTwoFactor } from "../models/request/identityToken/tokenRequestTwoFactor";
-import { PreloginRequest } from "../models/request/preloginRequest";
+import { TokenRequestTwoFactor, PreloginRequest } from "../models/request";
 import { ErrorResponse } from "../models/response/errorResponse";
 
 const sessionTimeoutLength = 2 * 60 * 1000; // 2 minutes

@@ -6,7 +6,7 @@ import { LogService } from "@bitwarden/common/abstractions/log.service";
 import { PlatformUtilsService } from "@bitwarden/common/abstractions/platformUtils.service";
 import { UserVerificationService } from "@bitwarden/common/abstractions/userVerification.service";
 import { TwoFactorProviderType } from "@bitwarden/common/enums/twoFactorProviderType";
-import { UpdateTwoFactorYubioOtpRequest } from "@bitwarden/common/models/request/updateTwoFactorYubioOtpRequest";
+import { UpdateTwoFactorYubioOtpRequest } from "@bitwarden/common/models/request";
 import { TwoFactorYubiKeyResponse } from "@bitwarden/common/models/response/twoFactorYubiKeyResponse";
 
 import { TwoFactorBaseComponent } from "./two-factor-base.component";

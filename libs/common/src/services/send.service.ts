@@ -15,7 +15,7 @@ import { Send } from "../models/domain/send";
 import { SendFile } from "../models/domain/sendFile";
 import { SendText } from "../models/domain/sendText";
 import { SymmetricCryptoKey } from "../models/domain/symmetricCryptoKey";
-import { SendRequest } from "../models/request/sendRequest";
+import { SendRequest } from "../models/request";
 import { ErrorResponse } from "../models/response/errorResponse";
 import { SendResponse } from "../models/response/sendResponse";
 import { SendView } from "../models/view/sendView";

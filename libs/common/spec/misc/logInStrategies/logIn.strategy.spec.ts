@@ -17,8 +17,7 @@ import { Account, AccountProfile, AccountTokens } from "@bitwarden/common/models
 import { AuthResult } from "@bitwarden/common/models/domain/authResult";
 import { EncString } from "@bitwarden/common/models/domain/encString";
 import { PasswordLogInCredentials } from "@bitwarden/common/models/domain/logInCredentials";
-import { PasswordTokenRequest } from "@bitwarden/common/models/request/identityToken/passwordTokenRequest";
-import { TokenRequestTwoFactor } from "@bitwarden/common/models/request/identityToken/tokenRequestTwoFactor";
+import { PasswordTokenRequest, TokenRequestTwoFactor } from "@bitwarden/common/models/request";
 import { IdentityCaptchaResponse } from "@bitwarden/common/models/response/identityCaptchaResponse";
 import { IdentityTokenResponse } from "@bitwarden/common/models/response/identityTokenResponse";
 import { IdentityTwoFactorResponse } from "@bitwarden/common/models/response/identityTwoFactorResponse";

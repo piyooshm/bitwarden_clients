@@ -13,6 +13,23 @@
     "prettier"
   ],
   "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          "@bitwarden/common/abstractions/*",
+          "@bitwarden/common/enums/*",
+          "@bitwarden/common/models/api/*",
+          "@bitwarden/common/models/data/*",
+          "@bitwarden/common/models/domain/*",
+          "@bitwarden/common/models/export/*",
+          "@bitwarden/common/models/request/*",
+          "@bitwarden/common/models/response/*",
+          "@bitwarden/common/models/view/*",
+          "@bitwarden/common/services/*"
+        ]
+      }
+    ],
     "@typescript-eslint/no-explicit-any": "off", // TODO: This should be re-enabled
     "@typescript-eslint/no-unused-vars": ["warn", { "args": "none" }],
     "@typescript-eslint/explicit-member-accessibility": [

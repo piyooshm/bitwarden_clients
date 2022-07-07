@@ -5,7 +5,7 @@ import { LogService } from "@bitwarden/common/abstractions/log.service";
 import { UserVerificationService } from "@bitwarden/common/abstractions/userVerification.service";
 import { TwoFactorProviderType } from "@bitwarden/common/enums/twoFactorProviderType";
 import { VerificationType } from "@bitwarden/common/enums/verificationType";
-import { SecretVerificationRequest } from "@bitwarden/common/models/request/secretVerificationRequest";
+import { SecretVerificationRequest } from "@bitwarden/common/models/request";
 import { TwoFactorAuthenticatorResponse } from "@bitwarden/common/models/response/twoFactorAuthenticatorResponse";
 import { TwoFactorDuoResponse } from "@bitwarden/common/models/response/twoFactorDuoResponse";
 import { TwoFactorEmailResponse } from "@bitwarden/common/models/response/twoFactorEmailResponse";

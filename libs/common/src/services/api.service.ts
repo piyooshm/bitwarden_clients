@@ -7,103 +7,105 @@ import { DeviceType } from "../enums/deviceType";
 import { OrganizationConnectionType } from "../enums/organizationConnectionType";
 import { PolicyType } from "../enums/policyType";
 import { Utils } from "../misc/utils";
-import { SetKeyConnectorKeyRequest } from "../models/request/account/setKeyConnectorKeyRequest";
-import { VerifyOTPRequest } from "../models/request/account/verifyOTPRequest";
-import { AttachmentRequest } from "../models/request/attachmentRequest";
-import { BitPayInvoiceRequest } from "../models/request/bitPayInvoiceRequest";
-import { CipherBulkDeleteRequest } from "../models/request/cipherBulkDeleteRequest";
-import { CipherBulkMoveRequest } from "../models/request/cipherBulkMoveRequest";
-import { CipherBulkShareRequest } from "../models/request/cipherBulkShareRequest";
-import { CipherCollectionsRequest } from "../models/request/cipherCollectionsRequest";
-import { CipherCreateRequest } from "../models/request/cipherCreateRequest";
-import { CipherRequest } from "../models/request/cipherRequest";
-import { CipherShareRequest } from "../models/request/cipherShareRequest";
-import { CollectionRequest } from "../models/request/collectionRequest";
-import { DeleteRecoverRequest } from "../models/request/deleteRecoverRequest";
-import { DeviceRequest } from "../models/request/deviceRequest";
-import { DeviceVerificationRequest } from "../models/request/deviceVerificationRequest";
-import { EmailRequest } from "../models/request/emailRequest";
-import { EmailTokenRequest } from "../models/request/emailTokenRequest";
-import { EmergencyAccessAcceptRequest } from "../models/request/emergencyAccessAcceptRequest";
-import { EmergencyAccessConfirmRequest } from "../models/request/emergencyAccessConfirmRequest";
-import { EmergencyAccessInviteRequest } from "../models/request/emergencyAccessInviteRequest";
-import { EmergencyAccessPasswordRequest } from "../models/request/emergencyAccessPasswordRequest";
-import { EmergencyAccessUpdateRequest } from "../models/request/emergencyAccessUpdateRequest";
-import { EventRequest } from "../models/request/eventRequest";
-import { FolderRequest } from "../models/request/folderRequest";
-import { GroupRequest } from "../models/request/groupRequest";
-import { IapCheckRequest } from "../models/request/iapCheckRequest";
-import { ApiTokenRequest } from "../models/request/identityToken/apiTokenRequest";
-import { PasswordTokenRequest } from "../models/request/identityToken/passwordTokenRequest";
-import { SsoTokenRequest } from "../models/request/identityToken/ssoTokenRequest";
-import { TokenRequestTwoFactor } from "../models/request/identityToken/tokenRequestTwoFactor";
-import { ImportCiphersRequest } from "../models/request/importCiphersRequest";
-import { ImportDirectoryRequest } from "../models/request/importDirectoryRequest";
-import { ImportOrganizationCiphersRequest } from "../models/request/importOrganizationCiphersRequest";
-import { KdfRequest } from "../models/request/kdfRequest";
-import { KeyConnectorUserKeyRequest } from "../models/request/keyConnectorUserKeyRequest";
-import { KeysRequest } from "../models/request/keysRequest";
-import { OrganizationSponsorshipCreateRequest } from "../models/request/organization/organizationSponsorshipCreateRequest";
-import { OrganizationSponsorshipRedeemRequest } from "../models/request/organization/organizationSponsorshipRedeemRequest";
-import { OrganizationSsoRequest } from "../models/request/organization/organizationSsoRequest";
-import { OrganizationApiKeyRequest } from "../models/request/organizationApiKeyRequest";
-import { OrganizationConnectionRequest } from "../models/request/organizationConnectionRequest";
-import { OrganizationCreateRequest } from "../models/request/organizationCreateRequest";
-import { OrganizationImportRequest } from "../models/request/organizationImportRequest";
-import { OrganizationKeysRequest } from "../models/request/organizationKeysRequest";
-import { OrganizationSubscriptionUpdateRequest } from "../models/request/organizationSubscriptionUpdateRequest";
-import { OrganizationTaxInfoUpdateRequest } from "../models/request/organizationTaxInfoUpdateRequest";
-import { OrganizationUpdateRequest } from "../models/request/organizationUpdateRequest";
-import { OrganizationUpgradeRequest } from "../models/request/organizationUpgradeRequest";
-import { OrganizationUserAcceptRequest } from "../models/request/organizationUserAcceptRequest";
-import { OrganizationUserBulkConfirmRequest } from "../models/request/organizationUserBulkConfirmRequest";
-import { OrganizationUserBulkRequest } from "../models/request/organizationUserBulkRequest";
-import { OrganizationUserConfirmRequest } from "../models/request/organizationUserConfirmRequest";
-import { OrganizationUserInviteRequest } from "../models/request/organizationUserInviteRequest";
-import { OrganizationUserResetPasswordEnrollmentRequest } from "../models/request/organizationUserResetPasswordEnrollmentRequest";
-import { OrganizationUserResetPasswordRequest } from "../models/request/organizationUserResetPasswordRequest";
-import { OrganizationUserUpdateGroupsRequest } from "../models/request/organizationUserUpdateGroupsRequest";
-import { OrganizationUserUpdateRequest } from "../models/request/organizationUserUpdateRequest";
-import { PasswordHintRequest } from "../models/request/passwordHintRequest";
-import { PasswordRequest } from "../models/request/passwordRequest";
-import { PaymentRequest } from "../models/request/paymentRequest";
-import { PolicyRequest } from "../models/request/policyRequest";
-import { PreloginRequest } from "../models/request/preloginRequest";
-import { ProviderAddOrganizationRequest } from "../models/request/provider/providerAddOrganizationRequest";
-import { ProviderOrganizationCreateRequest } from "../models/request/provider/providerOrganizationCreateRequest";
-import { ProviderSetupRequest } from "../models/request/provider/providerSetupRequest";
-import { ProviderUpdateRequest } from "../models/request/provider/providerUpdateRequest";
-import { ProviderUserAcceptRequest } from "../models/request/provider/providerUserAcceptRequest";
-import { ProviderUserBulkConfirmRequest } from "../models/request/provider/providerUserBulkConfirmRequest";
-import { ProviderUserBulkRequest } from "../models/request/provider/providerUserBulkRequest";
-import { ProviderUserConfirmRequest } from "../models/request/provider/providerUserConfirmRequest";
-import { ProviderUserInviteRequest } from "../models/request/provider/providerUserInviteRequest";
-import { ProviderUserUpdateRequest } from "../models/request/provider/providerUserUpdateRequest";
-import { RegisterRequest } from "../models/request/registerRequest";
-import { SeatRequest } from "../models/request/seatRequest";
-import { SecretVerificationRequest } from "../models/request/secretVerificationRequest";
-import { SelectionReadOnlyRequest } from "../models/request/selectionReadOnlyRequest";
-import { SendAccessRequest } from "../models/request/sendAccessRequest";
-import { SendRequest } from "../models/request/sendRequest";
-import { SetPasswordRequest } from "../models/request/setPasswordRequest";
-import { StorageRequest } from "../models/request/storageRequest";
-import { TaxInfoUpdateRequest } from "../models/request/taxInfoUpdateRequest";
-import { TwoFactorEmailRequest } from "../models/request/twoFactorEmailRequest";
-import { TwoFactorProviderRequest } from "../models/request/twoFactorProviderRequest";
-import { TwoFactorRecoveryRequest } from "../models/request/twoFactorRecoveryRequest";
-import { UpdateDomainsRequest } from "../models/request/updateDomainsRequest";
-import { UpdateKeyRequest } from "../models/request/updateKeyRequest";
-import { UpdateProfileRequest } from "../models/request/updateProfileRequest";
-import { UpdateTempPasswordRequest } from "../models/request/updateTempPasswordRequest";
-import { UpdateTwoFactorAuthenticatorRequest } from "../models/request/updateTwoFactorAuthenticatorRequest";
-import { UpdateTwoFactorDuoRequest } from "../models/request/updateTwoFactorDuoRequest";
-import { UpdateTwoFactorEmailRequest } from "../models/request/updateTwoFactorEmailRequest";
-import { UpdateTwoFactorWebAuthnDeleteRequest } from "../models/request/updateTwoFactorWebAuthnDeleteRequest";
-import { UpdateTwoFactorWebAuthnRequest } from "../models/request/updateTwoFactorWebAuthnRequest";
-import { UpdateTwoFactorYubioOtpRequest } from "../models/request/updateTwoFactorYubioOtpRequest";
-import { VerifyBankRequest } from "../models/request/verifyBankRequest";
-import { VerifyDeleteRecoverRequest } from "../models/request/verifyDeleteRecoverRequest";
-import { VerifyEmailRequest } from "../models/request/verifyEmailRequest";
+import {
+  SetKeyConnectorKeyRequest,
+  VerifyOTPRequest,
+  AttachmentRequest,
+  BitPayInvoiceRequest,
+  CipherBulkDeleteRequest,
+  CipherBulkMoveRequest,
+  CipherBulkShareRequest,
+  CipherCollectionsRequest,
+  CipherCreateRequest,
+  CipherRequest,
+  CipherShareRequest,
+  CollectionRequest,
+  DeleteRecoverRequest,
+  DeviceRequest,
+  DeviceVerificationRequest,
+  EmailRequest,
+  EmailTokenRequest,
+  EmergencyAccessAcceptRequest,
+  EmergencyAccessConfirmRequest,
+  EmergencyAccessInviteRequest,
+  EmergencyAccessPasswordRequest,
+  EmergencyAccessUpdateRequest,
+  EventRequest,
+  FolderRequest,
+  GroupRequest,
+  IapCheckRequest,
+  ApiTokenRequest,
+  PasswordTokenRequest,
+  SsoTokenRequest,
+  TokenRequestTwoFactor,
+  ImportCiphersRequest,
+  ImportDirectoryRequest,
+  ImportOrganizationCiphersRequest,
+  KdfRequest,
+  KeyConnectorUserKeyRequest,
+  KeysRequest,
+  OrganizationSponsorshipCreateRequest,
+  OrganizationSponsorshipRedeemRequest,
+  OrganizationSsoRequest,
+  OrganizationApiKeyRequest,
+  OrganizationConnectionRequest,
+  OrganizationCreateRequest,
+  OrganizationImportRequest,
+  OrganizationKeysRequest,
+  OrganizationSubscriptionUpdateRequest,
+  OrganizationTaxInfoUpdateRequest,
+  OrganizationUpdateRequest,
+  OrganizationUpgradeRequest,
+  OrganizationUserAcceptRequest,
+  OrganizationUserBulkConfirmRequest,
+  OrganizationUserBulkRequest,
+  OrganizationUserConfirmRequest,
+  OrganizationUserInviteRequest,
+  OrganizationUserResetPasswordEnrollmentRequest,
+  OrganizationUserResetPasswordRequest,
+  OrganizationUserUpdateGroupsRequest,
+  OrganizationUserUpdateRequest,
+  PasswordHintRequest,
+  PasswordRequest,
+  PaymentRequest,
+  PolicyRequest,
+  PreloginRequest,
+  ProviderAddOrganizationRequest,
+  ProviderOrganizationCreateRequest,
+  ProviderSetupRequest,
+  ProviderUpdateRequest,
+  ProviderUserAcceptRequest,
+  ProviderUserBulkConfirmRequest,
+  ProviderUserBulkRequest,
+  ProviderUserConfirmRequest,
+  ProviderUserInviteRequest,
+  ProviderUserUpdateRequest,
+  RegisterRequest,
+  SeatRequest,
+  SecretVerificationRequest,
+  SelectionReadOnlyRequest,
+  SendAccessRequest,
+  SendRequest,
+  SetPasswordRequest,
+  StorageRequest,
+  TaxInfoUpdateRequest,
+  TwoFactorEmailRequest,
+  TwoFactorProviderRequest,
+  TwoFactorRecoveryRequest,
+  UpdateDomainsRequest,
+  UpdateKeyRequest,
+  UpdateProfileRequest,
+  UpdateTempPasswordRequest,
+  UpdateTwoFactorAuthenticatorRequest,
+  UpdateTwoFactorDuoRequest,
+  UpdateTwoFactorEmailRequest,
+  UpdateTwoFactorWebAuthnDeleteRequest,
+  UpdateTwoFactorWebAuthnRequest,
+  UpdateTwoFactorYubioOtpRequest,
+  VerifyBankRequest,
+  VerifyDeleteRecoverRequest,
+  VerifyEmailRequest,
+} from "../models/request";
 import { ApiKeyResponse } from "../models/response/apiKeyResponse";
 import { AttachmentResponse } from "../models/response/attachmentResponse";
 import { AttachmentUploadDataResponse } from "../models/response/attachmentUploadDataResponse";

@@ -13,7 +13,7 @@ import { SyncService } from "@bitwarden/common/abstractions/sync.service";
 import { EncString } from "@bitwarden/common/models/domain/encString";
 import { MasterPasswordPolicyOptions } from "@bitwarden/common/models/domain/masterPasswordPolicyOptions";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
-import { UpdateTempPasswordRequest } from "@bitwarden/common/models/request/updateTempPasswordRequest";
+import { UpdateTempPasswordRequest } from "@bitwarden/common/models/request";
 
 import { ChangePasswordComponent as BaseChangePasswordComponent } from "./change-password.component";
 

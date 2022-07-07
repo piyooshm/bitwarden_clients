@@ -11,7 +11,7 @@ import { NodeUtils } from "@bitwarden/common/misc/nodeUtils";
 import { Utils } from "@bitwarden/common/misc/utils";
 import { SendAccess } from "@bitwarden/common/models/domain/sendAccess";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
-import { SendAccessRequest } from "@bitwarden/common/models/request/sendAccessRequest";
+import { SendAccessRequest } from "@bitwarden/common/models/request";
 import { ErrorResponse } from "@bitwarden/common/models/response/errorResponse";
 import { SendAccessView } from "@bitwarden/common/models/view/sendAccessView";
 import { Response } from "@bitwarden/node/cli/models/response";

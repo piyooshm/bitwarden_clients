@@ -16,10 +16,12 @@ import { PolicyType } from "@bitwarden/common/enums/policyType";
 import { ProductType } from "@bitwarden/common/enums/productType";
 import { EncString } from "@bitwarden/common/models/domain/encString";
 import { SymmetricCryptoKey } from "@bitwarden/common/models/domain/symmetricCryptoKey";
-import { OrganizationCreateRequest } from "@bitwarden/common/models/request/organizationCreateRequest";
-import { OrganizationKeysRequest } from "@bitwarden/common/models/request/organizationKeysRequest";
-import { OrganizationUpgradeRequest } from "@bitwarden/common/models/request/organizationUpgradeRequest";
-import { ProviderOrganizationCreateRequest } from "@bitwarden/common/models/request/provider/providerOrganizationCreateRequest";
+import {
+  OrganizationCreateRequest,
+  OrganizationKeysRequest,
+  OrganizationUpgradeRequest,
+  ProviderOrganizationCreateRequest,
+} from "@bitwarden/common/models/request";
 import { PlanResponse } from "@bitwarden/common/models/response/planResponse";
 
 import { PaymentComponent } from "./payment.component";

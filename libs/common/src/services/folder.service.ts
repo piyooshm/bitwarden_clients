@@ -11,7 +11,7 @@ import { FolderData } from "../models/data/folderData";
 import { Folder } from "../models/domain/folder";
 import { SymmetricCryptoKey } from "../models/domain/symmetricCryptoKey";
 import { TreeNode } from "../models/domain/treeNode";
-import { FolderRequest } from "../models/request/folderRequest";
+import { FolderRequest } from "../models/request";
 import { FolderResponse } from "../models/response/folderResponse";
 import { FolderView } from "../models/view/folderView";
 

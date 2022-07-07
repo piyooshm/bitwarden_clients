@@ -7,8 +7,10 @@ import { PlatformUtilsService } from "@bitwarden/common/abstractions/platformUti
 import { StateService } from "@bitwarden/common/abstractions/state.service";
 import { UserVerificationService } from "@bitwarden/common/abstractions/userVerification.service";
 import { TwoFactorProviderType } from "@bitwarden/common/enums/twoFactorProviderType";
-import { TwoFactorEmailRequest } from "@bitwarden/common/models/request/twoFactorEmailRequest";
-import { UpdateTwoFactorEmailRequest } from "@bitwarden/common/models/request/updateTwoFactorEmailRequest";
+import {
+  TwoFactorEmailRequest,
+  UpdateTwoFactorEmailRequest,
+} from "@bitwarden/common/models/request";
 import { TwoFactorEmailResponse } from "@bitwarden/common/models/response/twoFactorEmailResponse";
 
 import { TwoFactorBaseComponent } from "./two-factor-base.component";
