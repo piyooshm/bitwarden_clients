@@ -11,7 +11,7 @@ import { CipherType } from "../enums/cipherType";
 import { FieldType } from "../enums/fieldType";
 import { UriMatchType } from "../enums/uriMatchType";
 import { sequentialize } from "../misc/sequentialize";
-import { UrlUtils } from "../misc/utilities/urlUtils";
+import { Utils } from "../misc/utils";
 import { CipherData } from "../models/data/cipherData";
 import { Attachment } from "../models/domain/attachment";
 import { Card } from "../models/domain/card";
@@ -383,7 +383,7 @@ export class CipherService implements CipherServiceAbstraction {
       return Promise.resolve([]);
     }
 
-    const domain = UrlUtils.getDomain(url);
+    const domain = Utils.getDomain(url);
     const eqDomainsPromise =
       domain == null
         ? Promise.resolve([])
@@ -433,7 +433,7 @@ export class CipherService implements CipherServiceAbstraction {
             case UriMatchType.Domain:
               if (domain != null && u.domain != null && matchingDomains.indexOf(u.domain) > -1) {
                 if (DomainMatchBlacklist.has(u.domain)) {
-                  const domainUrlHost = UrlUtils.getHost(url);
+                  const domainUrlHost = Utils.getHost(url);
                   if (!DomainMatchBlacklist.get(u.domain).has(domainUrlHost)) {
                     return true;
                   }
@@ -443,8 +443,8 @@ export class CipherService implements CipherServiceAbstraction {
               }
               break;
             case UriMatchType.Host: {
-              const urlHost = UrlUtils.getHost(url);
-              if (urlHost != null && urlHost === UrlUtils.getHost(u.uri)) {
+              const urlHost = Utils.getHost(url);
+              if (urlHost != null && urlHost === Utils.getHost(u.uri)) {
                 return true;
               }
               break;

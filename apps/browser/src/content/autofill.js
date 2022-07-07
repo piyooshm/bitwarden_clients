@@ -1037,6 +1037,11 @@
           fill(document, msg.fillScript);
           sendResponse();
           return true;
+      } else if (msg.command === 'collectPageDetailsImmediately') {
+        var pageDetails = collect(document);
+        var pageDetailsObj = JSON.parse(pageDetails);
+        sendResponse(pageDetailsObj);
+        return true;
       }
   });
 })();

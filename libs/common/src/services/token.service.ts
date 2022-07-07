@@ -1,6 +1,6 @@
 import { StateService } from "../abstractions/state.service";
 import { TokenService as TokenServiceAbstraction } from "../abstractions/token.service";
-import { encodingUtils } from "../misc/utilities";
+import { Utils } from "../misc/utils";
 import { IdentityTokenResponse } from "../models/response/identityTokenResponse";
 
 export class TokenService implements TokenServiceAbstraction {
@@ -14,7 +14,7 @@ export class TokenService implements TokenServiceAbstraction {
       throw new Error("JWT must have 3 parts");
     }
 
-    const decoded = encodingUtils.fromUrlB64ToUtf8(parts[1]);
+    const decoded = Utils.fromUrlB64ToUtf8(parts[1]);
     if (decoded == null) {
       throw new Error("Cannot decode the token");
     }

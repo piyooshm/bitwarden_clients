@@ -1,12 +1,13 @@
+import { AuthenticationStatus } from "@bitwarden/common/enums/authenticationStatus";
 import { StateFactory } from "@bitwarden/common/factories/stateFactory";
 import { GlobalState } from "@bitwarden/common/models/domain/globalState";
+import { AuthService } from "@bitwarden/common/services/auth.service";
 import { CipherService } from "@bitwarden/common/services/cipher.service";
 import { ConsoleLogService } from "@bitwarden/common/services/consoleLog.service";
 import { EncryptService } from "@bitwarden/common/services/encrypt.service";
 import { SettingsService } from "@bitwarden/common/services/settings.service";
 import { StateMigrationService } from "@bitwarden/common/services/stateMigration.service";
 import { WebCryptoFunctionService } from "@bitwarden/common/services/webCryptoFunction.service";
-
 
 import { AutoFillActiveTabCommand } from "../commands/AutoFillActiveTabCommand";
 import { Account } from "../models/account";
@@ -101,6 +102,29 @@ const doAutoFillLogin = async (tab: chrome.tabs.Tab): Promise<void> => {
     null, // EventService
     logService // LogService
   );
+
+  const authService = new AuthService(
+    null, // CryptoService
+    null, // ApiService
+    null, // TokenService
+    null, // AppIdService,
+    platformUtils,
+    null, // MessagingService
+    logService,
+    null, // KeyConnectorService
+    null, // EnvironmentService
+    stateService,
+    null, // TwoFactorService,
+    null // I18nService
+  );
+
+  const authStatus = await authService.getAuthStatus();
+
+  if (authStatus < AuthenticationStatus.Unlocked) {
+    // TODO: Add back in unlock on autofill
+    console.log("Currently not unlocked, MV3 does not support unlock on autofill currently.");
+    return;
+  }
 
   const command = new AutoFillActiveTabCommand(autofillService);
   await command.doAutoFillActiveTabCommand(tab);

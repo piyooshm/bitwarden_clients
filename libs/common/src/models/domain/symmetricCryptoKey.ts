@@ -1,5 +1,6 @@
+import { Utils } from "@bitwarden/common/misc/utils";
+
 import { EncryptionType } from "../../enums/encryptionType";
-import { encodingUtils } from "../../misc/utilities";
 
 export class SymmetricCryptoKey {
   key: ArrayBuffer;
@@ -45,13 +46,13 @@ export class SymmetricCryptoKey {
     }
 
     if (this.key != null) {
-      this.keyB64 = encodingUtils.fromBufferToB64(this.key);
+      this.keyB64 = Utils.fromBufferToB64(this.key);
     }
     if (this.encKey != null) {
-      this.encKeyB64 = encodingUtils.fromBufferToB64(this.encKey);
+      this.encKeyB64 = Utils.fromBufferToB64(this.encKey);
     }
     if (this.macKey != null) {
-      this.macKeyB64 = encodingUtils.fromBufferToB64(this.macKey);
+      this.macKeyB64 = Utils.fromBufferToB64(this.macKey);
     }
   }
 
@@ -61,13 +62,13 @@ export class SymmetricCryptoKey {
     }
 
     if (jsonResult.keyB64 != null) {
-      jsonResult.key = encodingUtils.fromB64ToArray(jsonResult.keyB64).buffer;
+      jsonResult.key = Utils.fromB64ToArray(jsonResult.keyB64).buffer;
     }
     if (jsonResult.encKeyB64 != null) {
-      jsonResult.encKey = encodingUtils.fromB64ToArray(jsonResult.encKeyB64).buffer;
+      jsonResult.encKey = Utils.fromB64ToArray(jsonResult.encKeyB64).buffer;
     }
     if (jsonResult.macKeyB64 != null) {
-      jsonResult.macKey = encodingUtils.fromB64ToArray(jsonResult.macKeyB64).buffer;
+      jsonResult.macKey = Utils.fromB64ToArray(jsonResult.macKeyB64).buffer;
     }
 
     return jsonResult;

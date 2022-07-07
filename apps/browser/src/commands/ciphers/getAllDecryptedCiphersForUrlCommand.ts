@@ -4,7 +4,7 @@ import { SearchService } from "@bitwarden/common/abstractions/search.service";
 import { SettingsService } from "@bitwarden/common/abstractions/settings.service";
 import { CipherType } from "@bitwarden/common/enums/cipherType";
 import { UriMatchType } from "@bitwarden/common/enums/uriMatchType";
-import { UrlUtils } from "@bitwarden/common/misc/utilities/urlUtils";
+import { Utils } from "@bitwarden/common/misc/utils";
 import { SortedCiphersCache } from "@bitwarden/common/models/domain/sortedCiphersCache";
 import { CipherView } from "@bitwarden/common/models/view/cipherView";
 
@@ -42,7 +42,7 @@ export class GetAllDecryptedCiphersForUrlCommand extends GetAllDecryptedCiphersC
       return Promise.resolve([]);
     }
 
-    const domain = UrlUtils.getDomain(url);
+    const domain = Utils.getDomain(url);
     const eqDomainsPromise =
       domain == null
         ? Promise.resolve([])
@@ -92,7 +92,7 @@ export class GetAllDecryptedCiphersForUrlCommand extends GetAllDecryptedCiphersC
             case UriMatchType.Domain:
               if (domain != null && u.domain != null && matchingDomains.indexOf(u.domain) > -1) {
                 if (DomainMatchBlacklist.has(u.domain)) {
-                  const domainUrlHost = UrlUtils.getHost(url);
+                  const domainUrlHost = Utils.getHost(url);
                   if (!DomainMatchBlacklist.get(u.domain).has(domainUrlHost)) {
                     return true;
                   }
@@ -102,8 +102,8 @@ export class GetAllDecryptedCiphersForUrlCommand extends GetAllDecryptedCiphersC
               }
               break;
             case UriMatchType.Host: {
-              const urlHost = UrlUtils.getHost(url);
-              if (urlHost != null && urlHost === UrlUtils.getHost(u.uri)) {
+              const urlHost = Utils.getHost(url);
+              if (urlHost != null && urlHost === Utils.getHost(u.uri)) {
                 return true;
               }
               break;
