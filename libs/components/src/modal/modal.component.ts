@@ -12,41 +12,13 @@ export class ModalComponent {
   getWidth() {
     switch (this.modalSize) {
       case "small": {
-        return "tw-w-[300px]";
+        return "tw-max-w-xs";
       }
       case "large": {
-        return "tw-w-[800px]";
+        return "tw-max-w-4xl";
       }
       default: {
-        return "tw-w-[500px]";
-      }
-    }
-  }
-
-  getBodyWidth() {
-    switch (this.modalSize) {
-      case "small": {
-        return "tw-w-[268px]";
-      }
-      case "large": {
-        return "tw-w-[768px]";
-      }
-      default: {
-        return "tw-w-[468px]";
-      }
-    }
-  }
-
-  getTitleWidth() {
-    switch (this.modalSize) {
-      case "small": {
-        return "tw-w-[234px]";
-      }
-      case "large": {
-        return "tw-w-[734px]";
-      }
-      default: {
-        return "tw-w-[434px]";
+        return "tw-max-w-xl";
       }
     }
   }

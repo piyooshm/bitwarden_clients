@@ -16,7 +16,7 @@ const Template: Story<ModalComponent> = (args: ModalComponent) => ({
   <bit-modal [modalSize]="modalSize">
     <span title> Modal Title </span>
     <span body>
-      Modal body text goes here.<br>
+    Modal body text goes here.
     </span>
     <button footer> Save </button>
     <button footer> Cancel </button>
@@ -42,4 +42,135 @@ DefaultModal.args = {
 export const LargeModal = Template.bind({});
 LargeModal.args = {
   modalSize: "large",
+};
+
+const TemplateScrolling: Story<ModalComponent> = (args: ModalComponent) => ({
+  props: args,
+  template: `
+  <bit-modal [modalSize]="modalSize">
+  <span title> Modal Title </span>
+  <span body>
+    Modal body text goes here.<br>
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters
+    repeating lines of characters <br>
+    end of sequence!
+  </span>
+  <button footer> Save </button>
+  <button footer> Cancel </button>
+  </bit-modal>
+  `,
+});
+
+export const ScrollingTextModal = TemplateScrolling.bind({});
+ScrollingTextModal.args = {
+  modalSize: "small",
 };
