@@ -299,7 +299,7 @@ export class ApiService implements ApiServiceAbstraction {
   }
 
   async getTaxInfo(): Promise<TaxInfoResponse> {
-    const r = await this.send("GET", "/accounts/tax", null, false, true);
+    const r = await this.send("GET", "/accounts/tax", null, true, true);
     return new TaxInfoResponse(r);
   }
 
@@ -1412,7 +1412,7 @@ export class ApiService implements ApiServiceAbstraction {
   // Plan APIs
 
   async getPlans(): Promise<ListResponse<PlanResponse>> {
-    const r = await this.send("GET", "/plans/", null, true, true);
+    const r = await this.send("GET", "/plans/", null, false, true);
     return new ListResponse(r, PlanResponse);
   }
 
@@ -1425,7 +1425,7 @@ export class ApiService implements ApiServiceAbstraction {
   }
 
   async getTaxRates(): Promise<ListResponse<TaxRateResponse>> {
-    const r = await this.send("GET", "/plans/sales-tax-rates/", null, false, true);
+    const r = await this.send("GET", "/plans/sales-tax-rates/", null, true, true);
     return new ListResponse(r, TaxRateResponse);
   }
 

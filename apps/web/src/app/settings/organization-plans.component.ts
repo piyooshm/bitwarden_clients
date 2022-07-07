@@ -132,7 +132,9 @@ export class OrganizationPlansComponent implements OnInit {
   }
 
   get selectablePlans() {
-    return this.plans.filter(
+    console.log("Plan::", this.plan);
+    console.log("Product::", this.product);
+    return this.plans?.filter(
       (plan) => !plan.legacyYear && !plan.disabled && plan.product === this.product
     );
   }

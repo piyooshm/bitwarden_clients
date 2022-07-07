@@ -10,7 +10,6 @@ import { OrganizationService } from "@bitwarden/common/abstractions/organization
 import { PlatformUtilsService } from "@bitwarden/common/abstractions/platformUtils.service";
 import { PolicyService } from "@bitwarden/common/abstractions/policy.service";
 import { SyncService } from "@bitwarden/common/abstractions/sync.service";
-import { PlanType } from "@bitwarden/common/enums/planType";
 
 import { OrganizationPlansComponent } from "src/app/settings/organization-plans.component";
 
@@ -43,6 +42,9 @@ export class BillingComponent extends OrganizationPlansComponent {
       logService,
       messagingService
     );
-    this.plan = PlanType.EnterpriseAnnually;
+  }
+
+  async ngOnInit() {
+    await super.ngOnInit();
   }
 }

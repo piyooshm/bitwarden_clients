@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { first } from "rxjs";
 
 import { PlanType } from "@bitwarden/common/enums/planType";
+import { ProductType } from "@bitwarden/common/enums/productType";
 
 @Component({
   selector: "app-trial",
@@ -11,7 +12,8 @@ import { PlanType } from "@bitwarden/common/enums/planType";
 export class TrialInitiationComponent implements OnInit {
   email = "";
   org = "teams";
-  plan = PlanType.EnterpriseAnnually;
+  plan: PlanType;
+  product: ProductType;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -22,6 +24,17 @@ export class TrialInitiationComponent implements OnInit {
       }
       if (qParams.org) {
         this.org = qParams.org;
+      }
+
+      if (qParams.org === "families") {
+        this.plan = PlanType.FamiliesAnnually;
+        this.product = ProductType.Families;
+      } else if (qParams.org === "teams") {
+        this.plan = PlanType.TeamsAnnually;
+        this.product = ProductType.Teams;
+      } else if (qParams.org === "enterprise") {
+        this.plan = PlanType.EnterpriseAnnually;
+        this.product = ProductType.Enterprise;
       }
     });
   }

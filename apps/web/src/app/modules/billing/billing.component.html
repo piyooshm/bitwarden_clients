@@ -1,6 +1,6 @@
 <div class="tw-container tw-mb-3">
   <h2 class="tw-text-base tw-mb-3">{{ "billingPlanLabel" | i18n }}</h2>
-  <!-- <div class="tw-flex tw-items-center tw-mb-3" *ngFor="let selectablePlan of selectablePlans">
+  <div class="tw-flex tw-items-center tw-mb-3" *ngFor="let selectablePlan of selectablePlans">
     <label class="tw-block tw-text-main" for="interval{{ selectablePlan.type }}">
       <input
         checked
@@ -12,18 +12,15 @@
         [(ngModel)]="plan"
       />
       <ng-container *ngIf="selectablePlan.isAnnual">
-        {{ "annually" | i18n }} - {{ seatTotal(selectablePlan) | currency: "$" }} /{{
-          "yr" | i18n
-        }}
+        {{ "annually" | i18n }} - {{ selectedPlan.basePrice | currency: "$" }} /{{ "yr" | i18n }}
       </ng-container>
       <ng-container *ngIf="!selectablePlan.isAnnual">
-        {{ "monthly" | i18n }} - {{ seatTotal(selectablePlan) | currency: "$" }} /{{
+        {{ "monthly" | i18n }} - {{ selectedPlan.basePrice | currency: "$" }} /{{
           "monthAbbr" | i18n
         }}
       </ng-container>
-      <span class="tw-ml-1">{{ plan }}</span>
     </label>
-  </div> -->
+  </div>
 
   <h2 class="tw-text-base tw-mb-3">{{ "paymentType" | i18n }}</h2>
   <div class="tw-mb-3">

@@ -43,7 +43,11 @@
           <app-vertical-step label="Billing">
             <!-- Replace with Billing step -->
             <p>This is content of "Step 3"</p>
-            <app-billing *ngIf="stepper.selectedIndex === 2" [plan]="plan"></app-billing>
+            <app-billing
+              *ngIf="stepper.selectedIndex === 2"
+              [plan]="plan"
+              [product]="product"
+            ></app-billing>
             <button bitButton buttonType="secondary" cdkStepperPrevious>Back</button>
             <button bitButton buttonType="primary" cdkStepperNext>Complete step</button>
           </app-vertical-step>
