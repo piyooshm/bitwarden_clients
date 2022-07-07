@@ -16,6 +16,7 @@ import LockedVaultPendingNotificationsItem from "./models/lockedVaultPendingNoti
 export default class RuntimeBackground {
   private autofillTimeout: any;
   private pageDetailsToAutoFill: any[] = [];
+  private tabToAutoFill: any;
   private onInstalledReason: string = null;
   private lockedVaultPendingNotifications: LockedVaultPendingNotificationsItem[] = [];
 
@@ -143,6 +144,7 @@ export default class RuntimeBackground {
               tab: msg.tab,
               details: msg.details,
             });
+            this.tabToAutoFill = msg.tab;
             this.autofillTimeout = setTimeout(async () => await this.autofillPage(), 300);
             break;
           default:
@@ -207,6 +209,7 @@ export default class RuntimeBackground {
 
   private async autofillPage() {
     const totpCode = await this.autofillService.doAutoFill({
+      tab: this.tabToAutoFill,
       cipher: this.main.loginToAutoFill,
       pageDetails: this.pageDetailsToAutoFill,
       fillNewPassword: true,
@@ -219,6 +222,7 @@ export default class RuntimeBackground {
     // reset
     this.main.loginToAutoFill = null;
     this.pageDetailsToAutoFill = [];
+    this.tabToAutoFill = null;
   }
 
   private async checkOnInstalled() {
