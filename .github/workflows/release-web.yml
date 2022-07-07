@@ -263,7 +263,7 @@ jobs:
         if: ${{ github.event.inputs.release_type != 'Dry Run' }}
         uses: ncipollo/release-action@58ae73b360456532aafd58ee170c045abbeaee37  # v1.10.0
         with:
-          name: "Version v${{ needs.setup.outputs.release_version }}"
+          name: "Web v${{ needs.setup.outputs.release_version }}"
           commit: ${{ github.sha }}
           tag: web-v${{ needs.setup.outputs.tag_version }}
           body: "<insert release notes here>"
