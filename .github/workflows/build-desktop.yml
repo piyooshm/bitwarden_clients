@@ -190,6 +190,7 @@ jobs:
           options: --user 0:0 -v ${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
           run: |
             set -e
+            npm i
             npm run build -- --target x86_64-unknown-linux-gnu
             strip *.node
 
