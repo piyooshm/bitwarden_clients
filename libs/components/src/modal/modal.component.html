@@ -5,13 +5,19 @@
 >
   <!-- Modal Header-->
   <div
-    class="tw-w-full tw-box-border tw-flex tw-flex-row tw-items-center tw-gap-4 tw-max-h-full tw-border-0 tw-border-b tw-border-solid tw-border-secondary-300 tw-flex-none tw-order-none tw-self-stretch tw-grow-0"
+    class="tw-w-full tw-box-border tw-flex tw-flex-row tw-items-center tw-gap-4 tw-p-4 tw-max-h-full tw-border-0 tw-border-b tw-border-solid tw-border-secondary-300 tw-flex-none tw-order-none tw-self-stretch tw-grow-0"
   >
     <!-- Modal Title text container -->
     <div
-      class="tw-w-full tw-max-h-full tw-text-lg tw-font-normal tw-leading-7 tw-uppercase tw-flex tw-items-center tw-p-4 tw-text-main tw-flex-none tw-order-none tw-grow"
+      class="tw-max-h-full tw-text-lg tw-font-normal tw-leading-7 tw-uppercase tw-flex tw-items-center tw-text-main tw-flex-none tw-order-none tw-grow"
     >
       <ng-content select="[title]"></ng-content>
+    </div>
+    <!-- Modal Title close button container TODO: when implementing modal popup this should broadcast to close modal popup-->
+    <div class="tw-flex-none tw-order-1 tw-flex-grow-0">
+      <button class="tw-border-0 tw-bg-transparent tw-text-main tw-p-0">
+        <i class="bwi bwi-close tw-text-xs tw-font-bold tw-text-main" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 
