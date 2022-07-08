@@ -1,10 +1,17 @@
-import { Meta, Story } from "@storybook/angular";
+import { Meta, moduleMetadata, Story } from "@storybook/angular";
+
+import { ButtonModule } from "../button";
 
 import { ModalComponent } from "./modal.component";
 
 export default {
   title: "Component Library/Modals/Modal",
   component: ModalComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [ButtonModule],
+    }),
+  ],
   args: {
     modalSize: "small",
   },
@@ -18,8 +25,8 @@ const Template: Story<ModalComponent> = (args: ModalComponent) => ({
     <span body>
     Modal body text goes here.
     </span>
-    <button footer> Save </button>
-    <button footer> Cancel </button>
+    <button footer bitButton buttonType="primary"> Save </button>
+    <button footer bitButton buttonType="secondary"> Cancel </button>
   </bit-modal>
   `,
 });
@@ -164,8 +171,8 @@ const TemplateScrolling: Story<ModalComponent> = (args: ModalComponent) => ({
     repeating lines of characters <br>
     end of sequence!
   </span>
-  <button footer> Save </button>
-  <button footer> Cancel </button>
+  <button footer bitButton buttonType="primary"> Save </button>
+  <button footer bitButton buttonType="secondary"> Cancel </button>
   </bit-modal>
   `,
 });

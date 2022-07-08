@@ -1,10 +1,17 @@
-import { Meta, Story } from "@storybook/angular";
+import { Meta, moduleMetadata, Story } from "@storybook/angular";
+
+import { ButtonModule } from "../button";
 
 import { ModalSimpleComponent } from "./modal-simple.component";
 
 export default {
   title: "Component Library/Modals/Simple Modal",
   component: ModalSimpleComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [ButtonModule],
+    }),
+  ],
 } as Meta;
 
 const Template: Story<ModalSimpleComponent> = (args: ModalSimpleComponent) => ({
@@ -15,8 +22,8 @@ const Template: Story<ModalSimpleComponent> = (args: ModalSimpleComponent) => ({
       </span>
       <span message> Message Content
       </span>
-      <button footer> Yes </button>
-      <button footer> No </button>
+      <button footer bitButton buttonType="primary"> Yes </button>
+      <button footer bitButton buttonType="secondary"> No </button>
   </bit-simple-modal>
   `,
 });
@@ -35,8 +42,8 @@ const TemplateWithIcon: Story<ModalSimpleComponent> = (args: ModalSimpleComponen
       </span>
       <span message> Message Content
       </span>
-      <button footer> Yes </button>
-      <button footer> No </button>
+      <button footer bitButton buttonType="primary"> Yes </button>
+      <button footer bitButton buttonType="secondary"> No </button>
   </bit-simple-modal>
   `,
 });
@@ -167,8 +174,8 @@ const TemplateScroll: Story<ModalSimpleComponent> = (args: ModalSimpleComponent)
       repeating lines of characters <br>
       end of sequence!
       </span>
-      <button footer> Yes </button>
-      <button footer> No </button>
+      <button footer bitButton buttonType="primary"> Yes </button>
+      <button footer bitButton buttonType="secondary"> No </button>
   </bit-simple-modal>
   `,
 });
