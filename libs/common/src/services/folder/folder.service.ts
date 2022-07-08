@@ -3,16 +3,12 @@ import { CryptoService } from "../../abstractions/crypto.service";
 import { FolderService as FolderServiceAbstraction } from "../../abstractions/folder/folder.service.abstraction";
 import { I18nService } from "../../abstractions/i18n.service";
 import { StateService } from "../../abstractions/state.service";
-import { ServiceUtils } from "../../misc/serviceUtils";
 import { Utils } from "../../misc/utils";
 import { CipherData } from "../../models/data/cipherData";
 import { FolderData } from "../../models/data/folderData";
 import { Folder } from "../../models/domain/folder";
 import { SymmetricCryptoKey } from "../../models/domain/symmetricCryptoKey";
-import { TreeNode } from "../../models/domain/treeNode";
 import { FolderView } from "../../models/view/folderView";
-
-const NestingDelimiter = "/";
 
 export class FolderService implements FolderServiceAbstraction {
   constructor(
@@ -82,24 +78,6 @@ export class FolderService implements FolderServiceAbstraction {
 
     await this.stateService.setDecryptedFolders(decFolders);
     return decFolders;
-  }
-
-  async getAllNested(folders?: FolderView[]): Promise<TreeNode<FolderView>[]> {
-    folders = folders ?? (await this.getAllDecrypted());
-    const nodes: TreeNode<FolderView>[] = [];
-    folders.forEach((f) => {
-      const folderCopy = new FolderView();
-      folderCopy.id = f.id;
-      folderCopy.revisionDate = f.revisionDate;
-      const parts = f.name != null ? f.name.replace(/^\/+|\/+$/g, "").split(NestingDelimiter) : [];
-      ServiceUtils.nestedTraverse(nodes, 0, parts, folderCopy, null, NestingDelimiter);
-    });
-    return nodes;
-  }
-
-  async getNested(id: string): Promise<TreeNode<FolderView>> {
-    const folders = await this.getAllNested();
-    return ServiceUtils.getTreeNodeObject(folders, id) as TreeNode<FolderView>;
   }
 
   async upsert(folder: FolderData | FolderData[]): Promise<any> {

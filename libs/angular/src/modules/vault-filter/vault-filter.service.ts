@@ -7,11 +7,15 @@ import { OrganizationService } from "@bitwarden/common/abstractions/organization
 import { PolicyService } from "@bitwarden/common/abstractions/policy.service";
 import { StateService } from "@bitwarden/common/abstractions/state.service";
 import { PolicyType } from "@bitwarden/common/enums/policyType";
+import { ServiceUtils } from "@bitwarden/common/misc/serviceUtils";
 import { Organization } from "@bitwarden/common/models/domain/organization";
+import { TreeNode } from "@bitwarden/common/models/domain/treeNode";
 import { CollectionView } from "@bitwarden/common/models/view/collectionView";
 import { FolderView } from "@bitwarden/common/models/view/folderView";
 
 import { DynamicTreeNode } from "./models/dynamic-tree-node.model";
+
+const NestingDelimiter = "/";
 
 @Injectable()
 export class VaultFilterService {
@@ -50,7 +54,7 @@ export class VaultFilterService {
     } else {
       folders = storedFolders;
     }
-    const nestedFolders = await this.folderService.getAllNested(folders);
+    const nestedFolders = await this.getAllFoldersNested(folders);
     return new DynamicTreeNode<FolderView>({
       fullList: folders,
       nestedList: nestedFolders,
@@ -78,5 +82,23 @@ export class VaultFilterService {
 
   async checkForPersonalOwnershipPolicy(): Promise<boolean> {
     return await this.policyService.policyAppliesToUser(PolicyType.PersonalOwnership);
+  }
+
+  protected async getAllFoldersNested(folders?: FolderView[]): Promise<TreeNode<FolderView>[]> {
+    folders = folders ?? (await this.folderService.getAllDecrypted());
+    const nodes: TreeNode<FolderView>[] = [];
+    folders.forEach((f) => {
+      const folderCopy = new FolderView();
+      folderCopy.id = f.id;
+      folderCopy.revisionDate = f.revisionDate;
+      const parts = f.name != null ? f.name.replace(/^\/+|\/+$/g, "").split(NestingDelimiter) : [];
+      ServiceUtils.nestedTraverse(nodes, 0, parts, folderCopy, null, NestingDelimiter);
+    });
+    return nodes;
+  }
+
+  async getFolderNested(id: string): Promise<TreeNode<FolderView>> {
+    const folders = await this.getAllFoldersNested();
+    return ServiceUtils.getTreeNodeObject(folders, id) as TreeNode<FolderView>;
   }
 }
