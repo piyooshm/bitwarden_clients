@@ -190,7 +190,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           image: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-          options: --user 0:0 -v ${{ env.RUNNER_TEMP }}/.cargo/git:/root/.cargo/git -v ${{ env.RUNNER_TEMP }}/.cargo/registry:/root/.cargo/registry -v ${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
+          options: -v -v ${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
           run: |
             set -e
             npm i
