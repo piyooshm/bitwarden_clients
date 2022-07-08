@@ -1,15 +1,17 @@
+import { Observable } from "rxjs";
+
 import { FolderData } from "../../models/data/folderData";
 import { Folder } from "../../models/domain/folder";
 import { SymmetricCryptoKey } from "../../models/domain/symmetricCryptoKey";
-import { TreeNode } from "../../models/domain/treeNode";
 import { FolderView } from "../../models/view/folderView";
 
 export abstract class FolderService {
+  folders$: Observable<Folder[]>;
+  folderViews$: Observable<FolderView[]>;
+
   clearCache: () => Promise<void>;
   encrypt: (model: FolderView, key?: SymmetricCryptoKey) => Promise<Folder>;
   get: (id: string) => Promise<Folder>;
-  getAll: () => Promise<Folder[]>;
-  getAllDecrypted: () => Promise<FolderView[]>;
 }
 
 export abstract class InternalFolderService extends FolderService {

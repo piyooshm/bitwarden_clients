@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { from, mergeMap, Observable } from "rxjs";
 
 import { CipherService } from "@bitwarden/common/abstractions/cipher.service";
 import { CollectionService } from "@bitwarden/common/abstractions/collection.service";
@@ -40,25 +41,30 @@ export class VaultFilterService {
     return await this.organizationService.getAll();
   }
 
-  async buildFolders(organizationId?: string): Promise<DynamicTreeNode<FolderView>> {
-    const storedFolders = await this.folderService.getAllDecrypted();
-    let folders: FolderView[];
-    if (organizationId != null) {
-      const ciphers = await this.cipherService.getAllDecrypted();
-      const orgCiphers = ciphers.filter((c) => c.organizationId == organizationId);
-      folders = storedFolders.filter(
-        (f) =>
-          orgCiphers.filter((oc) => oc.folderId == f.id).length > 0 ||
-          ciphers.filter((c) => c.folderId == f.id).length < 1
-      );
-    } else {
-      folders = storedFolders;
-    }
-    const nestedFolders = await this.getAllFoldersNested(folders);
-    return new DynamicTreeNode<FolderView>({
-      fullList: folders,
-      nestedList: nestedFolders,
-    });
+  buildFolders(organizationId?: string): Observable<DynamicTreeNode<FolderView>> {
+    const transformation = async (storedFolders: FolderView[]) => {
+      let folders: FolderView[];
+      if (organizationId != null) {
+        const ciphers = await this.cipherService.getAllDecrypted();
+        const orgCiphers = ciphers.filter((c) => c.organizationId == organizationId);
+        folders = storedFolders.filter(
+          (f) =>
+            orgCiphers.filter((oc) => oc.folderId == f.id).length > 0 ||
+            ciphers.filter((c) => c.folderId == f.id).length < 1
+        );
+      } else {
+        folders = storedFolders;
+      }
+      const nestedFolders = await this.getAllFoldersNested(folders);
+      return new DynamicTreeNode<FolderView>({
+        fullList: folders,
+        nestedList: nestedFolders,
+      });
+    };
+
+    return this.folderService.folderViews$.pipe(
+      mergeMap((folders) => from(transformation(folders)))
+    );
   }
 
   async buildCollections(organizationId?: string): Promise<DynamicTreeNode<CollectionView>> {
@@ -85,7 +91,6 @@ export class VaultFilterService {
   }
 
   protected async getAllFoldersNested(folders?: FolderView[]): Promise<TreeNode<FolderView>[]> {
-    folders = folders ?? (await this.folderService.getAllDecrypted());
     const nodes: TreeNode<FolderView>[] = [];
     folders.forEach((f) => {
       const folderCopy = new FolderView();

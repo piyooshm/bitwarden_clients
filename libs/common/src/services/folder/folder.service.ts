@@ -13,7 +13,6 @@ import { Folder } from "../../models/domain/folder";
 import { SymmetricCryptoKey } from "../../models/domain/symmetricCryptoKey";
 import { FolderView } from "../../models/view/folderView";
 
-
 const BroadcasterSubscriptionId = "FolderService";
 
 export class FolderService implements FolderServiceAbstraction {
@@ -74,14 +73,6 @@ export class FolderService implements FolderServiceAbstraction {
     const folders = this._folders.getValue();
 
     return folders.find((folder) => folder.id === id);
-  }
-
-  async getAll(): Promise<Folder[]> {
-    return this._folders.getValue();
-  }
-
-  async getAllDecrypted(): Promise<FolderView[]> {
-    return this._folderViews.getValue();
   }
 
   async upsert(folder: FolderData | FolderData[]): Promise<any> {
