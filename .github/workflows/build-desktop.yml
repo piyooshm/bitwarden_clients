@@ -185,10 +185,10 @@ jobs:
       - name: "Get the Rust toolchain"
          uses: actions-rs/toolchain@b2417cde72dcf67f306c0ae8e0828a81bf0b189f # v1.0.6
          with:
-             toolchain: stable
-             override: true
-             target: x86_64-unknown-linux-musl
-             components: rustfmt, clippy
+          toolchain: stable
+          override: true
+          target: x86_64-unknown-linux-musl
+          components: rustfmt, clippy
 
       - name: Build Native Module
         if: steps.cache.outputs.cache-hit != 'true'
