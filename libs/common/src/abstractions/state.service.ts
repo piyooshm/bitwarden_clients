@@ -88,8 +88,6 @@ export abstract class StateService<T extends Account = Account> {
     value: SymmetricCryptoKey,
     options?: StorageOptions
   ) => Promise<void>;
-  getDecryptedFolders: (options?: StorageOptions) => Promise<FolderView[]>;
-  setDecryptedFolders: (value: FolderView[], options?: StorageOptions) => Promise<void>;
   getDecryptedOrganizationKeys: (
     options?: StorageOptions
   ) => Promise<Map<string, SymmetricCryptoKey>>;

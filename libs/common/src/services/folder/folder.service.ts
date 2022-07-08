@@ -1,3 +1,6 @@
+import { BehaviorSubject } from "rxjs";
+
+import { BroadcasterService } from "../../abstractions/broadcaster.service";
 import { CipherService } from "../../abstractions/cipher.service";
 import { CryptoService } from "../../abstractions/crypto.service";
 import { FolderService as FolderServiceAbstraction } from "../../abstractions/folder/folder.service.abstraction";
@@ -10,16 +13,54 @@ import { Folder } from "../../models/domain/folder";
 import { SymmetricCryptoKey } from "../../models/domain/symmetricCryptoKey";
 import { FolderView } from "../../models/view/folderView";
 
+
+const BroadcasterSubscriptionId = "FolderService";
+
 export class FolderService implements FolderServiceAbstraction {
+  private _folders: BehaviorSubject<Folder[]> = new BehaviorSubject([]);
+  private _folderViews: BehaviorSubject<FolderView[]> = new BehaviorSubject([]);
+
+  folders$ = this._folders.asObservable();
+  folderViews$ = this._folderViews.asObservable();
+
   constructor(
     private cryptoService: CryptoService,
     private i18nService: I18nService,
     private cipherService: CipherService,
-    private stateService: StateService
-  ) {}
+    private stateService: StateService,
+    private broadcasterService: BroadcasterService
+  ) {
+    this.stateService.activeAccount.subscribe(async (activeAccount) => {
+      if ((Utils.global as any).bitwardenContainerService == null) {
+        return;
+      }
 
-  async clearCache(userId?: string): Promise<void> {
-    await this.stateService.setDecryptedFolders(null, { userId: userId });
+      if (activeAccount == null) {
+        return;
+      }
+
+      const data = await this.stateService.getEncryptedFolders();
+
+      await this.updateObservables(data);
+    });
+
+    // TODO: Broadcasterservice should be removed or replaced with observables
+    this.broadcasterService.subscribe(BroadcasterSubscriptionId, async (message: any) => {
+      switch (message.command) {
+        case "unlocked": {
+          const data = await this.stateService.getEncryptedFolders();
+
+          await this.updateObservables(data);
+          break;
+        }
+        default:
+          break;
+      }
+    });
+  }
+
+  async clearCache(): Promise<void> {
+    this._folderViews.next([]);
   }
 
   async encrypt(model: FolderView, key?: SymmetricCryptoKey): Promise<Folder> {
@@ -30,54 +71,17 @@ export class FolderService implements FolderServiceAbstraction {
   }
 
   async get(id: string): Promise<Folder> {
-    const folders = await this.stateService.getEncryptedFolders();
-    // eslint-disable-next-line
-    if (folders == null || !folders.hasOwnProperty(id)) {
-      return null;
-    }
+    const folders = this._folders.getValue();
 
-    return new Folder(folders[id]);
+    return folders.find((folder) => folder.id === id);
   }
 
   async getAll(): Promise<Folder[]> {
-    const folders = await this.stateService.getEncryptedFolders();
-    const response: Folder[] = [];
-    for (const id in folders) {
-      // eslint-disable-next-line
-      if (folders.hasOwnProperty(id)) {
-        response.push(new Folder(folders[id]));
-      }
-    }
-    return response;
+    return this._folders.getValue();
   }
 
   async getAllDecrypted(): Promise<FolderView[]> {
-    const decryptedFolders = await this.stateService.getDecryptedFolders();
-    if (decryptedFolders != null) {
-      return decryptedFolders;
-    }
-
-    const hasKey = await this.cryptoService.hasKey();
-    if (!hasKey) {
-      throw new Error("No key.");
-    }
-
-    const decFolders: FolderView[] = [];
-    const promises: Promise<any>[] = [];
-    const folders = await this.getAll();
-    folders.forEach((folder) => {
-      promises.push(folder.decrypt().then((f) => decFolders.push(f)));
-    });
-
-    await Promise.all(promises);
-    decFolders.sort(Utils.getSortFunction(this.i18nService, "name"));
-
-    const noneFolder = new FolderView();
-    noneFolder.name = this.i18nService.t("noneFolder");
-    decFolders.push(noneFolder);
-
-    await this.stateService.setDecryptedFolders(decFolders);
-    return decFolders;
+    return this._folderViews.getValue();
   }
 
   async upsert(folder: FolderData | FolderData[]): Promise<any> {
@@ -95,17 +99,20 @@ export class FolderService implements FolderServiceAbstraction {
       });
     }
 
-    await this.stateService.setDecryptedFolders(null);
+    await this.updateObservables(folders);
     await this.stateService.setEncryptedFolders(folders);
   }
 
   async replace(folders: { [id: string]: FolderData }): Promise<any> {
-    await this.stateService.setDecryptedFolders(null);
+    await this.updateObservables(folders);
     await this.stateService.setEncryptedFolders(folders);
   }
 
   async clear(userId?: string): Promise<any> {
-    await this.stateService.setDecryptedFolders(null, { userId: userId });
+    if (userId == (await this.stateService.getUserId())) {
+      this._folders.next([]);
+      this._folderViews.next([]);
+    }
     await this.stateService.setEncryptedFolders(null, { userId: userId });
   }
 
@@ -126,7 +133,7 @@ export class FolderService implements FolderServiceAbstraction {
       });
     }
 
-    await this.stateService.setDecryptedFolders(null);
+    await this.updateObservables(folders);
     await this.stateService.setEncryptedFolders(folders);
 
     // Items in a deleted folder are re-assigned to "No Folder"
@@ -143,5 +150,21 @@ export class FolderService implements FolderServiceAbstraction {
         this.cipherService.upsert(updates);
       }
     }
+  }
+
+  private async updateObservables(foldersMap: { [id: string]: FolderData }) {
+    const folders = Object.values(foldersMap || {}).map((f) => new Folder(f));
+
+    const decryptFolderPromises = folders.map((f) => f.decrypt());
+    const decryptedFolders = await Promise.all(decryptFolderPromises);
+
+    decryptedFolders.sort(Utils.getSortFunction(this.i18nService, "name"));
+
+    const noneFolder = new FolderView();
+    noneFolder.name = this.i18nService.t("noneFolder");
+    decryptedFolders.push(noneFolder);
+
+    this._folders.next(folders);
+    this._folderViews.next(decryptedFolders);
   }
 }

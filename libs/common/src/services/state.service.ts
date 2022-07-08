@@ -658,24 +658,6 @@ export class StateService<
     );
   }
 
-  @withPrototypeForArrayMembers(FolderView)
-  async getDecryptedFolders(options?: StorageOptions): Promise<FolderView[]> {
-    return (
-      await this.getAccount(this.reconcileOptions(options, await this.defaultInMemoryOptions()))
-    )?.data?.folders?.decrypted;
-  }
-
-  async setDecryptedFolders(value: FolderView[], options?: StorageOptions): Promise<void> {
-    const account = await this.getAccount(
-      this.reconcileOptions(options, await this.defaultInMemoryOptions())
-    );
-    account.data.folders.decrypted = value;
-    await this.saveAccount(
-      account,
-      this.reconcileOptions(options, await this.defaultInMemoryOptions())
-    );
-  }
-
   @withPrototypeForMap(SymmetricCryptoKey, SymmetricCryptoKey.initFromJson)
   async getDecryptedOrganizationKeys(
     options?: StorageOptions
