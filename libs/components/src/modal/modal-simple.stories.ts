@@ -17,7 +17,7 @@ export default {
 const Template: Story<ModalSimpleComponent> = (args: ModalSimpleComponent) => ({
   props: args,
   template: `
-  <bit-simple-modal [useDefaultIcon]="useDefaultIcon">
+  <bit-simple-modal [useDefaultIcon]="true">
       <span title> Alert Modal Title
       </span>
       <span message> Message Content
@@ -28,15 +28,12 @@ const Template: Story<ModalSimpleComponent> = (args: ModalSimpleComponent) => ({
   `,
 });
 
-export const ExampleSimpleModal = Template.bind({});
-ExampleSimpleModal.args = {
-  useDefaultIcon: true,
-};
+export const Default = Template.bind({});
 
 const TemplateWithIcon: Story<ModalSimpleComponent> = (args: ModalSimpleComponent) => ({
   props: args,
   template: `
-  <bit-simple-modal [useDefaultIcon]="useDefaultIcon">
+  <bit-simple-modal [useDefaultIcon]="false">
       <i icon class="bwi bwi-star tw-text-3xl tw-text-success" aria-hidden="true"></i>
       <span title> Premium Subscription Available
       </span>
@@ -48,10 +45,7 @@ const TemplateWithIcon: Story<ModalSimpleComponent> = (args: ModalSimpleComponen
   `,
 });
 
-export const ExampleSimpleModalWithCustomIcon = TemplateWithIcon.bind({});
-ExampleSimpleModalWithCustomIcon.args = {
-  useDefaultIcon: false,
-};
+export const CustomIcon = TemplateWithIcon.bind({});
 
 const TemplateScroll: Story<ModalSimpleComponent> = (args: ModalSimpleComponent) => ({
   props: args,
@@ -180,7 +174,7 @@ const TemplateScroll: Story<ModalSimpleComponent> = (args: ModalSimpleComponent)
   `,
 });
 
-export const ExampleScrollingSimpleModal = TemplateScroll.bind({});
-ExampleScrollingSimpleModal.args = {
+export const ScrollingContent = TemplateScroll.bind({});
+ScrollingContent.args = {
   useDefaultIcon: true,
 };

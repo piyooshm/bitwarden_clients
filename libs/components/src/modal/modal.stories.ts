@@ -31,23 +31,18 @@ const Template: Story<ModalComponent> = (args: ModalComponent) => ({
   `,
 });
 
-export const ExampleModal = Template.bind({});
-ExampleModal.args = {
+export const Default = Template.bind({});
+Default.args = {
   modalSize: "default",
 };
 
-export const SmallModal = Template.bind({});
-SmallModal.args = {
+export const Small = Template.bind({});
+Small.args = {
   modalSize: "small",
 };
 
-export const DefaultModal = Template.bind({});
-DefaultModal.args = {
-  modalSize: "default",
-};
-
-export const LargeModal = Template.bind({});
-LargeModal.args = {
+export const Large = Template.bind({});
+Large.args = {
   modalSize: "large",
 };
 
@@ -177,7 +172,7 @@ const TemplateScrolling: Story<ModalComponent> = (args: ModalComponent) => ({
   `,
 });
 
-export const ScrollingTextModal = TemplateScrolling.bind({});
-ScrollingTextModal.args = {
+export const ScrollingContent = TemplateScrolling.bind({});
+ScrollingContent.args = {
   modalSize: "small",
 };
