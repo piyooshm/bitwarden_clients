@@ -187,7 +187,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           image: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-          options: --user 0:0 -v ${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
+          options: --user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/root/.cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/root/.cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/root/.cargo/registry/index -v ${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
           run: |
             set -e
             npm i
