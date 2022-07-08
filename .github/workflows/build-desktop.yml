@@ -179,7 +179,10 @@ jobs:
         uses: actions/cache@48af2dc4a9e8278b89d7fa154b955c30c6aaab09 # v3.0.2
         id: cache
         with:
-          path: apps/desktop/desktop_native/*.node
+          path: |
+            apps/desktop/desktop_native/*.node
+            ${{ env.RUNNER_TEMP }}/.cargo/registry
+            ${{ env.RUNNER_TEMP }}/.cargo/git
           key: rust-${{ runner.os }}-${{ hashFiles('apps/desktop/desktop_native/**/*') }}
 
       - name: Build Native Module
@@ -187,7 +190,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           image: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-          options: --user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/root/.cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/root/.cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/root/.cargo/registry/index -v ${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
+          options: --user 0:0 -v ${{ env.RUNNER_TEMP }}/.cargo/git:/root/.cargo/git -v ${{ env.RUNNER_TEMP }}/.cargo/registry:/root/.cargo/registry -v ${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
           run: |
             set -e
             npm i
