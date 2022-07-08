@@ -6,9 +6,18 @@
   <div
     class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-p-0 tw-gap-2 tw-w-full tw-max-h-full tw-order-none tw-flex-grow-0 tw-py-4 tw-flex-auto tw-overflow-y-auto"
   >
-    <!--Simple Modal Vector Container-->
-    <div class="tw-w-11 tw-h-11 tw-flex-none tw-order-none tw-flex-grow-0">
-      <ng-content select="[vector]"></ng-content>
+    <!--Simple Modal Icon Container-->
+    <div
+      class="tw-w-11 tw-h-11 tw-flex-none tw-order-0 tw-flex-grow-0 tw-items-center tw-text-center"
+    >
+      <i
+        *ngIf="useDefaultIcon; else elseBlock"
+        class="bwi bwi-exclamation-triangle tw-text-3xl tw-text-warning tw-text-center"
+        aria-hidden="true"
+      ></i>
+      <ng-template #elseBlock>
+        <ng-content select="[icon]"></ng-content>
+      </ng-template>
     </div>
     <!--Simple Modal Title Container-->
     <div
