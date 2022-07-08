@@ -185,7 +185,6 @@ jobs:
       - name: Build Native Module
         uses: addnab/docker-run-action@4f65fabd2431ebc8d299f8e5a018d79a769ae185 # v3
         if: steps.cache.outputs.cache-hit != 'true'
-        working-directory: apps/desktop/desktop_native
         with:
           image: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
           options: --user 0:0 -v \${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
