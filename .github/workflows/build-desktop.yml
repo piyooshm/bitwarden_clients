@@ -162,6 +162,7 @@ jobs:
           sudo apt-get -y install pkg-config libxss-dev libsecret-1-dev rpm
 
       - name: Set up Snap
+        if: false
         run: sudo snap install snapcraft --classic
 
       - name: Print environment
@@ -186,16 +187,10 @@ jobs:
           key: rust-${{ runner.os }}-${{ hashFiles('apps/desktop/desktop_native/**/*') }}
 
       - name: Build Native Module
-        uses: addnab/docker-run-action@4f65fabd2431ebc8d299f8e5a018d79a769ae185 # v3
         if: steps.cache.outputs.cache-hit != 'true'
-        with:
-          image: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-          options: -v ${{ github.workspace }}/apps/desktop/desktop_native:/build -w /build
-          run: |
-            set -e
-            npm i
-            npm run build -- --target x86_64-unknown-linux-gnu
-            strip *.node
+        run: |
+          rustup target add x86_64-unknown-linux-musl
+          npm run build:cross-platform
 
       - name: Build application
         run: npm run dist:lin
@@ -244,6 +239,7 @@ jobs:
 
 
   windows:
+    if: false
     name: Windows Build
     runs-on: windows-2019
     needs: setup
@@ -458,6 +454,7 @@ jobs:
 
 
   macos-build:
+    if: false
     name: MacOS Build
     runs-on: macos-11
     needs: setup
@@ -601,6 +598,7 @@ jobs:
 
 
   macos-package-github:
+    if: false
     name: MacOS Package GitHub Release Assets
     runs-on: macos-11
     needs:
@@ -825,6 +823,7 @@ jobs:
 
 
   macos-package-mas:
+    if: false
     name: MacOS Package Prod Release Asset
     runs-on: macos-11
     needs:
