@@ -162,7 +162,6 @@ jobs:
           sudo apt-get -y install pkg-config libxss-dev libsecret-1-dev rpm musl-dev musl-tools
 
       - name: Set up Snap
-        if: false
         run: sudo snap install snapcraft --classic
 
       - name: Print environment
@@ -244,7 +243,6 @@ jobs:
 
 
   windows:
-    if: false
     name: Windows Build
     runs-on: windows-2019
     needs: setup
@@ -459,7 +457,6 @@ jobs:
 
 
   macos-build:
-    if: false
     name: MacOS Build
     runs-on: macos-11
     needs: setup
@@ -603,7 +600,6 @@ jobs:
 
 
   macos-package-github:
-    if: false
     name: MacOS Package GitHub Release Assets
     runs-on: macos-11
     needs:
@@ -828,7 +824,6 @@ jobs:
 
 
   macos-package-mas:
-    if: false
     name: MacOS Package Prod Release Asset
     runs-on: macos-11
     needs:
