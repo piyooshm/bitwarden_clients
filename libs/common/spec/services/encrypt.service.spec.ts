@@ -84,7 +84,7 @@ describe("EncryptService", () => {
       expect(actual).toEqualBuffer(decryptedBytes);
     });
 
-    it("compares macs", async () => {
+    it("compares macs using CryptoFunctionService", async () => {
       const expectedMacData = new Uint8Array(
         encBuffer.ivBytes.byteLength + encBuffer.ctBytes.byteLength
       );
