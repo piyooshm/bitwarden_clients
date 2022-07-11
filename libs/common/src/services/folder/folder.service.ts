@@ -63,6 +63,7 @@ export class FolderService implements FolderServiceAbstraction {
     this._folderViews.next([]);
   }
 
+  // TODO: This should be moved to EncryptService or something
   async encrypt(model: FolderView, key?: SymmetricCryptoKey): Promise<Folder> {
     const folder = new Folder();
     folder.id = model.id;
@@ -76,7 +77,7 @@ export class FolderService implements FolderServiceAbstraction {
     return folders.find((folder) => folder.id === id);
   }
 
-  async upsert(folder: FolderData | FolderData[]): Promise<any> {
+  async upsert(folder: FolderData | FolderData[]): Promise<void> {
     let folders = await this.stateService.getEncryptedFolders();
     if (folders == null) {
       folders = {};
@@ -95,7 +96,7 @@ export class FolderService implements FolderServiceAbstraction {
     await this.stateService.setEncryptedFolders(folders);
   }
 
-  async replace(folders: { [id: string]: FolderData }): Promise<any> {
+  async replace(folders: { [id: string]: FolderData }): Promise<void> {
     await this.updateObservables(folders);
     await this.stateService.setEncryptedFolders(folders);
   }
