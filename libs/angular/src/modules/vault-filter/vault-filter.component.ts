@@ -46,7 +46,7 @@ export class VaultFilterComponent implements OnInit {
       this.activeSingleOrganizationPolicy =
         await this.vaultFilterService.checkForSingleOrganizationPolicy();
     }
-    this.folders$ = await this.vaultFilterService.buildFolders();
+    this.folders$ = await this.vaultFilterService.buildNestedFolders();
     this.collections = await this.initCollections();
     this.isLoaded = true;
   }
@@ -74,7 +74,7 @@ export class VaultFilterComponent implements OnInit {
   }
 
   async reloadCollectionsAndFolders(filter: VaultFilter) {
-    this.folders$ = await this.vaultFilterService.buildFolders(filter.selectedOrganizationId);
+    this.folders$ = await this.vaultFilterService.buildNestedFolders(filter.selectedOrganizationId);
     this.collections = filter.myVaultOnly
       ? null
       : await this.vaultFilterService.buildCollections(filter.selectedOrganizationId);

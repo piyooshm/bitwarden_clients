@@ -184,7 +184,7 @@ export class VaultFilterComponent implements OnInit, OnDestroy {
 
   async loadFolders() {
     const allFolders = await firstValueFrom(
-      this.vaultFilterService.buildFolders(this.selectedOrganization)
+      this.vaultFilterService.buildNestedFolders(this.selectedOrganization)
     );
     this.folders = allFolders.fullList;
     this.nestedFolders = allFolders.nestedList;

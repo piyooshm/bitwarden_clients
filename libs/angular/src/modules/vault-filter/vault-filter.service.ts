@@ -41,7 +41,7 @@ export class VaultFilterService {
     return await this.organizationService.getAll();
   }
 
-  buildFolders(organizationId?: string): Observable<DynamicTreeNode<FolderView>> {
+  buildNestedFolders(organizationId?: string): Observable<DynamicTreeNode<FolderView>> {
     const transformation = async (storedFolders: FolderView[]) => {
       let folders: FolderView[];
       if (organizationId != null) {

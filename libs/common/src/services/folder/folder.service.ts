@@ -35,7 +35,8 @@ export class FolderService implements FolderServiceAbstraction {
       }
 
       if (activeAccount == null) {
-        return;
+        this._folders.next([]);
+        this._folderViews.next([]);
       }
 
       const data = await this.stateService.getEncryptedFolders();
