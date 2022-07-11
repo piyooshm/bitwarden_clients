@@ -39,13 +39,12 @@ describe("EncryptService", () => {
       cryptoFunctionService.hmac.mockResolvedValue(mac.buffer);
 
       const actual = await encryptService.encryptToBytes(plainValue, key);
-      const actualBytes = new Uint8Array(actual.buffer);
 
-      expect(actualBytes[0]).toEqual(encType);
-      expect(actualBytes.slice(1, 17)).toEqual(iv);
-      expect(actualBytes.slice(17, 49)).toEqual(mac);
-      expect(actualBytes.slice(49)).toEqual(encryptedData);
-      expect(actualBytes.byteLength).toEqual(
+      expect(actual.encryptionType).toEqual(encType);
+      expect(actual.iv).toEqual(iv);
+      expect(actual.mac).toEqual(mac);
+      expect(actual.ct).toEqual(encryptedData);
+      expect(actual.buffer.byteLength).toEqual(
         1 + iv.byteLength + mac.byteLength + encryptedData.byteLength
       );
     });
