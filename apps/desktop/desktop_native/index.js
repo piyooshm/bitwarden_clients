@@ -150,61 +150,31 @@ switch (platform) {
   case 'linux':
     switch (arch) {
       case 'x64':
-        if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'desktop_native.linux-x64-musl.node')
-          )
-          try {
-            if (localFileExisted) {
-              nativeBinding = require('./desktop_native.linux-x64-musl.node')
-            } else {
-              nativeBinding = require('@bitwarden/desktop-native-linux-x64-musl')
-            }
-          } catch (e) {
-            loadError = e
+        localFileExisted = existsSync(
+          join(__dirname, 'desktop_native.linux-x64-musl.node')
+        )
+        try {
+          if (localFileExisted) {
+            nativeBinding = require('./desktop_native.linux-x64-musl.node')
+          } else {
+            nativeBinding = require('@bitwarden/desktop-native-linux-x64-musl')
           }
-        } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'desktop_native.linux-x64-gnu.node')
-          )
-          try {
-            if (localFileExisted) {
-              nativeBinding = require('./desktop_native.linux-x64-gnu.node')
-            } else {
-              nativeBinding = require('@bitwarden/desktop-native-linux-x64-gnu')
-            }
-          } catch (e) {
-            loadError = e
-          }
+        } catch (e) {
+          loadError = e
         }
         break
       case 'arm64':
-        if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'desktop_native.linux-arm64-musl.node')
-          )
-          try {
-            if (localFileExisted) {
-              nativeBinding = require('./desktop_native.linux-arm64-musl.node')
-            } else {
-              nativeBinding = require('@bitwarden/desktop-native-linux-arm64-musl')
-            }
-          } catch (e) {
-            loadError = e
+        localFileExisted = existsSync(
+          join(__dirname, 'desktop_native.linux-arm64-musl.node')
+        )
+        try {
+          if (localFileExisted) {
+            nativeBinding = require('./desktop_native.linux-arm64-musl.node')
+          } else {
+            nativeBinding = require('@bitwarden/desktop-native-linux-arm64-musl')
           }
-        } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'desktop_native.linux-arm64-gnu.node')
-          )
-          try {
-            if (localFileExisted) {
-              nativeBinding = require('./desktop_native.linux-arm64-gnu.node')
-            } else {
-              nativeBinding = require('@bitwarden/desktop-native-linux-arm64-gnu')
-            }
-          } catch (e) {
-            loadError = e
-          }
+        } catch (e) {
+          loadError = e
         }
         break
       case 'arm':
