@@ -40,14 +40,14 @@ export class EncArrayBuffer {
   }
 
   get iv() {
-    return new Uint8Array(this.ivBytes);
+    return this.ivBytes == null ? null : new Uint8Array(this.ivBytes);
   }
 
   get mac() {
-    return new Uint8Array(this.macBytes);
+    return this.macBytes == null ? null : new Uint8Array(this.macBytes);
   }
 
   get ct() {
-    return new Uint8Array(this.ctBytes);
+    return this.ctBytes == null ? null : new Uint8Array(this.ctBytes);
   }
 }
