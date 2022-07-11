@@ -46,9 +46,34 @@ describe("encArrayBuffer", () => {
     });
   });
 
-  it("doesn't parse the buffer if invalid", () => {
-    const invalidBuffer = makeStaticByteArray(10, 1);
-    const actual = new EncArrayBuffer(invalidBuffer.buffer);
+  describe("doesn't parse the buffer if it has an invalid length", () => {
+    test.each([
+      [EncryptionType.AesCbc128_HmacSha256_B64, 49, "AesCbc128_HmacSha256_B64"],
+      [EncryptionType.AesCbc256_HmacSha256_B64, 49, "AesCbc256_HmacSha256_B64"],
+      [EncryptionType.AesCbc256_B64, 17, "AesCbc256_B64"],
+    ])("with %c%c%s", (encType: EncryptionType, minLength: number) => {
+      // Generate invalid byte array
+      // Minus 1 to leave room for the encType, minus 1 to make it invalid
+      const invalidBytes = makeStaticByteArray(minLength - 2);
+
+      const invalidArray = new Uint8Array(1 + invalidBytes.buffer.byteLength);
+      invalidArray.set([encType]);
+      invalidArray.set(invalidBytes, 1);
+
+      const actual = new EncArrayBuffer(invalidArray.buffer);
+
+      expect(actual.buffer).not.toBeNull();
+      expect(actual.ctBytes).toBeNull();
+      expect(actual.encryptionType).toBeNull();
+      expect(actual.ivBytes).toBeNull();
+      expect(actual.macBytes).toBeNull();
+    });
+  });
+
+  it("doesn't parse the buffer if the encryptionType is not supported", () => {
+    // Starting at 9 implicitly gives us an invalid encType
+    const bytes = makeStaticByteArray(50, 9);
+    const actual = new EncArrayBuffer(bytes);
 
     expect(actual.buffer).not.toBeNull();
     expect(actual.ctBytes).toBeNull();
