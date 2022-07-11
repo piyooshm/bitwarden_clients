@@ -106,6 +106,10 @@ export class EncryptService implements AbstractEncryptService {
       throw new Error("No encryption key provided.");
     }
 
+    if (encStringOrBuffer == null) {
+      throw new Error("Nothing provided for decryption.");
+    }
+
     const result = this.aesDecryptToBytes(
       encStringOrBuffer.encryptionType,
       encStringOrBuffer.ctBytes,
