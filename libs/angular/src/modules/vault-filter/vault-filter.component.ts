@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { lastValueFrom, Observable } from "rxjs";
+import { firstValueFrom, Observable } from "rxjs";
 
 import { Organization } from "@bitwarden/common/models/domain/organization";
 import { ITreeNodeObject } from "@bitwarden/common/models/domain/treeNode";
@@ -105,7 +105,7 @@ export class VaultFilterComponent implements OnInit {
   protected async pruneInvalidFolderSelection(filter: VaultFilter): Promise<VaultFilter> {
     if (
       filter.selectedFolder &&
-      !(await lastValueFrom(this.folders$))?.hasId(filter.selectedFolderId)
+      !(await firstValueFrom(this.folders$))?.hasId(filter.selectedFolderId)
     ) {
       filter.selectedFolder = false;
       filter.selectedFolderId = null;
