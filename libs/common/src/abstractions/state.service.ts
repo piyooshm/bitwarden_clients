@@ -180,7 +180,13 @@ export abstract class StateService<T extends Account = Account> {
   ) => Promise<void>;
   getEncryptedCryptoSymmetricKey: (options?: StorageOptions) => Promise<string>;
   setEncryptedCryptoSymmetricKey: (value: string, options?: StorageOptions) => Promise<void>;
+  /**
+   * @deprecated Do not call this directly, use FolderService
+   */
   getEncryptedFolders: (options?: StorageOptions) => Promise<{ [id: string]: FolderData }>;
+  /**
+   * @deprecated Do not call this directly, use FolderService
+   */
   setEncryptedFolders: (
     value: { [id: string]: FolderData },
     options?: StorageOptions
