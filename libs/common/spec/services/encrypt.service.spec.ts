@@ -28,6 +28,12 @@ describe("EncryptService", () => {
     const mac = makeStaticByteArray(32, 40);
     const encryptedData = makeStaticByteArray(20, 50);
 
+    it("throws if no key is provided", () => {
+      return expect(encryptService.encryptToBytes(plainValue, null)).rejects.toThrow(
+        "No encryption key"
+      );
+    });
+
     describe("encrypts data", () => {
       beforeEach(() => {
         cryptoFunctionService.randomBytes.calledWith(16).mockResolvedValueOnce(iv.buffer);
@@ -82,6 +88,18 @@ describe("EncryptService", () => {
 
     beforeEach(() => {
       cryptoFunctionService.hmac.mockResolvedValue(computedMac);
+    });
+
+    it("throws if no key is provided", () => {
+      return expect(encryptService.decryptToBytes(encBuffer, null)).rejects.toThrow(
+        "No encryption key"
+      );
+    });
+
+    it("throws if no encrypted value is provided", () => {
+      return expect(encryptService.decryptToBytes(null, key)).rejects.toThrow(
+        "Nothing provided for decryption"
+      );
     });
 
     it("decrypts data with provided key", async () => {
