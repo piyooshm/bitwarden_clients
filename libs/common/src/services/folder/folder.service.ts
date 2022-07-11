@@ -102,7 +102,7 @@ export class FolderService implements FolderServiceAbstraction {
   }
 
   async clear(userId?: string): Promise<any> {
-    if (userId == (await this.stateService.getUserId())) {
+    if (userId == null || userId == (await this.stateService.getUserId())) {
       this._folders.next([]);
       this._folderViews.next([]);
     }

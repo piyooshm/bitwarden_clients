@@ -148,6 +148,43 @@ describe("Folder Service", () => {
     ]);
   });
 
+  it("clearCache", async () => {
+    await folderService.clearCache();
+
+    expect((await firstValueFrom(folderService.folders$)).length).toBe(1);
+    expect((await firstValueFrom(folderService.folderViews$)).length).toBe(0);
+  });
+
+  describe("clear", () => {
+    it("null userId", async () => {
+      await folderService.clear();
+
+      stateService.received(1).setEncryptedFolders(Arg.any(), Arg.any());
+
+      expect((await firstValueFrom(folderService.folders$)).length).toBe(0);
+      expect((await firstValueFrom(folderService.folderViews$)).length).toBe(0);
+    });
+
+    it("matching userId", async () => {
+      stateService.getUserId().resolves("1");
+      await folderService.clear("1");
+
+      stateService.received(1).setEncryptedFolders(Arg.any(), Arg.any());
+
+      expect((await firstValueFrom(folderService.folders$)).length).toBe(0);
+      expect((await firstValueFrom(folderService.folderViews$)).length).toBe(0);
+    });
+
+    it("missmatching userId", async () => {
+      await folderService.clear("12");
+
+      stateService.received(1).setEncryptedFolders(Arg.any(), Arg.any());
+
+      expect((await firstValueFrom(folderService.folders$)).length).toBe(1);
+      expect((await firstValueFrom(folderService.folderViews$)).length).toBe(2);
+    });
+  });
+
   function folderData(id: string, name: string) {
     const data = new FolderData({} as any);
     data.id = id;
