@@ -1,9 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { first } from "rxjs";
 
 import { PlanType } from "@bitwarden/common/enums/planType";
 import { ProductType } from "@bitwarden/common/enums/productType";
+
+import { VerticalStepperComponent } from "../vertical-stepper/vertical-stepper.component";
 
 @Component({
   selector: "app-trial",
@@ -14,6 +16,7 @@ export class TrialInitiationComponent implements OnInit {
   org = "teams";
   plan: PlanType;
   product: ProductType;
+  @ViewChild("stepper", { static: true }) verticalStepper: VerticalStepperComponent;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -37,5 +40,10 @@ export class TrialInitiationComponent implements OnInit {
         this.product = ProductType.Enterprise;
       }
     });
+  }
+
+  createdAccount(email: string) {
+    this.email = email;
+    this.verticalStepper.next();
   }
 }
