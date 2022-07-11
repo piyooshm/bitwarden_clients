@@ -1,6 +1,8 @@
 import * as papa from "papaparse";
 import { firstValueFrom } from "rxjs";
 
+import { FolderUtils } from "@bitwarden/common/misc/folder-utils";
+
 import { ApiService } from "../abstractions/api.service";
 import { CipherService } from "../abstractions/cipher.service";
 import { CryptoService } from "../abstractions/crypto.service";
@@ -10,6 +12,7 @@ import {
   ExportService as ExportServiceAbstraction,
 } from "../abstractions/export.service";
 import { FolderService } from "../abstractions/folder/folder.service.abstraction";
+import { I18nService } from "../abstractions/i18n.service";
 import { CipherType } from "../enums/cipherType";
 import { DEFAULT_KDF_ITERATIONS, KdfType } from "../enums/kdfType";
 import { Utils } from "../misc/utils";
@@ -34,7 +37,8 @@ export class ExportService implements ExportServiceAbstraction {
     private cipherService: CipherService,
     private apiService: ApiService,
     private cryptoService: CryptoService,
-    private cryptoFunctionService: CryptoFunctionService
+    private cryptoFunctionService: CryptoFunctionService,
+    private i18nService: I18nService
   ) {}
 
   async getExport(format: ExportFormat = "csv", organizationId?: string): Promise<string> {
@@ -117,7 +121,7 @@ export class ExportService implements ExportServiceAbstraction {
 
     promises.push(
       firstValueFrom(this.folderService.folderViews$).then((folders) => {
-        decFolders = folders;
+        decFolders = FolderUtils.sortAndAppendNoFolder(folders, this.i18nService);
       })
     );
 

@@ -4,8 +4,10 @@ import { ApiService } from "@bitwarden/common/abstractions/api.service";
 import { CipherService } from "@bitwarden/common/abstractions/cipher.service";
 import { CollectionService } from "@bitwarden/common/abstractions/collection.service";
 import { FolderService } from "@bitwarden/common/abstractions/folder/folder.service.abstraction";
+import { I18nService } from "@bitwarden/common/abstractions/i18n.service";
 import { OrganizationService } from "@bitwarden/common/abstractions/organization.service";
 import { SearchService } from "@bitwarden/common/abstractions/search.service";
+import { FolderUtils } from "@bitwarden/common/misc/folder-utils";
 import { Utils } from "@bitwarden/common/misc/utils";
 import { CollectionData } from "@bitwarden/common/models/data/collectionData";
 import { Collection } from "@bitwarden/common/models/domain/collection";
@@ -32,7 +34,8 @@ export class ListCommand {
     private collectionService: CollectionService,
     private organizationService: OrganizationService,
     private searchService: SearchService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private i18nService: I18nService
   ) {}
 
   async run(object: string, cmdOptions: Record<string, any>): Promise<Response> {
@@ -134,7 +137,9 @@ export class ListCommand {
       folders = CliUtils.searchFolders(folders, options.search);
     }
 
-    const res = new ListResponse(folders.map((o) => new FolderResponse(o)));
+    const res = new ListResponse(
+      FolderUtils.sort(folders, this.i18nService).map((o) => new FolderResponse(o))
+    );
     return Response.success(res);
   }
 

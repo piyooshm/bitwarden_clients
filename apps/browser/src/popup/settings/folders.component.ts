@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { map, Observable } from "rxjs";
 
 import { FolderService } from "@bitwarden/common/abstractions/folder/folder.service.abstraction";
+import { I18nService } from "@bitwarden/common/abstractions/i18n.service";
+import { FolderUtils } from "@bitwarden/common/misc/folder-utils";
 import { FolderView } from "@bitwarden/common/models/view/folderView";
 
 @Component({
@@ -12,15 +14,13 @@ import { FolderView } from "@bitwarden/common/models/view/folderView";
 export class FoldersComponent {
   folders$: Observable<FolderView[]>;
 
-  constructor(private folderService: FolderService, private router: Router) {
+  constructor(
+    private router: Router,
+    private folderService: FolderService,
+    i18nService: I18nService
+  ) {
     this.folders$ = this.folderService.folderViews$.pipe(
-      map((folders) => {
-        if (folders.length > 0) {
-          folders = folders.slice(0, folders.length - 1);
-        }
-
-        return folders;
-      })
+      map((folders) => FolderUtils.sort(folders, i18nService))
     );
   }
 

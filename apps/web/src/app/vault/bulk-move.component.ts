@@ -28,7 +28,7 @@ export class BulkMoveComponent implements OnInit {
 
   async ngOnInit() {
     this.folders$ = this.folderService.folderViews$;
-    this.folderId = (await firstValueFrom(this.folders$))[0].id;
+    this.folderId = (await firstValueFrom(this.folders$))?.[0].id;
   }
 
   async submit() {

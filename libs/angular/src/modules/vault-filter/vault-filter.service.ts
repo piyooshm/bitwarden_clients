@@ -4,10 +4,12 @@ import { from, mergeMap, Observable } from "rxjs";
 import { CipherService } from "@bitwarden/common/abstractions/cipher.service";
 import { CollectionService } from "@bitwarden/common/abstractions/collection.service";
 import { FolderService } from "@bitwarden/common/abstractions/folder/folder.service.abstraction";
+import { I18nService } from "@bitwarden/common/abstractions/i18n.service";
 import { OrganizationService } from "@bitwarden/common/abstractions/organization.service";
 import { PolicyService } from "@bitwarden/common/abstractions/policy.service";
 import { StateService } from "@bitwarden/common/abstractions/state.service";
 import { PolicyType } from "@bitwarden/common/enums/policyType";
+import { FolderUtils } from "@bitwarden/common/misc/folder-utils";
 import { ServiceUtils } from "@bitwarden/common/misc/serviceUtils";
 import { Organization } from "@bitwarden/common/models/domain/organization";
 import { TreeNode } from "@bitwarden/common/models/domain/treeNode";
@@ -26,7 +28,8 @@ export class VaultFilterService {
     protected folderService: FolderService,
     protected cipherService: CipherService,
     protected collectionService: CollectionService,
-    protected policyService: PolicyService
+    protected policyService: PolicyService,
+    protected i18nService: I18nService
   ) {}
 
   async storeCollapsedFilterNodes(collapsedFilterNodes: Set<string>): Promise<void> {
@@ -63,7 +66,9 @@ export class VaultFilterService {
     };
 
     return this.folderService.folderViews$.pipe(
-      mergeMap((folders) => from(transformation(folders)))
+      mergeMap((folders) =>
+        from(transformation(FolderUtils.sortAndAppendNoFolder(folders, this.i18nService)))
+      )
     );
   }
 

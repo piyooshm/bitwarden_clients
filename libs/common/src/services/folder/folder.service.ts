@@ -151,12 +151,6 @@ export class FolderService implements FolderServiceAbstraction {
     const decryptFolderPromises = folders.map((f) => f.decrypt());
     const decryptedFolders = await Promise.all(decryptFolderPromises);
 
-    decryptedFolders.sort(Utils.getSortFunction(this.i18nService, "name"));
-
-    const noneFolder = new FolderView();
-    noneFolder.name = this.i18nService.t("noneFolder");
-    decryptedFolders.push(noneFolder);
-
     this._folders.next(folders);
     this._folderViews.next(decryptedFolders);
   }

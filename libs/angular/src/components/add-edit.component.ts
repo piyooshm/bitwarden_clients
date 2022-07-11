@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 
 import { AuditService } from "@bitwarden/common/abstractions/audit.service";
 import { CipherService } from "@bitwarden/common/abstractions/cipher.service";
@@ -21,6 +21,7 @@ import { OrganizationUserStatusType } from "@bitwarden/common/enums/organization
 import { PolicyType } from "@bitwarden/common/enums/policyType";
 import { SecureNoteType } from "@bitwarden/common/enums/secureNoteType";
 import { UriMatchType } from "@bitwarden/common/enums/uriMatchType";
+import { FolderUtils } from "@bitwarden/common/misc/folder-utils";
 import { Utils } from "@bitwarden/common/misc/utils";
 import { Cipher } from "@bitwarden/common/models/domain/cipher";
 import { CardView } from "@bitwarden/common/models/view/cardView";
@@ -244,7 +245,9 @@ export class AddEditComponent implements OnInit {
       }
     }
 
-    this.folders$ = this.folderService.folderViews$;
+    this.folders$ = this.folderService.folderViews$.pipe(
+      map((folders) => FolderUtils.sortAndAppendNoFolder(folders, this.i18nService))
+    );
 
     if (this.editMode && this.previousCipherId !== this.cipherId) {
       this.eventService.collect(EventType.Cipher_ClientViewed, this.cipherId);

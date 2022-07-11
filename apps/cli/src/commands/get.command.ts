@@ -6,12 +6,14 @@ import { CipherService } from "@bitwarden/common/abstractions/cipher.service";
 import { CollectionService } from "@bitwarden/common/abstractions/collection.service";
 import { CryptoService } from "@bitwarden/common/abstractions/crypto.service";
 import { FolderService } from "@bitwarden/common/abstractions/folder/folder.service.abstraction";
+import { I18nService } from "@bitwarden/common/abstractions/i18n.service";
 import { OrganizationService } from "@bitwarden/common/abstractions/organization.service";
 import { SearchService } from "@bitwarden/common/abstractions/search.service";
 import { StateService } from "@bitwarden/common/abstractions/state.service";
 import { TotpService } from "@bitwarden/common/abstractions/totp.service";
 import { CipherType } from "@bitwarden/common/enums/cipherType";
 import { SendType } from "@bitwarden/common/enums/sendType";
+import { FolderUtils } from "@bitwarden/common/misc/folder-utils";
 import { Utils } from "@bitwarden/common/misc/utils";
 import { EncString } from "@bitwarden/common/models/domain/encString";
 import { Organization } from "@bitwarden/common/models/domain/organization";
@@ -55,7 +57,8 @@ export class GetCommand extends DownloadCommand {
     private stateService: StateService,
     private searchService: SearchService,
     private apiService: ApiService,
-    private organizationService: OrganizationService
+    private organizationService: OrganizationService,
+    private i18nService: I18nService
   ) {
     super(cryptoService);
   }
@@ -363,7 +366,9 @@ export class GetCommand extends DownloadCommand {
       let folders = await firstValueFrom(this.folderService.folderViews$);
       folders = CliUtils.searchFolders(folders, id);
       if (folders.length > 1) {
-        return Response.multipleResults(folders.map((f) => f.id));
+        return Response.multipleResults(
+          FolderUtils.sort(folders, this.i18nService).map((f) => f.id)
+        );
       }
       if (folders.length > 0) {
         decFolder = folders[0];
