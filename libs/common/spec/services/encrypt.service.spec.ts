@@ -52,23 +52,23 @@ describe("EncryptService", () => {
 
   describe("decryptToBytes", () => {
     const encType = EncryptionType.AesCbc256_HmacSha256_B64;
+    const key = new SymmetricCryptoKey(makeStaticByteArray(64, 100), encType);
+    const computedMac = new Uint8Array(1).buffer;
 
+    // Create test EncArrayBuffer to decrypt
     const encryptedBytes = makeStaticByteArray(60);
     const tempArray = new Uint8Array(1 + encryptedBytes.buffer.byteLength);
     tempArray.set([encType]);
     tempArray.set(encryptedBytes, 1);
     const encBuffer = new EncArrayBuffer(tempArray.buffer);
 
-    const key = new SymmetricCryptoKey(makeStaticByteArray(64, 100), encType);
-
-    const decryptedBytes = makeStaticByteArray(10, 200).buffer;
-    const computedMac = new Uint8Array(1).buffer;
-
     beforeEach(() => {
       cryptoFunctionService.hmac.mockResolvedValue(computedMac);
     });
 
     it("decrypts data with provided key", async () => {
+      const decryptedBytes = makeStaticByteArray(10, 200).buffer;
+
       cryptoFunctionService.hmac.mockResolvedValue(makeStaticByteArray(1).buffer);
       cryptoFunctionService.compare.mockResolvedValue(true);
       cryptoFunctionService.aesDecrypt.mockResolvedValueOnce(decryptedBytes);
