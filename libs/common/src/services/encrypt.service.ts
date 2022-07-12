@@ -99,42 +99,17 @@ export class EncryptService implements AbstractEncryptService {
   }
 
   async decryptToBytes(
-    encStringOrBuffer: EncString | EncArrayBuffer,
+    encThing: EncString | EncArrayBuffer,
     key: SymmetricCryptoKey
   ): Promise<ArrayBuffer> {
     if (key == null) {
       throw new Error("No encryption key provided.");
     }
 
-    if (encStringOrBuffer == null) {
+    if (encThing == null) {
       throw new Error("Nothing provided for decryption.");
     }
 
-    const result = await this.aesDecryptToBytes(encStringOrBuffer, key);
-
-    return result ?? null;
-  }
-
-  private async aesEncrypt(data: ArrayBuffer, key: SymmetricCryptoKey): Promise<EncryptedObject> {
-    const obj = new EncryptedObject();
-    obj.key = key;
-    obj.iv = await this.cryptoFunctionService.randomBytes(16);
-    obj.data = await this.cryptoFunctionService.aesEncrypt(data, obj.iv, obj.key.encKey);
-
-    if (obj.key.macKey != null) {
-      const macData = new Uint8Array(obj.iv.byteLength + obj.data.byteLength);
-      macData.set(new Uint8Array(obj.iv), 0);
-      macData.set(new Uint8Array(obj.data), obj.iv.byteLength);
-      obj.mac = await this.cryptoFunctionService.hmac(macData.buffer, obj.key.macKey, "sha256");
-    }
-
-    return obj;
-  }
-
-  private async aesDecryptToBytes(
-    encThing: EncString | EncArrayBuffer,
-    key: SymmetricCryptoKey
-  ): Promise<ArrayBuffer> {
     if (key.macKey != null && encThing.macBytes == null) {
       return null;
     }
@@ -163,11 +138,29 @@ export class EncryptService implements AbstractEncryptService {
       }
     }
 
-    return await this.cryptoFunctionService.aesDecrypt(
+    const result = await this.cryptoFunctionService.aesDecrypt(
       encThing.ctBytes,
       encThing.ivBytes,
       key.encKey
     );
+
+    return result ?? null;
+  }
+
+  private async aesEncrypt(data: ArrayBuffer, key: SymmetricCryptoKey): Promise<EncryptedObject> {
+    const obj = new EncryptedObject();
+    obj.key = key;
+    obj.iv = await this.cryptoFunctionService.randomBytes(16);
+    obj.data = await this.cryptoFunctionService.aesEncrypt(data, obj.iv, obj.key.encKey);
+
+    if (obj.key.macKey != null) {
+      const macData = new Uint8Array(obj.iv.byteLength + obj.data.byteLength);
+      macData.set(new Uint8Array(obj.iv), 0);
+      macData.set(new Uint8Array(obj.data), obj.iv.byteLength);
+      obj.mac = await this.cryptoFunctionService.hmac(macData.buffer, obj.key.macKey, "sha256");
+    }
+
+    return obj;
   }
 
   private logMacFailed(msg: string) {
