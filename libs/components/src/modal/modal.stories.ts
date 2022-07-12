@@ -15,18 +15,26 @@ export default {
   args: {
     modalSize: "small",
   },
+  parameters: {
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/Zt3YSeb6E6lebAffrNLa0h/Tailwind-Component-Library",
+    },
+  },
 } as Meta;
 
 const Template: Story<ModalComponent> = (args: ModalComponent) => ({
   props: args,
   template: `
   <bit-modal [modalSize]="modalSize">
-    <span title> Modal Title </span>
-    <span body>
+    <span bit-title> Modal Title </span>
+    <span bit-body>
     Modal body text goes here.
     </span>
-    <button footer bitButton buttonType="primary"> Save </button>
-    <button footer bitButton buttonType="secondary"> Cancel </button>
+    <div bit-footer class="tw-flex tw-flex-row tw-gap-2">
+      <button bitButton buttonType="primary"> Save </button>
+      <button bitButton buttonType="secondary"> Cancel </button>
+    </div>
   </bit-modal>
   `,
 });
@@ -50,124 +58,18 @@ const TemplateScrolling: Story<ModalComponent> = (args: ModalComponent) => ({
   props: args,
   template: `
   <bit-modal [modalSize]="modalSize">
-  <span title> Modal Title </span>
-  <span body>
+  <span bit-title> Modal Title </span>
+  <span bit-body>
     Modal body text goes here.<br>
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters
-    repeating lines of characters <br>
+    <ng-container *ngFor="let _ of [].constructor(100)">
+      repeating lines of characters <br>
+    </ng-container>
     end of sequence!
   </span>
-  <button footer bitButton buttonType="primary"> Save </button>
-  <button footer bitButton buttonType="secondary"> Cancel </button>
+  <div bit-footer class="tw-flex tw-flex-row tw-gap-2">
+    <button bitButton buttonType="primary"> Save </button>
+    <button bitButton buttonType="secondary"> Cancel </button>
+  </div>
   </bit-modal>
   `,
 });

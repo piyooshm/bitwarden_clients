@@ -10,26 +10,27 @@
     <div
       class="tw-w-11 tw-h-11 tw-flex-none tw-order-0 tw-flex-grow-0 tw-items-center tw-text-center"
     >
-      <i
-        *ngIf="useDefaultIcon; else elseBlock"
-        class="bwi bwi-exclamation-triangle tw-text-3xl tw-text-warning tw-text-center"
-        aria-hidden="true"
-      ></i>
-      <ng-template #elseBlock>
-        <ng-content select="[icon]"></ng-content>
-      </ng-template>
+      <div #providedIcon>
+        <ng-content select="[bit-icon]"></ng-content>
+      </div>
+      <ng-container *ngIf="!providedIcon?.children?.length">
+        <i
+          class="bwi bwi-exclamation-triangle tw-text-3xl tw-text-warning tw-text-center"
+          aria-hidden="true"
+        ></i>
+      </ng-container>
     </div>
     <!--Simple Modal Title Container-->
     <div
       class="tw-w-full tw-max-h-full tw-non-italic tw-font-semibold tw-text-base tw-text-center tw-text-main tw-order-1 tw-flex-grow-0 tw-px-4 tw-flex-none"
     >
-      <ng-content select="[title]"></ng-content>
+      <ng-content select="[bit-title]"></ng-content>
     </div>
     <!--Simple Modal Message Container-->
     <div
       class="tw-w-full tw-max-h-full tw-non-italic tw-font-normal tw-text-base tw-text-center tw-text-main tw-order-2 tw-flex-grow-0 tw-px-4 tw-flex-auto tw-overflow-y-auto"
     >
-      <ng-content select="[message]"></ng-content>
+      <ng-content select="[bit-message]"></ng-content>
     </div>
   </div>
   <!--Simple Modal Footer-->
@@ -44,7 +45,7 @@
     <div
       class="tw-flex tw-flex-row tw-items-center tw-p-4 tw-gap-2 tw-w-full tw-max-h-full tw-flex-none tw-order-1 tw-self-stretch tw-flex-grow-0"
     >
-      <ng-content select="[footer]"></ng-content>
+      <ng-content select="[bit-footer]"></ng-content>
     </div>
   </div>
 </div>

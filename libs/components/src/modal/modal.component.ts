@@ -5,11 +5,9 @@ import { Component, Input } from "@angular/core";
   templateUrl: "./modal.component.html",
 })
 export class ModalComponent {
-  // Controls the size of the bit modal displayed. Needs to be implemented.
-  @Input()
-  modalSize: "small" | "default" | "large";
+  @Input() modalSize: "small" | "default" | "large";
 
-  getWidth() {
+  get width() {
     switch (this.modalSize) {
       case "small": {
         return "tw-max-w-xs";
