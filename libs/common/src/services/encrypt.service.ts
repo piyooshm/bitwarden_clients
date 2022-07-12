@@ -110,19 +110,9 @@ export class EncryptService implements AbstractEncryptService {
       throw new Error("Nothing provided for decryption.");
     }
 
-    const result = this.aesDecryptToBytes(
-      encStringOrBuffer.encryptionType,
-      encStringOrBuffer.ctBytes,
-      encStringOrBuffer.ivBytes,
-      encStringOrBuffer.macBytes != null ? encStringOrBuffer.macBytes : null,
-      key
-    );
+    const result = await this.aesDecryptToBytes(encStringOrBuffer, key);
 
-    if (result == null) {
-      return null;
-    }
-
-    return result;
+    return result ?? null;
   }
 
   private async aesEncrypt(data: ArrayBuffer, key: SymmetricCryptoKey): Promise<EncryptedObject> {
@@ -142,24 +132,21 @@ export class EncryptService implements AbstractEncryptService {
   }
 
   private async aesDecryptToBytes(
-    encType: EncryptionType,
-    data: ArrayBuffer,
-    iv: ArrayBuffer,
-    mac: ArrayBuffer,
+    encThing: EncString | EncArrayBuffer,
     key: SymmetricCryptoKey
   ): Promise<ArrayBuffer> {
-    if (key.macKey != null && mac == null) {
+    if (key.macKey != null && encThing.macBytes == null) {
       return null;
     }
 
-    if (key.encType !== encType) {
+    if (key.encType !== encThing.encryptionType) {
       return null;
     }
 
-    if (key.macKey != null && mac != null) {
-      const macData = new Uint8Array(iv.byteLength + data.byteLength);
-      macData.set(new Uint8Array(iv), 0);
-      macData.set(new Uint8Array(data), iv.byteLength);
+    if (key.macKey != null && encThing.macBytes != null) {
+      const macData = new Uint8Array(encThing.ivBytes.byteLength + encThing.ctBytes.byteLength);
+      macData.set(new Uint8Array(encThing.ivBytes), 0);
+      macData.set(new Uint8Array(encThing.ctBytes), encThing.ivBytes.byteLength);
       const computedMac = await this.cryptoFunctionService.hmac(
         macData.buffer,
         key.macKey,
@@ -169,14 +156,18 @@ export class EncryptService implements AbstractEncryptService {
         return null;
       }
 
-      const macsMatch = await this.cryptoFunctionService.compare(mac, computedMac);
+      const macsMatch = await this.cryptoFunctionService.compare(encThing.macBytes, computedMac);
       if (!macsMatch) {
         this.logMacFailed("mac failed.");
         return null;
       }
     }
 
-    return await this.cryptoFunctionService.aesDecrypt(data, iv, key.encKey);
+    return await this.cryptoFunctionService.aesDecrypt(
+      encThing.ctBytes,
+      encThing.ivBytes,
+      key.encKey
+    );
   }
 
   private logMacFailed(msg: string) {
