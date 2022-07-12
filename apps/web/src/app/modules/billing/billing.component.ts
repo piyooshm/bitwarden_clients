@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { ApiService } from "@bitwarden/common/abstractions/api.service";
@@ -28,7 +29,8 @@ export class BillingComponent extends OrganizationPlansComponent {
     policyService: PolicyService,
     organizationService: OrganizationService,
     logService: LogService,
-    messagingService: MessagingService
+    messagingService: MessagingService,
+    formBuilder: FormBuilder
   ) {
     super(
       apiService,
@@ -40,7 +42,8 @@ export class BillingComponent extends OrganizationPlansComponent {
       policyService,
       organizationService,
       logService,
-      messagingService
+      messagingService,
+      formBuilder
     );
   }
 

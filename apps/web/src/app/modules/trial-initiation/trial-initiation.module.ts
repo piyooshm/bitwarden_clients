@@ -20,6 +20,7 @@ import { TrialInitiationComponent } from "./trial-initiation.component";
     VerticalStepperModule,
     FormFieldModule,
     RegisterFormModule,
+    BillingModule,
   ],
   declarations: [
     TrialInitiationComponent,

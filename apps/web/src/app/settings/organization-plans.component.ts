@@ -83,6 +83,14 @@ export class OrganizationPlansComponent implements OnInit {
   }
 
   async ngOnInit() {
+    //used when plan and product is passed as an input
+    if (this.plan !== 0 && this.product !== 0) {
+      this.formGroup.patchValue({
+        plan: this.plan,
+        product: this.product,
+      });
+    }
+
     if (!this.selfHosted) {
       const plans = await this.apiService.getPlans();
       this.plans = plans.data;
@@ -139,7 +147,7 @@ export class OrganizationPlansComponent implements OnInit {
   }
 
   get selectablePlans() {
-    return this.plans.filter(
+    return this.plans?.filter(
       (plan) =>
         !plan.legacyYear && !plan.disabled && plan.product === this.formGroup.controls.product.value
     );
