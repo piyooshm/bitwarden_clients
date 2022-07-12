@@ -48,6 +48,7 @@ export class TabItemComponent {
       "tw-border-x-secondary-300",
       "tw-border-t-primary-500",
       "tw-border-b-transparent",
+      "tw-bg-background",
       "tw-text-primary-500",
       "hover:tw-border-t-primary-700",
       "hover:!tw-text-primary-700",
