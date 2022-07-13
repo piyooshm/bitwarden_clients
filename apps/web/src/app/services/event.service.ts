@@ -287,11 +287,9 @@ export class EventService {
       case EventType.Organization_PurgedVault:
         msg = humanReadableMsg = this.i18nService.t("purgedOrganizationVault");
         break;
-      /*
-            case EventType.Organization_ClientExportedVault:
-                msg = this.i18nService.t('exportedOrganizationVault');
-                break;
-            */
+      case EventType.Organization_ClientExportedVault:
+        msg = humanReadableMsg = this.i18nService.t("exportedOrganizationVault");
+        break;
       case EventType.Organization_VaultAccessed:
         msg = humanReadableMsg = this.i18nService.t("vaultAccessedByProvider");
         break;
