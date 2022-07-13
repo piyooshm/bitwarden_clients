@@ -146,11 +146,11 @@ export class AppComponent implements OnDestroy, OnInit {
             const premiumConfirmed = await this.platformUtilsService.showDialog(
               this.i18nService.t("premiumRequiredDesc"),
               this.i18nService.t("premiumRequired"),
-              this.i18nService.t("learnMore"),
+              this.i18nService.t("upgrade"),
               this.i18nService.t("cancel")
             );
             if (premiumConfirmed) {
-              this.router.navigate(["settings/premium"]);
+              this.router.navigate(["settings/subscription/premium"]);
             }
             break;
           }
