@@ -180,13 +180,16 @@
               />
             </div>
             <div class="tw-flex tw-w-1/2 tw-mb-4 tw-items-end tw-ml-4" [ngClass]="{ low: totpLow }">
-              <div class="totp tw-flex tw-flex-row tw-items-center" *ngIf="!cipher.login.totp">
+              <div
+                class="totp tw-flex tw-flex-row tw-items-center"
+                *ngIf="!cipher.login.totp || (cipher.login.totp && !canAccessPremium)"
+              >
                 <span class="totp-countdown">
-                  <span class="totp-sec tw-text-gray-300">14</span>
+                  <span class="totp-sec tw-text-muted">15</span>
                   <svg>
                     <g>
                       <circle
-                        class="totp-circle inner"
+                        class="totp-circle-muted inner"
                         r="12.6"
                         cy="16"
                         cx="16"
@@ -194,7 +197,7 @@
                         [ngStyle]="{ 'stroke-dashoffset.px': 40 }"
                       ></circle>
                       <circle
-                        class="totp-circle outer"
+                        class="totp-circle-muted outer"
                         opacity="0.25"
                         r="14"
                         cy="16"
@@ -204,19 +207,34 @@
                   </svg>
                 </span>
                 <span
-                  class="totp-code tw-mr-2 tw-ml-2 tw-text-monospace tw-text-gray-300"
+                  class="totp-code tw-mr-3 tw-ml-2 tw-text-muted"
                   title="{{ 'verificationCodeTotp' | i18n }}"
                   >--- ---</span
                 >
-                <i class="bwi bwi-clone" aria-hidden="true"></i>
+                <i class="bwi bwi-lg bwi-clone tw-text-muted" aria-hidden="true"></i>
               </div>
-              <div class="tw-pb-2" *ngIf="cipher.login.totp && !canAccessPremium">
-                <small>
-                  <a class="tw-text-decoration-none" [routerLink]="" (click)="showGetPremium()">
-                    {{ "premiumSubcription" | i18n }}
-                  </a>
-                  {{ "required" | i18n }}
-                </small>
+              <div class="tw-pb-2" *ngIf="!cipher.login.totp || !totpCode">
+                <app-premium-badge
+                  *ngIf="!organization && !cipher.organizationId"
+                  class="ml-3"
+                ></app-premium-badge>
+                <a
+                  href="#"
+                  appStopClick
+                  bitBadge
+                  badgeType="primary"
+                  class="tw-ml-4"
+                  (click)="upgradeOrganization()"
+                  *ngIf="
+                    (organization && !organization.useTotp) ||
+                    (!organization &&
+                      !canAccessPremium &&
+                      cipher.organizationId &&
+                      !cipher.organizationUseTotp)
+                  "
+                >
+                  {{ "upgrade" | i18n }}
+                </a>
               </div>
               <div
                 *ngIf="cipher.login.totp && totpCode && canAccessPremium"
@@ -248,7 +266,7 @@
                   appA11yTitle="{{ 'copyVerificationCode' | i18n }}"
                   (click)="copy(totpCode, 'verificationCodeTotp', 'TOTP')"
                 >
-                  <i class="bwi bwi-clone" aria-hidden="true"></i>
+                  <i class="bwi bwi-lg bwi-clone" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
