@@ -23,13 +23,11 @@ export class ErrorResponse extends BaseResponse {
 
     if (status === 429) {
       this.message = "Rate limit exceeded. Try again later.";
-    } else {
-      if (errorModel) {
-        this.message = this.getResponseProperty("Message", errorModel);
-        this.validationErrors = this.getResponseProperty("ValidationErrors", errorModel);
-        this.captchaSiteKey = this.validationErrors?.HCaptcha_SiteKey?.[0];
-        this.captchaRequired = !Utils.isNullOrWhitespace(this.captchaSiteKey);
-      }
+    } else if (errorModel) {
+      this.message = this.getResponseProperty("Message", errorModel);
+      this.validationErrors = this.getResponseProperty("ValidationErrors", errorModel);
+      this.captchaSiteKey = this.validationErrors?.HCaptcha_SiteKey?.[0];
+      this.captchaRequired = !Utils.isNullOrWhitespace(this.captchaSiteKey);
     }
     this.statusCode = status;
   }
