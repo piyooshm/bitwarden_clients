@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
     if (fingerprint != null) {
       this.fingerprint = fingerprint.join("-");
     }
-    this.hidePasswordHint = await this.keyConnectorService.getUsesKeyConnector();
+    this.hidePasswordHint = true;
   }
 
   async submit() {
