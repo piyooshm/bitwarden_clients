@@ -87,8 +87,8 @@
                       id="biometric"
                       type="checkbox"
                       name="biometric"
-                      [checked]="biometric"
-                      (change)="updateBiometric()"
+                      [ngModel]="biometric"
+                      (ngModelChange)="updateBiometric($event)"
                     />
                     {{ biometricText | i18n }}
                   </label>
