@@ -1,3 +1,5 @@
+import { ParsedObject } from "@bitwarden/common/types/serializationTypes";
+
 import { LoginLinkedId as LinkedId } from "../../enums/linkedIdType";
 import { linkedFieldOption } from "../../misc/linkedFieldOption.decorator";
 import { Utils } from "../../misc/utils";
@@ -61,7 +63,7 @@ export class LoginView extends ItemView {
     return this.uris != null && this.uris.length > 0;
   }
 
-  static fromJSON(obj: Partial<LoginView>): LoginView {
+  static fromJSON(obj: ParsedObject<LoginView>): LoginView {
     const view = new LoginView();
 
     view.username = obj.username;

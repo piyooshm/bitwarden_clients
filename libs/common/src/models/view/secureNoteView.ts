@@ -1,4 +1,5 @@
 import { SecureNoteType } from "../../enums/secureNoteType";
+import { ParsedObject } from "../../types/serializationTypes";
 import { SecureNote } from "../domain/secureNote";
 
 import { ItemView } from "./itemView";
@@ -19,7 +20,7 @@ export class SecureNoteView extends ItemView {
     return null;
   }
 
-  static fromJSON(obj: Partial<SecureNoteView>): SecureNoteView {
+  static fromJSON(obj: ParsedObject<SecureNoteView>): SecureNoteView {
     const view = new SecureNoteView();
     view.type = obj.type;
     return view;

@@ -1,3 +1,5 @@
+import { ParsedObject } from "@bitwarden/common/types/serializationTypes";
+
 import { FieldType } from "../../enums/fieldType";
 import { LinkedIdType } from "../../enums/linkedIdType";
 import { Field } from "../domain/field";
@@ -26,7 +28,7 @@ export class FieldView implements View {
     return this.value != null ? "••••••••" : null;
   }
 
-  static fromJSON(obj: Partial<FieldView>): FieldView {
+  static fromJSON(obj: ParsedObject<FieldView>): FieldView {
     const view = new FieldView();
     view.name = obj.name;
     view.value = obj.value;

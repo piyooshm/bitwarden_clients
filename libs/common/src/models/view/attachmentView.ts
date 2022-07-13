@@ -1,3 +1,5 @@
+import { ParsedObject } from "@bitwarden/common/types/serializationTypes";
+
 import { Attachment } from "../domain/attachment";
 import { SymmetricCryptoKey } from "../domain/symmetricCryptoKey";
 
@@ -33,7 +35,7 @@ export class AttachmentView implements View {
     return 0;
   }
 
-  static fromJSON(obj: Partial<AttachmentView>): AttachmentView {
+  static fromJSON(obj: ParsedObject<AttachmentView>): AttachmentView {
     const view = new AttachmentView();
     view.id = obj.id;
     view.url = obj.url;

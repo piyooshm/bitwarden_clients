@@ -1,3 +1,5 @@
+import { ParsedObject, SerializableObject } from "@bitwarden/common/types/serializationTypes";
+
 import { UriMatchType } from "../../enums/uriMatchType";
 import { Utils } from "../../misc/utils";
 import { LoginUri } from "../domain/loginUri";
@@ -125,7 +127,7 @@ export class LoginUriView implements View {
       : this.uri;
   }
 
-  toJSON(): Partial<LoginUriView> {
+  toJSON(): SerializableObject<LoginUriView> {
     // Needed to serialize getters which are not included by JSON.stringify
     return {
       match: this.match,
@@ -133,7 +135,7 @@ export class LoginUriView implements View {
     };
   }
 
-  static fromJSON(obj: Partial<LoginUriView>): LoginUriView {
+  static fromJSON(obj: ParsedObject<LoginUriView>): LoginUriView {
     const view = new LoginUriView();
     view.match = obj.match;
     view.uri = obj.uri;

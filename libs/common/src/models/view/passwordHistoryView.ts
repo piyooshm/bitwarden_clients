@@ -1,3 +1,5 @@
+import { ParsedObject } from "@bitwarden/common/types/serializationTypes";
+
 import { Password } from "../domain/password";
 
 import { View } from "./view";
@@ -14,7 +16,7 @@ export class PasswordHistoryView implements View {
     this.lastUsedDate = ph.lastUsedDate;
   }
 
-  static fromJSON(obj: Partial<PasswordHistoryView>): PasswordHistoryView {
+  static fromJSON(obj: ParsedObject<PasswordHistoryView>): PasswordHistoryView {
     const view = new PasswordHistoryView();
     view.password = obj.password;
     view.lastUsedDate = obj.lastUsedDate == null ? null : new Date(obj.lastUsedDate);

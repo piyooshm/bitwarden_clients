@@ -1,3 +1,5 @@
+import { ParsedObject, SerializableObject } from "@bitwarden/common/types/serializationTypes";
+
 import { CipherRepromptType } from "../../enums/cipherRepromptType";
 import { CipherType } from "../../enums/cipherType";
 import { LinkedIdType } from "../../enums/linkedIdType";
@@ -132,8 +134,8 @@ export class CipherView implements View {
     return this.linkedFieldOptions.get(id)?.i18nKey;
   }
 
-  toJSON(): Partial<CipherView> {
-    const result: Partial<CipherView> = {
+  toJSON(): SerializableObject<CipherView> {
+    const result: SerializableObject<CipherView> = {
       id: this.id,
       organizationId: this.organizationId,
       folderId: this.folderId,
@@ -176,7 +178,7 @@ export class CipherView implements View {
     return result;
   }
 
-  static fromJSON(obj: Partial<CipherView>): CipherView {
+  static fromJSON(obj: ParsedObject<CipherView>): CipherView {
     const view = new CipherView();
     view.id = obj.id;
     view.organizationId = obj.organizationId;

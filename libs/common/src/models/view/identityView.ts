@@ -1,3 +1,5 @@
+import { ParsedObject, SerializableObject } from "@bitwarden/common/types/serializationTypes";
+
 import { IdentityLinkedId as LinkedId } from "../../enums/linkedIdType";
 import { linkedFieldOption } from "../../misc/linkedFieldOption.decorator";
 import { Utils } from "../../misc/utils";
@@ -140,7 +142,7 @@ export class IdentityView extends ItemView {
     return addressPart2;
   }
 
-  toJSON(): Partial<IdentityView> {
+  toJSON(): SerializableObject<IdentityView> {
     // Needed to serialize getters which are not included by JSON.stringify
     return {
       title: this.title,
@@ -164,7 +166,7 @@ export class IdentityView extends ItemView {
     };
   }
 
-  static fromJSON(obj: Partial<IdentityView>): IdentityView {
+  static fromJSON(obj: ParsedObject<IdentityView>): IdentityView {
     const view = new IdentityView();
     view.title = obj.title;
     view.firstName = obj.firstName;
