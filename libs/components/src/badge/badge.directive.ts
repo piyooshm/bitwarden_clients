@@ -27,7 +27,7 @@ export class BadgeDirective {
   @HostBinding("class") get classList() {
     return [
       "tw-inline",
-      "tw-py-1",
+      "tw-py-0.5",
       "tw-px-1.5",
       "tw-font-bold",
       "tw-text-center",
