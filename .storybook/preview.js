@@ -12,7 +12,7 @@ export const parameters = {
       date: /Date$/,
     },
   },
-  docs: { inlineStories: true },
+  docs: { inlineStories: false },
 };
 
 // ng-template is used to scope any template reference variables and isolate the previews

@@ -1,0 +1,71 @@
+import { Meta, Story, Canvas, ArgsTable, Source } from "@storybook/addon-docs/blocks";
+
+import { ButtonDirective } from "./button.directive";
+
+<Meta
+  title="Component Library/Button"
+  component={ButtonDirective}
+  parameters={{
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/file/f32LSg3jaegICkMu7rPARm/Tailwind-Component-Library-Update?node-id=1881%3A16733",
+    },
+  }}
+/>
+
+export const Template = (args) => ({
+  props: args,
+  template: `
+    <button bitButton [buttonType]="buttonType" [block]="block">Button</button>
+    <a bitButton [buttonType]="buttonType" [block]="block" href="#" class="tw-ml-2">Link</a>  `,
+});
+
+# Buttons
+
+Use buttons for actions in forms, dialogs, tables, and more.
+
+<ArgsTable story="Primary" />
+
+<Source id="component-library-button--primary" />
+
+## Choosing between `<a>` and `<button>`
+
+Call to actions (CTAs) can use either the `<a>` or `<button>` html elements; choose which based on the action the button takes: if navigating to a new page, use an `<a>` if taking an action on the current page use a `<button>`.
+
+## Placement
+
+For pairings in the bottom left corner of a page or component, the primary CTA will go on the left side of a button group with the secondary CTA option on the left. Parings in the top right corner of a page, should have the Primary CTA on the right.
+
+## Styles
+
+There are 3 main button styles: Primary, Secondary, and Danger.
+
+### Primary
+
+Use the `primary` styling for an action that relate to the main purpose of a page. There should never be 2 `primary` styled buttons next to each other.
+
+<Canvas>
+  <Story name="Primary" args={{ buttonType: "primary" }} height="290px">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Secondary
+
+The `secondary` styling should be used for secondary page action. An action is `secondary` if it relates indirectly to the purpose of a page. There may be multiple secondary actions next to each other; however, generally there should only be 1 or 2 calls to action per page.
+
+<Canvas>
+  <Story name="Secondary" args={{ buttonType: "secondary" }} height="290px">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Danger
+
+Use the Danger styling when the user may preform a permanent action.
+
+<Canvas>
+  <Story name="Danger" args={{ buttonType: "danger" }} height="290px">
+    {Template.bind({})}
+  </Story>
+</Canvas>
