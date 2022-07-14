@@ -532,11 +532,14 @@
   "invalidEmail": {
     "message": "Endereço de e-mail inválido."
   },
-  "masterPassRequired": {
-    "message": "A senha mestra é obrigatória."
+  "masterPasswordRequired": {
+    "message": "Master password is required."
   },
-  "masterPassLength": {
-    "message": "A senha mestra deve ter pelo menos 8 caracteres."
+  "confirmMasterPasswordRequired": {
+    "message": "Master password retype is required."
+  },
+  "masterPasswordMinLength": {
+    "message": "Master password must be at least 8 characters long."
   },
   "masterPassDoesntMatch": {
     "message": "A confirmação da senha mestra não corresponde."
@@ -869,10 +872,10 @@
     "message": "4 horas"
   },
   "onIdle": {
-    "message": "Quando o Sistema estiver Inativo"
+    "message": "Quando o sistema está inativo"
   },
   "onSleep": {
-    "message": "Quando o Sistema Hibernar"
+    "message": "Quando o sistema hibernar"
   },
   "onLocked": {
     "message": "Quando o Sistema estiver Bloqueado"
@@ -894,11 +897,11 @@
     "message": "Limpar automaticamente os valores copiados da sua área de transferência.",
     "description": "Clipboard is the operating system thing where you copy/paste data to on your device."
   },
-  "disableFavicon": {
-    "message": "Desativar Ícones de Sites"
+  "enableFavicon": {
+    "message": "Show website icons"
   },
-  "disableFaviconDesc": {
-    "message": "Os ícones de sites fornecem uma imagem reconhecível próxima de cada item de credencial no seu cofre."
+  "faviconDesc": {
+    "message": "Show a recognizable image next to each login."
   },
   "enableMinToTray": {
     "message": "Minimizar para Ícone da Bandeja"
@@ -913,7 +916,7 @@
     "message": "Ao minimizar a janela, mostra um ícone na barra de menus."
   },
   "enableCloseToTray": {
-    "message": "Fechar para Ícone da Bandeja"
+    "message": "Fechar para a área de notificações"
   },
   "enableCloseToTrayDesc": {
     "message": "Ao fechar a janela, mostra um ícone na bandeja do sistema."
@@ -931,7 +934,7 @@
     "message": "Sempre mostrar um ícone na bandeja do sistema."
   },
   "startToTray": {
-    "message": "Iniciar com o ícone para a Bandeja"
+    "message": "Iniciar para o Ícone da Bandeja"
   },
   "startToTrayDesc": {
     "message": "Quando o aplicativo for iniciado, apenas mostrar um ícone na bandeja do sistema."
@@ -1381,11 +1384,11 @@
   "touchIdConsentMessage": {
     "message": "desbloquear o seu cofre"
   },
-  "noAutoPromptWindowsHello": {
-    "message": "Não solicite por Windows Hello na inicialização."
+  "autoPromptWindowsHello": {
+    "message": "Ask for Windows Hello on launch"
   },
-  "noAutoPromptTouchId": {
-    "message": "Não solicite por Touch ID na inicialização."
+  "autoPromptTouchId": {
+    "message": "Ask for Touch ID on launch"
   },
   "lockWithMasterPassOnRestart": {
     "message": "Bloquear com senha mestra ao reiniciar"
@@ -1543,8 +1546,8 @@
   "acceptPolicies": {
     "message": "Ao marcar esta caixa, você concorda com o seguinte:"
   },
-  "acceptPoliciesError": {
-    "message": "Os Termos de Serviço e a Política de Privacidade não foram reconhecidos."
+  "acceptPoliciesRequired": {
+    "message": "Terms of Service and Privacy Policy have not been acknowledged."
   },
   "enableBrowserIntegration": {
     "message": "Ativar integração com o navegador"
@@ -1960,5 +1963,8 @@
   },
   "apiKey": {
     "message": "API Key"
+  },
+  "neverLockWarning": {
+    "message": "Are you sure you want to use the \"Never\" option? Setting your lock options to \"Never\" stores your vault's encryption key on your device. If you use this option you should ensure that you keep your device properly protected."
   }
 }

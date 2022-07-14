@@ -15,9 +15,12 @@ const pjson = require("./package.json");
 
 const ENV = process.env.ENV == null ? "development" : process.env.ENV;
 const NODE_ENV = process.env.NODE_ENV == null ? "development" : process.env.NODE_ENV;
+const LOGGING = process.env.LOGGING != "false";
 
 const envConfig = config.load(ENV);
-config.log(envConfig);
+if (LOGGING) {
+  config.log(envConfig);
+}
 
 const moduleRules = [
   {
@@ -158,6 +161,7 @@ const plugins = [
     STRIPE_KEY: envConfig["stripeKey"] ?? "",
     BRAINTREE_KEY: envConfig["braintreeKey"] ?? "",
     PAYPAL_CONFIG: envConfig["paypal"] ?? {},
+    FLAGS: envConfig["flags"] ?? {},
   }),
   new AngularWebpackPlugin({
     tsConfigPath: "tsconfig.json",

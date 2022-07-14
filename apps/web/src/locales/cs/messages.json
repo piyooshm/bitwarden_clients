@@ -572,6 +572,9 @@
   "createAccount": {
     "message": "Vytvořit účet"
   },
+  "startTrial": {
+    "message": "Start Trial"
+  },
   "logIn": {
     "message": "Přihlásit se"
   },
@@ -592,6 +595,9 @@
   },
   "masterPassDesc": {
     "message": "Hlavní heslo je heslo, které používáte k přístupu do vašeho trezoru. Je velmi důležité, abyste jej nezapomněli. Neexistuje totiž žádný způsob, jak heslo obnovit v případě, že jste na něj zapomněli."
+  },
+  "masterPassImportant": {
+    "message": "Master passwords cannot be recovered if you forget it!"
   },
   "masterPassHintDesc": {
     "message": "Nápověda k hlavnímu heslu vám pomůže zapamatovat si heslo, pokud ho zapomenete."
@@ -623,11 +629,14 @@
   "invalidEmail": {
     "message": "Neplatná e-mailová adresa."
   },
-  "masterPassRequired": {
-    "message": "Hlavní heslo je povinné."
+  "masterPasswordRequired": {
+    "message": "Master password is required."
   },
-  "masterPassLength": {
-    "message": "Hlavní heslo musí obsahovat alespoň 8 znaků."
+  "confirmMasterPasswordRequired": {
+    "message": "Master password retype is required."
+  },
+  "masterPasswordMinLength": {
+    "message": "Master password must be at least 8 characters long."
   },
   "masterPassDoesntMatch": {
     "message": "Potvrzení hlavního hesla se neshoduje."
@@ -1151,15 +1160,15 @@
   "languageDesc": {
     "message": "Změňte jazyk používaný ve webovém trezoru."
   },
-  "disableIcons": {
-    "message": "Zakázat ikonky webových stránek"
+  "enableFavicon": {
+    "message": "Show website icons"
   },
-  "disableIconsDesc": {
-    "message": "Ikonky webových stránek zobrazí snadno rozeznatelný obrázek vedle každé položky ve vašem trezoru."
+  "faviconDesc": {
+    "message": "Show a recognizable image next to each login."
   },
   "enableGravatars": {
     "message": "Povolit službu Gravatar",
-    "description": "'Gravatar' is the name of a service. See www.gravatar.com"
+    "description": "Use avatar images loaded from gravatar.com."
   },
   "enableGravatarsDesc": {
     "message": "Použije profilový obrázek načtený z gravatar.com."
@@ -1238,6 +1247,9 @@
   "enabled": {
     "message": "Povoleno"
   },
+  "activate": {
+    "message": "Activate"
+  },
   "premium": {
     "message": "Prémium",
     "description": "Premium Membership"
@@ -1262,6 +1274,9 @@
   },
   "disable": {
     "message": "Zakázat"
+  },
+  "deactivate": {
+    "message": "Deactivate"
   },
   "twoStepLoginProviderEnabled": {
     "message": "Tento poskytovatel dvoufázového přihlášení byl povolen."
@@ -2226,6 +2241,12 @@
   "removeUserConfirmation": {
     "message": "Opravdu chcete tohoto uživatele smazat?"
   },
+  "deactivateUserConfirmation": {
+    "message": "The member will no longer have access to the organization, but will still have access to their individual vault."
+  },
+  "activateUserConfirmation": {
+    "message": "Are you sure you want to activate this user, granting them access to the organization?"
+  },
   "removeUserConfirmationKeyConnector": {
     "message": "Warning! This user requires Key Connector to manage their encryption. Removing this user from your organization will permanently disable their account. This action cannot be undone. Do you want to proceed?"
   },
@@ -2564,6 +2585,42 @@
   },
   "removedUserId": {
     "message": "Uživatel $ID$ byl odebrán.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "deactivatedUserId": {
+    "message": "Deactivated user $ID$.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "activatedUserId": {
+    "message": "Activated user $ID$.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "deactivateUserId": {
+    "message": "Deactivate user $ID$?",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "activateUserId": {
+    "message": "Activate user $ID$?",
     "placeholders": {
       "id": {
         "content": "$1",
@@ -3111,8 +3168,8 @@
   "acceptPolicies": {
     "message": "Zaškrtnutím tohoto políčka souhlasím s následujícím:"
   },
-  "acceptPoliciesError": {
-    "message": "Podmínky služby a zásady ochrany osobních údajů nebyly uznány."
+  "acceptPoliciesRequired": {
+    "message": "Terms of Service and Privacy Policy have not been acknowledged."
   },
   "termsOfService": {
     "message": "Podmínky služby"
@@ -3617,6 +3674,9 @@
   },
   "disabled": {
     "message": "Zakázáno"
+  },
+  "deactivated": {
+    "message": "Deactivated"
   },
   "sendLink": {
     "message": "Odkaz tohoto Send",
@@ -4219,6 +4279,12 @@
   "removeUsersWarning": {
     "message": "Opravdu chcete odebrat následující uživatele? Proces může trvat několik sekund a nelze jej přerušit ani zrušit."
   },
+  "deactivateUsersWarning": {
+    "message": "Are you sure you want to deactivate the following members? They will no longer have access to the organization, but will still have access to their individual vaults. The process may take a few seconds to complete and cannot be interrupted or canceled."
+  },
+  "activateUsersWarning": {
+    "message": "Are you sure you want to activate the following members, granting them access to the organization? The process may take a few seconds to complete and cannot be interrupted or canceled."
+  },
   "theme": {
     "message": "Motiv"
   },
@@ -4249,6 +4315,12 @@
   "bulkRemovedMessage": {
     "message": "Úspěšně odstraněno"
   },
+  "bulkDeactivatedMessage": {
+    "message": "Deactivated successfully"
+  },
+  "bulkActivatedMessage": {
+    "message": "Activated successfully"
+  },
   "bulkFilteredMessage": {
     "message": "Vyloučené, neplatí pro tuto akci."
   },
@@ -4257,6 +4329,12 @@
   },
   "removeUsers": {
     "message": "Odebrat uživatele"
+  },
+  "deactivateUsers": {
+    "message": "Deactivate Users"
+  },
+  "activateUsers": {
+    "message": "Activate Users"
   },
   "error": {
     "message": "Chyba"
@@ -5094,6 +5172,30 @@
       "email": {
         "content": "$1",
         "example": "My Email"
+      }
+    }
+  },
+  "inputRequired": {
+    "message": "Input is required."
+  },
+  "inputEmail": {
+    "message": "Input is not an email-address."
+  },
+  "inputMinLength": {
+    "message": "Input must be at least $COUNT$ characters long.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "8"
+      }
+    }
+  },
+  "fieldsNeedAttention": {
+    "message": "$COUNT$ field(s) above need your attention.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
       }
     }
   }

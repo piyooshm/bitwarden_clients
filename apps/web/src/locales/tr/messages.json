@@ -572,6 +572,9 @@
   "createAccount": {
     "message": "Hesap aç"
   },
+  "startTrial": {
+    "message": "Denemeyi başlat"
+  },
   "logIn": {
     "message": "Giriş yap"
   },
@@ -592,6 +595,9 @@
   },
   "masterPassDesc": {
     "message": "Ana parola, kasanıza ulaşmak için kullanacağınız paroladır. Ana parolanızı unutmamanız çok önemlidir. Unutursanız parolalarınızı asla kurtaramazsınız."
+  },
+  "masterPassImportant": {
+    "message": "Master passwords cannot be recovered if you forget it!"
   },
   "masterPassHintDesc": {
     "message": "Ana parolanızı unutursanız bu ipucuna bakınca size ana parolanızı hatırlatacak bir şey yazabilirsiniz."
@@ -623,10 +629,13 @@
   "invalidEmail": {
     "message": "Geçersiz e-posta adresi."
   },
-  "masterPassRequired": {
-    "message": "Ana parola gerekli."
+  "masterPasswordRequired": {
+    "message": "Ana parola gereklidir."
   },
-  "masterPassLength": {
+  "confirmMasterPasswordRequired": {
+    "message": "Ana parolayı yeniden yazmalısınız."
+  },
+  "masterPasswordMinLength": {
     "message": "Ana parola en az 8 karakter uzunluğunda olmalıdır."
   },
   "masterPassDoesntMatch": {
@@ -1151,15 +1160,15 @@
   "languageDesc": {
     "message": "Web kasasında kullanılan dili değiştirin."
   },
-  "disableIcons": {
-    "message": "Site simgelerini devre dışı bırak"
+  "enableFavicon": {
+    "message": "Web sitesi simgelerini göster"
   },
-  "disableIconsDesc": {
-    "message": "Web sitesi simgeleri, kasanızdaki her kaydın yanında o siteyi tanımanıza yardımcı olan bir resim sunar."
+  "faviconDesc": {
+    "message": "Hesapların yanında tanıdık görseller göster."
   },
   "enableGravatars": {
-    "message": "Gravatar'ı etkinleştir",
-    "description": "'Gravatar' is the name of a service. See www.gravatar.com"
+    "message": "Gravatar'ı Etkinleştir",
+    "description": "Use avatar images loaded from gravatar.com."
   },
   "enableGravatarsDesc": {
     "message": "gravatar.com adresinden yüklenen avatarları kullan."
@@ -1238,6 +1247,9 @@
   "enabled": {
     "message": "Etkin"
   },
+  "activate": {
+    "message": "Activate"
+  },
   "premium": {
     "message": "Premium",
     "description": "Premium Membership"
@@ -1262,6 +1274,9 @@
   },
   "disable": {
     "message": "Devre dışı bırak"
+  },
+  "deactivate": {
+    "message": "Deactivate"
   },
   "twoStepLoginProviderEnabled": {
     "message": "Bu iki aşamalı giriş sağlayıcısı hesabınızda etkin durumda."
@@ -2226,6 +2241,12 @@
   "removeUserConfirmation": {
     "message": "Bu kullanıcıyı silmek istediğinizden emin misiniz?"
   },
+  "deactivateUserConfirmation": {
+    "message": "The member will no longer have access to the organization, but will still have access to their individual vault."
+  },
+  "activateUserConfirmation": {
+    "message": "Are you sure you want to activate this user, granting them access to the organization?"
+  },
   "removeUserConfirmationKeyConnector": {
     "message": "Uyarı! Bu kullanıcı, şifrelemelerini yönetmek için Key Connector'a ihtiyaç duyuyor. Bu kullanıcıyı kuruluşunuzdan çıkarırsanız hesabı kalıcı olarak devre dışı kalacaktır. Bu işlem geri alınamaz. Devam etmek istiyor musunuz?"
   },
@@ -2564,6 +2585,42 @@
   },
   "removedUserId": {
     "message": "Kullanıcı silindi: $ID$.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "deactivatedUserId": {
+    "message": "Deactivated user $ID$.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "activatedUserId": {
+    "message": "Activated user $ID$.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "deactivateUserId": {
+    "message": "Deactivate user $ID$?",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "activateUserId": {
+    "message": "Activate user $ID$?",
     "placeholders": {
       "id": {
         "content": "$1",
@@ -3111,7 +3168,7 @@
   "acceptPolicies": {
     "message": "Bu kutuyu işaretleyerek aşağıdakileri kabul etmiş olursunuz:"
   },
-  "acceptPoliciesError": {
+  "acceptPoliciesRequired": {
     "message": "Hizmet Koşulları ve Gizlilik Politikası kabul edilmemiş."
   },
   "termsOfService": {
@@ -3148,7 +3205,7 @@
     "message": "4 saat"
   },
   "onRefresh": {
-    "message": "On Browser Refresh"
+    "message": "On browser refresh"
   },
   "dateUpdated": {
     "message": "Güncelleme",
@@ -3617,6 +3674,9 @@
   },
   "disabled": {
     "message": "Devre dışı"
+  },
+  "deactivated": {
+    "message": "Deactivated"
   },
   "sendLink": {
     "message": "Send bağlantısı",
@@ -4219,6 +4279,12 @@
   "removeUsersWarning": {
     "message": "Aşağıdaki kullanıcıları kaldırmak istediğinize emin misiniz? İşlemin tamamlanması birkaç saniye sürer ve durdurulamaz veya iptal edilemez."
   },
+  "deactivateUsersWarning": {
+    "message": "Are you sure you want to deactivate the following members? They will no longer have access to the organization, but will still have access to their individual vaults. The process may take a few seconds to complete and cannot be interrupted or canceled."
+  },
+  "activateUsersWarning": {
+    "message": "Are you sure you want to activate the following members, granting them access to the organization? The process may take a few seconds to complete and cannot be interrupted or canceled."
+  },
   "theme": {
     "message": "Tema"
   },
@@ -4249,6 +4315,12 @@
   "bulkRemovedMessage": {
     "message": "Başarıyla kaldırıldı"
   },
+  "bulkDeactivatedMessage": {
+    "message": "Deactivated successfully"
+  },
+  "bulkActivatedMessage": {
+    "message": "Activated successfully"
+  },
   "bulkFilteredMessage": {
     "message": "İstisna. Bu eylem için geçerli değildir."
   },
@@ -4257,6 +4329,12 @@
   },
   "removeUsers": {
     "message": "Kullanıcıları kaldır"
+  },
+  "deactivateUsers": {
+    "message": "Deactivate Users"
+  },
+  "activateUsers": {
+    "message": "Activate Users"
   },
   "error": {
     "message": "Hata"
@@ -5094,6 +5172,30 @@
       "email": {
         "content": "$1",
         "example": "My Email"
+      }
+    }
+  },
+  "inputRequired": {
+    "message": "Girdi gerekli."
+  },
+  "inputEmail": {
+    "message": "Input is not an email-address."
+  },
+  "inputMinLength": {
+    "message": "Input must be at least $COUNT$ characters long.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "8"
+      }
+    }
+  },
+  "fieldsNeedAttention": {
+    "message": "$COUNT$ field(s) above need your attention.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
       }
     }
   }

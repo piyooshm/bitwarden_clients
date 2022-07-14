@@ -572,6 +572,9 @@
   "createAccount": {
     "message": "ಖಾತೆ ತೆರೆ"
   },
+  "startTrial": {
+    "message": "Start Trial"
+  },
   "logIn": {
     "message": "ಲಾಗಿನ್"
   },
@@ -592,6 +595,9 @@
   },
   "masterPassDesc": {
     "message": "ನಿಮ್ಮ ವಾಲ್ಟ್ ಅನ್ನು ಪ್ರವೇಶಿಸಲು ನೀವು ಬಳಸುವ ಪಾಸ್ವರ್ಡ್ ಮಾಸ್ಟರ್ ಪಾಸ್ವರ್ಡ್ ಆಗಿದೆ. ನಿಮ್ಮ ಮಾಸ್ಟರ್ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ನೀವು ಮರೆಯದಿರುವುದು ಬಹಳ ಮುಖ್ಯ. ನೀವು ಅದನ್ನು ಮರೆತ ಸಂದರ್ಭದಲ್ಲಿ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಮರುಪಡೆಯಲು ಯಾವುದೇ ಮಾರ್ಗವಿಲ್ಲ."
+  },
+  "masterPassImportant": {
+    "message": "Master passwords cannot be recovered if you forget it!"
   },
   "masterPassHintDesc": {
     "message": "ನಿಮ್ಮ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ನೀವು ಮರೆತರೆ ಅದನ್ನು ನೆನಪಿಟ್ಟುಕೊಳ್ಳಲು ಮಾಸ್ಟರ್ ಪಾಸ್‌ವರ್ಡ್ ಸುಳಿವು ನಿಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ."
@@ -623,11 +629,14 @@
   "invalidEmail": {
     "message": "ಅಮಾನ್ಯ ಇಮೇಲ್ ವಿಳಾಸ."
   },
-  "masterPassRequired": {
-    "message": "ಮಾಸ್ಟರ್ ಪಾಸ್ವರ್ಡ್ ಅಗತ್ಯವಿದೆ."
+  "masterPasswordRequired": {
+    "message": "Master password is required."
   },
-  "masterPassLength": {
-    "message": "ಮಾಸ್ಟರ್ ಪಾಸ್‌ವರ್ಡ್ ಕನಿಷ್ಠ 8 ಅಕ್ಷರಗಳಷ್ಟು ಉದ್ದವಾಗಿರಬೇಕು."
+  "confirmMasterPasswordRequired": {
+    "message": "Master password retype is required."
+  },
+  "masterPasswordMinLength": {
+    "message": "Master password must be at least 8 characters long."
   },
   "masterPassDoesntMatch": {
     "message": "ಮಾಸ್ಟರ್ ಪಾಸ್‌ವರ್ಡ್ ದೃಢೀಕರಣವು ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ."
@@ -1151,15 +1160,15 @@
   "languageDesc": {
     "message": "ವೆಬ್ ವಾಲ್ಟ್ ಬಳಸುವ ಭಾಷೆಯನ್ನು ಬದಲಾಯಿಸಿ."
   },
-  "disableIcons": {
-    "message": "ವೆಬ್‌ಸೈಟ್ ಚಿಹ್ನೆಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"
+  "enableFavicon": {
+    "message": "Show website icons"
   },
-  "disableIconsDesc": {
-    "message": "ವೆಬ್‌ಸೈಟ್ ಐಕಾನ್‌ಗಳು ನಿಮ್ಮ ವಾಲ್ಟ್‌ನಲ್ಲಿರುವ ಪ್ರತಿ ಲಾಗಿನ್ ಐಟಂನ ಪಕ್ಕದಲ್ಲಿ ಗುರುತಿಸಬಹುದಾದ ಚಿತ್ರವನ್ನು ಒದಗಿಸುತ್ತದೆ."
+  "faviconDesc": {
+    "message": "Show a recognizable image next to each login."
   },
   "enableGravatars": {
     "message": "Gravatars ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
-    "description": "'Gravatar' is the name of a service. See www.gravatar.com"
+    "description": "Use avatar images loaded from gravatar.com."
   },
   "enableGravatarsDesc": {
     "message": "Gravatar.com ನಿಂದ ಲೋಡ್ ಮಾಡಲಾದ ಅವತಾರ್ ಚಿತ್ರಗಳನ್ನು ಬಳಸಿ."
@@ -1238,6 +1247,9 @@
   "enabled": {
     "message": "ಸಕ್ರಿಯಗೊಳಿಸಿದೆ"
   },
+  "activate": {
+    "message": "Activate"
+  },
   "premium": {
     "message": "ಪ್ರೀಮಿಯಮ್",
     "description": "Premium Membership"
@@ -1262,6 +1274,9 @@
   },
   "disable": {
     "message": "ನಿಷ್‌ಕ್ರಿಯೆಗೊಳಿಸಿ"
+  },
+  "deactivate": {
+    "message": "Deactivate"
   },
   "twoStepLoginProviderEnabled": {
     "message": "ಈ ಎರಡು ಹಂತದ ಲಾಗಿನ್ ಒದಗಿಸುವವರನ್ನು ನಿಮ್ಮ ಖಾತೆಯಲ್ಲಿ ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ."
@@ -2226,6 +2241,12 @@
   "removeUserConfirmation": {
     "message": "ಈ ಬಳಕೆದಾರರನ್ನು ತೆಗೆದುಹಾಕಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?"
   },
+  "deactivateUserConfirmation": {
+    "message": "The member will no longer have access to the organization, but will still have access to their individual vault."
+  },
+  "activateUserConfirmation": {
+    "message": "Are you sure you want to activate this user, granting them access to the organization?"
+  },
   "removeUserConfirmationKeyConnector": {
     "message": "Warning! This user requires Key Connector to manage their encryption. Removing this user from your organization will permanently disable their account. This action cannot be undone. Do you want to proceed?"
   },
@@ -2564,6 +2585,42 @@
   },
   "removedUserId": {
     "message": "ತೆಗೆದುಹಾಕಲಾದ ಬಳಕೆದಾರ $ID$.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "deactivatedUserId": {
+    "message": "Deactivated user $ID$.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "activatedUserId": {
+    "message": "Activated user $ID$.",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "deactivateUserId": {
+    "message": "Deactivate user $ID$?",
+    "placeholders": {
+      "id": {
+        "content": "$1",
+        "example": "John Smith"
+      }
+    }
+  },
+  "activateUserId": {
+    "message": "Activate user $ID$?",
     "placeholders": {
       "id": {
         "content": "$1",
@@ -3111,8 +3168,8 @@
   "acceptPolicies": {
     "message": "ಈ ಪೆಟ್ಟಿಗೆಯನ್ನು ಪರಿಶೀಲಿಸುವ ಮೂಲಕ ನೀವು ಈ ಕೆಳಗಿನವುಗಳನ್ನು ಒಪ್ಪುತ್ತೀರಿ:"
   },
-  "acceptPoliciesError": {
-    "message": "ಸೇವಾ ನಿಯಮಗಳು ಮತ್ತು ಗೌಪ್ಯತೆ ನೀತಿಯನ್ನು ಅಂಗೀಕರಿಸಲಾಗಿಲ್ಲ."
+  "acceptPoliciesRequired": {
+    "message": "Terms of Service and Privacy Policy have not been acknowledged."
   },
   "termsOfService": {
     "message": "ಸೇವಾ ನಿಯಮಗಳು"
@@ -3617,6 +3674,9 @@
   },
   "disabled": {
     "message": "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ"
+  },
+  "deactivated": {
+    "message": "Deactivated"
   },
   "sendLink": {
     "message": "ಲಿಂಕ್ ಕಳುಹಿಸಿ",
@@ -4219,6 +4279,12 @@
   "removeUsersWarning": {
     "message": "ಕೆಳಗಿನ ಬಳಕೆದಾರರನ್ನು ತೆಗೆದುಹಾಕಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ? ಪ್ರಕ್ರಿಯೆಯು ಪೂರ್ಣಗೊಳ್ಳಲು ಕೆಲವು ಸೆಕೆಂಡುಗಳು ತೆಗೆದುಕೊಳ್ಳಬಹುದು ಮತ್ತು ಅದನ್ನು ಅಡ್ಡಿಪಡಿಸಲು ಅಥವಾ ರದ್ದುಗೊಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ."
   },
+  "deactivateUsersWarning": {
+    "message": "Are you sure you want to deactivate the following members? They will no longer have access to the organization, but will still have access to their individual vaults. The process may take a few seconds to complete and cannot be interrupted or canceled."
+  },
+  "activateUsersWarning": {
+    "message": "Are you sure you want to activate the following members, granting them access to the organization? The process may take a few seconds to complete and cannot be interrupted or canceled."
+  },
   "theme": {
     "message": "Theme"
   },
@@ -4249,6 +4315,12 @@
   "bulkRemovedMessage": {
     "message": "ಯಶಸ್ವಿಯಾಗಿ ತೆಗೆದುಹಾಕಲಾಗಿದೆ"
   },
+  "bulkDeactivatedMessage": {
+    "message": "Deactivated successfully"
+  },
+  "bulkActivatedMessage": {
+    "message": "Activated successfully"
+  },
   "bulkFilteredMessage": {
     "message": "ಹೊರಗಿಡಲಾಗಿದೆ, ಈ ಕ್ರಿಯೆಗೆ ಅನ್ವಯಿಸುವುದಿಲ್ಲ."
   },
@@ -4257,6 +4329,12 @@
   },
   "removeUsers": {
     "message": "ಬಳಕೆದಾರರನ್ನು ತೆಗೆದುಹಾಕಿ"
+  },
+  "deactivateUsers": {
+    "message": "Deactivate Users"
+  },
+  "activateUsers": {
+    "message": "Activate Users"
   },
   "error": {
     "message": "ದೋಷ"
@@ -5094,6 +5172,30 @@
       "email": {
         "content": "$1",
         "example": "My Email"
+      }
+    }
+  },
+  "inputRequired": {
+    "message": "Input is required."
+  },
+  "inputEmail": {
+    "message": "Input is not an email-address."
+  },
+  "inputMinLength": {
+    "message": "Input must be at least $COUNT$ characters long.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "8"
+      }
+    }
+  },
+  "fieldsNeedAttention": {
+    "message": "$COUNT$ field(s) above need your attention.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "4"
       }
     }
   }
