@@ -271,16 +271,11 @@ export class SettingsComponent implements OnInit {
     // The bug should resolve itself once the angular issue is resolved.
     // See: https://github.com/angular/angular/issues/13063
 
-    if (!newValue) {
+    if (!newValue || !this.supportsBiometric) {
       this.biometric = false;
       await this.stateService.setBiometricUnlock(null);
       await this.stateService.setBiometricLocked(false);
       await this.cryptoService.toggleKey();
-      return;
-    }
-
-    if (!this.supportsBiometric) {
-      this.biometric = false;
       return;
     }
 
