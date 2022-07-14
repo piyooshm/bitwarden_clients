@@ -268,6 +268,7 @@ export class SettingsComponent implements OnInit {
   async updateBiometric(newValue: boolean) {
     // NOTE: A bug in angular causes [ngModel] to not reflect the backing field value
     // causing the checkbox to remain checked even if authentication fails.
+    // The bug should resolve itself once the angular issue is resolved.
     // See: https://github.com/angular/angular/issues/13063
 
     if (!newValue) {
