@@ -11,7 +11,7 @@
       class="tw-w-11 tw-h-11 tw-flex-none tw-order-0 tw-flex-grow-0 tw-items-center tw-text-center"
     >
       <div #providedIcon>
-        <ng-content select="[bit-icon]"></ng-content>
+        <ng-content select="[bit-sm-icon]"></ng-content>
       </div>
       <ng-container *ngIf="!providedIcon?.children?.length">
         <i
@@ -24,19 +24,19 @@
     <div
       class="tw-w-full tw-max-h-full tw-non-italic tw-font-semibold tw-text-base tw-text-center tw-text-main tw-order-1 tw-flex-grow-0 tw-px-4 tw-flex-none"
     >
-      <ng-content select="[bit-title]"></ng-content>
+      <ng-content select="[bit-sm-title]"></ng-content>
     </div>
     <!--Simple Modal Message Container-->
     <div
       class="tw-w-full tw-max-h-full tw-non-italic tw-font-normal tw-text-base tw-text-center tw-text-main tw-order-2 tw-flex-grow-0 tw-px-4 tw-flex-auto tw-overflow-y-auto"
     >
-      <ng-content select="[bit-message]"></ng-content>
+      <ng-content select="[bit-sm-message]"></ng-content>
     </div>
   </div>
   <!--Simple Modal Footer-->
   <div
     class="tw-flex tw-flex-row tw-items-center tw-w-full tw-p-4 tw-gap-2 tw-max-h-full tw-flex-1 tw-order-1 tw-flex-grow-0 tw-border-solid tw-border-secondary-300 tw-border-0 tw-border-t"
   >
-    <ng-content select="[bit-footer]"></ng-content>
+    <ng-content select="[bit-sm-footer]"></ng-content>
   </div>
 </div>
