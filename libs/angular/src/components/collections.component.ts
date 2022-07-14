@@ -82,7 +82,7 @@ export class CollectionsComponent implements OnInit {
   protected async loadCollections() {
     const allCollections = await this.collectionService.getAllDecrypted();
     return allCollections.filter(
-      (c) => !c.readOnly && c.organizationId === this.cipher.organizationId
+      (c) => !c.readOnly && c.organizationId === this.cipher.organizationId && c.id != null
     );
   }
 
