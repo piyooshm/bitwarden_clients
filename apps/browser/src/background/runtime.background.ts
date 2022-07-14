@@ -16,7 +16,7 @@ import LockedVaultPendingNotificationsItem from "./models/lockedVaultPendingNoti
 export default class RuntimeBackground {
   private autofillTimeout: any;
   private pageDetailsToAutoFill: any[] = [];
-  private tabToAutoFill: any;
+  private tabToAutoFill: chrome.tabs.Tab;
   private onInstalledReason: string = null;
   private lockedVaultPendingNotifications: LockedVaultPendingNotificationsItem[] = [];
 

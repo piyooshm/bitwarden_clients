@@ -28,7 +28,7 @@ const BroadcasterSubscriptionId = "CurrentTabComponent";
 })
 export class CurrentTabComponent implements OnInit, OnDestroy {
   pageDetails: any[] = [];
-  tab: any;
+  tab: chrome.tabs.Tab;
   cardCiphers: CipherView[];
   identityCiphers: CipherView[];
   loginCiphers: CipherView[];
