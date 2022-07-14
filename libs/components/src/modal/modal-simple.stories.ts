@@ -25,7 +25,7 @@ const Template: Story<ModalSimpleComponent> = (args: ModalSimpleComponent) => ({
   props: args,
   template: `
   <bit-simple-modal>
-      <span bit-sm-title> Alert Modal Title
+      <span bit-sm-title> Alert Modal
       </span>
       <span bit-sm-message> Message Content
       </span>
@@ -62,7 +62,7 @@ const TemplateScroll: Story<ModalSimpleComponent> = (args: ModalSimpleComponent)
   props: args,
   template: `
   <bit-simple-modal>
-      <span bit-sm-title> Alert Modal Title
+      <span bit-sm-title> Alert Modal
       </span>
       <span bit-sm-message> Message Content
       Message text goes here.<br>

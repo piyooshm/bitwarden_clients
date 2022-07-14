@@ -1,34 +1,24 @@
-<!-- Popup shell -->
 <div
   [ngClass]="width"
-  class="tw-max-h-screen tw-my-4 tw-flex tw-flex-col tw-items-start tw-p-0 tw-bg-text-contrast tw-border tw-border-solid tw-border-secondary-300 tw-rounded tw-overflow-hidden"
+  class="tw-max-h-screen tw-my-4 tw-flex tw-flex-col tw-bg-text-contrast tw-border tw-border-solid tw-border-secondary-300 tw-rounded tw-text-main tw-overflow-hidden"
 >
-  <!-- Modal Header-->
   <div
-    class="tw-w-full tw-flex tw-flex-row tw-items-center tw-gap-4 tw-p-4 tw-max-h-full tw-border-0 tw-border-b tw-border-solid tw-border-secondary-300 tw-flex-none tw-self-stretch tw-grow-0"
+    class="tw-flex tw-gap-4 tw-p-4 tw-border-0 tw-border-b tw-border-solid tw-border-secondary-300 tw-text-main"
   >
-    <!-- Modal Title text container -->
-    <h2
-      class="tw-text-lg tw-font-normal tw-leading-7 tw-uppercase tw-flex tw-items-center tw-text-main tw-flex-none tw-order-none tw-grow tw-mb-0"
-    >
+    <h2 class="tw-text-lg tw-uppercase tw-flex tw-grow tw-mb-0">
       <ng-content select="[bit-modal-title]"></ng-content>
     </h2>
-    <!-- Modal Title close button container TODO: when implementing modal popup this should broadcast to close modal popup-->
-    <button class="tw-border-0 tw-bg-transparent tw-text-main tw-p-0">
+    <button class="tw-border-0 tw-bg-transparent tw-p-0">
       <i class="bwi bwi-close tw-text-xs tw-font-bold tw-text-main" aria-hidden="true"></i>
     </button>
   </div>
 
-  <!-- Modal Body-->
-  <div
-    class="tw-pb-8 tw-p-4 tw-w-full tw-flex tw-flex-col tw-order-1 tw-self-stretch tw-grow-0 tw-relative tw-flex-auto tw-overflow-y-auto tw-not-italic tw-font-normal tw-text-base tw-text-main"
-  >
+  <div class="tw-pb-8 tw-p-4 tw-w-full tw-relative tw-overflow-y-auto">
     <ng-content select="[bit-modal-body]"></ng-content>
   </div>
 
-  <!-- Modal Footer-->
   <div
-    class="tw-w-full tw-flex tw-flex-row tw-items-center tw-p-4 tw-gap-2 tw-max-h-full tw-bg-background-alt tw-flex-none tw-order-2 tw-self-stretch tw-grow-0 tw-border-solid tw-border-secondary-300 tw-border-0 tw-border-t"
+    class="tw-p-4 tw-bg-background-alt tw-border-solid tw-border-secondary-300 tw-border-0 tw-border-t"
   >
     <ng-content select="[bit-modal-footer]"></ng-content>
   </div>
