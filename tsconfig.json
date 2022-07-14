@@ -26,5 +26,6 @@
       }
     ]
   },
-  "include": ["apps/*/src/**/*.stories.ts", "libs/*/src/**/*.stories.ts"]
+  "include": ["apps/*/src/**/*.stories.ts", "libs/*/src/**/*"],
+  "exclude": ["apps/*/src/**/*.spec.ts", "libs/*/src/**/*.spec.ts"]
 }
