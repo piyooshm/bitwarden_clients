@@ -55,6 +55,11 @@ export class EventService implements EventServiceAbstraction {
         return;
       }
     }
+    if (organizationId != null) {
+      if (!orgIds.has(organizationId)) {
+        return;
+      }
+    }
     let eventCollection = await this.stateService.getEventCollection();
     if (eventCollection == null) {
       eventCollection = [];
