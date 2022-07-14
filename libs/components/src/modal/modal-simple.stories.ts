@@ -2,7 +2,7 @@ import { Meta, moduleMetadata, Story } from "@storybook/angular";
 
 import { ButtonModule } from "../button";
 
-import { ModalSimpleComponent } from "./modal-simple.component";
+import { IconDirective, ModalSimpleComponent } from "./modal-simple.component";
 
 export default {
   title: "Component Library/Modals/Simple Modal",
@@ -10,6 +10,7 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [ButtonModule],
+      declarations: [IconDirective],
     }),
   ],
   parameters: {

@@ -10,15 +10,13 @@
     <div
       class="tw-w-11 tw-h-11 tw-flex-none tw-order-0 tw-flex-grow-0 tw-items-center tw-text-center"
     >
-      <div #providedIcon>
-        <ng-content select="[bit-sm-icon]"></ng-content>
-      </div>
-      <ng-container *ngIf="!providedIcon?.children?.length">
+      <ng-content *ngIf="hasIcon; else elseBlock" select="[bit-sm-icon]"></ng-content>
+      <ng-template #elseBlock>
         <i
           class="bwi bwi-exclamation-triangle tw-text-3xl tw-text-warning tw-text-center"
           aria-hidden="true"
         ></i>
-      </ng-container>
+      </ng-template>
     </div>
     <!--Simple Modal Title Container-->
     <div
