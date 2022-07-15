@@ -1,5 +1,4 @@
 import { StateService } from "@bitwarden/common/abstractions/state.service";
-import { sequentialize } from "@bitwarden/common/misc/sequentialize";
 import { EnvironmentService } from "@bitwarden/common/services/environment.service";
 
 type GroupPolicyEnvironment = {
@@ -13,14 +12,8 @@ type GroupPolicyEnvironment = {
 };
 
 export class BrowserEnvironmentService extends EnvironmentService {
-  private _loaded = false;
-  private _cached: GroupPolicyEnvironment = null;
-
   constructor(stateService: StateService) {
     super(stateService);
-    // Loading managed environment is a very slow operation, so to avoid
-    //  performance issues we load it directly.
-    this.getManagedEnvironment();
   }
 
   async hasManagedEnvironment(): Promise<boolean> {
@@ -42,15 +35,8 @@ export class BrowserEnvironmentService extends EnvironmentService {
   }
 
   getManagedEnvironment(): Promise<GroupPolicyEnvironment> {
-    if (this._loaded) {
-      return Promise.resolve(this._cached);
-    }
-
     return new Promise((resolve) => {
       chrome.storage.managed.get("environment", (result) => {
-        this._loaded = true;
-        this._cached = result.environment;
-
         resolve(result.environment);
       });
     });
