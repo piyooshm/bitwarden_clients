@@ -60,6 +60,13 @@ export class FolderService implements FolderServiceAbstraction {
     return folders.find((folder) => folder.id === id);
   }
 
+  async getAllDecrypted(): Promise<FolderView[]> {
+    const data = await this.stateService.getEncryptedFolders();
+    const folders = Object.values(data || {}).map((f) => new Folder(f));
+
+    return this.decryptFolders(folders);
+  }
+
   async upsert(folder: FolderData | FolderData[]): Promise<void> {
     let folders = await this.stateService.getEncryptedFolders();
     if (folders == null) {
@@ -134,16 +141,20 @@ export class FolderService implements FolderServiceAbstraction {
     this._folders.next(folders);
 
     if (await this.cryptoService.hasKey()) {
-      const decryptFolderPromises = folders.map((f) => f.decrypt());
-      const decryptedFolders = await Promise.all(decryptFolderPromises);
-
-      decryptedFolders.sort(Utils.getSortFunction(this.i18nService, "name"));
-
-      const noneFolder = new FolderView();
-      noneFolder.name = this.i18nService.t("noneFolder");
-      decryptedFolders.push(noneFolder);
-
-      this._folderViews.next(decryptedFolders);
+      this._folderViews.next(await this.decryptFolders(folders));
     }
+  }
+
+  private async decryptFolders(folders: Folder[]) {
+    const decryptFolderPromises = folders.map((f) => f.decrypt());
+    const decryptedFolders = await Promise.all(decryptFolderPromises);
+
+    decryptedFolders.sort(Utils.getSortFunction(this.i18nService, "name"));
+
+    const noneFolder = new FolderView();
+    noneFolder.name = this.i18nService.t("noneFolder");
+    decryptedFolders.push(noneFolder);
+
+    return decryptedFolders;
   }
 }

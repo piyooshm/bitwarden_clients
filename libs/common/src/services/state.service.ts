@@ -74,6 +74,10 @@ export class StateService<
   ) {
     // If the account gets changed, verify the new account is unlocked
     this.activeAccount.subscribe(async (userId) => {
+      if (userId == null && this.activeAccountUnlocked.getValue() == false) {
+        return;
+      }
+
       this.activeAccountUnlocked.next((await this.getCryptoMasterKey()) != null);
     });
   }
