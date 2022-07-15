@@ -11,14 +11,14 @@ export class EnvironmentService implements EnvironmentServiceAbstraction {
   private readonly urlsSubject = new Subject<Urls>();
   urls: Observable<Urls> = this.urlsSubject;
 
-  private baseUrl: string;
-  private webVaultUrl: string;
-  private apiUrl: string;
-  private identityUrl: string;
-  private iconsUrl: string;
-  private notificationsUrl: string;
-  private eventsUrl: string;
-  private keyConnectorUrl: string;
+  protected baseUrl: string;
+  protected webVaultUrl: string;
+  protected apiUrl: string;
+  protected identityUrl: string;
+  protected iconsUrl: string;
+  protected notificationsUrl: string;
+  protected eventsUrl: string;
+  protected keyConnectorUrl: string;
 
   constructor(private stateService: StateService) {
     this.stateService.activeAccount.subscribe(async () => {
