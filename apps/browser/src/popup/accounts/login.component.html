@@ -64,6 +64,9 @@
         </div>
       </div>
     </div>
+    <p class="text-center text-muted" *ngIf="selfHostedDomain">
+      {{ "loggingInTo" | i18n: selfHostedDomain }}
+    </p>
     <p class="text-center">
       <a routerLink="/hint">{{ "getMasterPasswordHint" | i18n }}</a>
     </p>

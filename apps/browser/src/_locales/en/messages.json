@@ -1971,7 +1971,16 @@
   "organizationIsDisabled": {
     "message": "Organization is disabled."
   },
-  "disabledOrganizationFilterError" : {
+  "disabledOrganizationFilterError": {
     "message" : "Items in disabled Organizations cannot be accessed. Contact your Organization owner for assistance."
+  },
+  "loggingInTo": {
+    "message": "Logging in to $DOMAIN$",
+    "placeholders": {
+      "domain": {
+        "content": "$1",
+        "example": "example.com"
+      }
+    }
   }
 }
