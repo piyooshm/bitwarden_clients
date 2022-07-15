@@ -2,7 +2,7 @@ import { BehaviorSubject } from "rxjs";
 
 import { CipherService } from "../../abstractions/cipher.service";
 import { CryptoService } from "../../abstractions/crypto.service";
-import { FolderService as FolderServiceAbstraction } from "../../abstractions/folder/folder.service.abstraction";
+import { InternalFolderService as InternalFolderServiceAbstraction } from "../../abstractions/folder/folder.service.abstraction";
 import { I18nService } from "../../abstractions/i18n.service";
 import { StateService } from "../../abstractions/state.service";
 import { Utils } from "../../misc/utils";
@@ -12,7 +12,7 @@ import { Folder } from "../../models/domain/folder";
 import { SymmetricCryptoKey } from "../../models/domain/symmetricCryptoKey";
 import { FolderView } from "../../models/view/folderView";
 
-export class FolderService implements FolderServiceAbstraction {
+export class FolderService implements InternalFolderServiceAbstraction {
   private _folders: BehaviorSubject<Folder[]> = new BehaviorSubject([]);
   private _folderViews: BehaviorSubject<FolderView[]> = new BehaviorSubject([]);
 
