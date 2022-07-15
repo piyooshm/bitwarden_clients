@@ -80,16 +80,14 @@ export class ExcludedDomainsComponent implements OnInit, OnDestroy {
     const savedDomains: { [name: string]: null } = {};
     for (const domain of this.excludedDomains) {
       if (domain.uri && domain.uri !== "") {
-        const validDomain = Utils.getHostname(domain.uri);
-        if (!validDomain) {
-          this.platformUtilsService.showToast(
-            "error",
-            null,
-            this.i18nService.t("excludedDomainsInvalidDomain", domain.uri)
-          );
-          return;
-        }
-        savedDomains[validDomain] = null;
+        savedDomains[domain.uri] = null;
+      } else {
+        this.platformUtilsService.showToast(
+          "error",
+          null,
+          this.i18nService.t("excludedDomainsInvalidDomain", domain.uri)
+        );
+        return;
       }
     }
     await this.stateService.setNeverDomains(savedDomains);
