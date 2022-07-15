@@ -1,5 +1,7 @@
 import { CipherView } from "@bitwarden/common/models/view/cipherView";
 
+import AutofillField from "../../models/autofillField";
+import AutofillForm from "../../models/autofillForm";
 import AutofillPageDetails from "../../models/autofillPageDetails";
 
 export interface PageDetail {
@@ -19,8 +21,21 @@ export interface AutoFillOptions {
   skipLastUsed?: boolean;
 }
 
+export interface FormData {
+  form: AutofillForm;
+  password: AutofillField;
+  username: AutofillField;
+  passwords: AutofillField[];
+}
+
 export abstract class AutofillService {
-  getFormsWithPasswordFields: (pageDetails: AutofillPageDetails) => any[];
+  getFormsWithPasswordFields: (pageDetails: AutofillPageDetails) => FormData[];
   doAutoFill: (options: AutoFillOptions) => Promise<string>;
+  doAutoFillOnTab: (
+    pageDetails: PageDetail[],
+    tab: chrome.tabs.Tab,
+    fromCommand: boolean
+  ) => Promise<string>;
+  doAutoFillOnTabWithOptions: (options: AutoFillOptions, tab: chrome.tabs.Tab) => Promise<string>;
   doAutoFillActiveTab: (pageDetails: PageDetail[], fromCommand: boolean) => Promise<string>;
 }

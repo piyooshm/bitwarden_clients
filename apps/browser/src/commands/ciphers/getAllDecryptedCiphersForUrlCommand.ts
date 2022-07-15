@@ -8,8 +8,8 @@ import { Utils } from "@bitwarden/common/misc/utils";
 import { SortedCiphersCache } from "@bitwarden/common/models/domain/sortedCiphersCache";
 import { CipherView } from "@bitwarden/common/models/view/cipherView";
 
-import { StateService } from "src/services/abstractions/state.service";
-import I18nService from "src/services/i18n.service";
+import { StateService } from "../../services/abstractions/state.service";
+import I18nService from "../../services/i18n.service";
 
 import { GetAllDecryptedCiphersCommand } from "./getAllDecryptedCiphersCommand";
 

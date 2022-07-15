@@ -60,4 +60,24 @@ export class LoginView extends ItemView {
   get hasUris(): boolean {
     return this.uris != null && this.uris.length > 0;
   }
+
+  static initFromJson(jsonResult: LoginView) {
+    const loginView = new LoginView();
+    if (jsonResult == null) {
+      return loginView;
+    }
+
+    loginView.username = jsonResult.username;
+    loginView.password = jsonResult.password;
+    if (jsonResult.passwordRevisionDate) {
+      loginView.passwordRevisionDate = new Date(jsonResult.passwordRevisionDate);
+    }
+    loginView.totp = jsonResult.totp;
+    if (jsonResult.uris instanceof Array) {
+      loginView.uris = jsonResult.uris.map((l) => LoginUriView.initFromJson(l));
+    }
+    loginView.autofillOnPageLoad = jsonResult.autofillOnPageLoad;
+
+    return loginView;
+  }
 }

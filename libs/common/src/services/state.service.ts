@@ -601,7 +601,7 @@ export class StateService<
     );
   }
 
-  @withPrototypeForArrayMembers(CipherView)
+  @withPrototypeForArrayMembers(CipherView, CipherView.initFromJson)
   async getDecryptedCiphers(options?: StorageOptions): Promise<CipherView[]> {
     return (
       await this.getAccount(this.reconcileOptions(options, await this.defaultInMemoryOptions()))

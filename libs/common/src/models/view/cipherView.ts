@@ -131,4 +131,33 @@ export class CipherView implements View {
   linkedFieldI18nKey(id: LinkedIdType): string {
     return this.linkedFieldOptions.get(id)?.i18nKey;
   }
+
+  static initFromJson(jsonResult: CipherView): CipherView {
+    if (jsonResult == null) {
+      return jsonResult;
+    }
+
+    const cipher = new CipherView();
+    cipher.id = jsonResult.id;
+    cipher.organizationId = jsonResult.organizationId;
+    cipher.folderId = jsonResult.folderId;
+    cipher.favorite = jsonResult.favorite;
+    cipher.organizationUseTotp = jsonResult.organizationUseTotp;
+    cipher.edit = jsonResult.edit;
+    cipher.viewPassword = jsonResult.viewPassword;
+    cipher.type = jsonResult.type;
+    cipher.localData = jsonResult.localData;
+    cipher.collectionIds = jsonResult.collectionIds;
+    cipher.revisionDate = jsonResult.revisionDate;
+    cipher.deletedDate = jsonResult.deletedDate;
+    // Old locally stored ciphers might have reprompt == null. If so set it to None.
+    cipher.reprompt = jsonResult.reprompt ?? CipherRepromptType.None;
+
+    cipher.login = LoginView.initFromJson(jsonResult.login);
+    cipher.secureNote = jsonResult.secureNote; // TODO
+    cipher.card = jsonResult.card; // TODO
+    cipher.identity = jsonResult.identity; // TODO
+
+    return cipher;
+  }
 }

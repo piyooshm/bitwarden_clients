@@ -11,6 +11,8 @@ import { CipherView } from "../models/view/cipherView";
 import { SendView } from "../models/view/sendView";
 
 export class SearchService implements SearchServiceAbstraction {
+  private static registeredPipeline = false;
+
   indexedEntityId?: string = null;
   private indexing = false;
   private index: lunr.Index = null;
@@ -19,13 +21,19 @@ export class SearchService implements SearchServiceAbstraction {
   constructor(
     private cipherService: CipherService,
     private logService: LogService,
-    private i18nService: I18nService
+    i18nService: I18nService
   ) {
     if (["zh-CN", "zh-TW"].indexOf(i18nService.locale) !== -1) {
       this.searchableMinLength = 1;
     }
-    //register lunr pipeline function
-    lunr.Pipeline.registerFunction(this.normalizeAccentsPipelineFunction, "normalizeAccents");
+
+    // Currently have to ensure this is only done a single time. Lunr allows you to register a function
+    // multiple times but they will add a warning message to the console. The way they do that breaks when ran on a service worker.
+    if (!SearchService.registeredPipeline) {
+      SearchService.registeredPipeline = true;
+      //register lunr pipeline function
+      lunr.Pipeline.registerFunction(this.normalizeAccentsPipelineFunction, "normalizeAccents");
+    }
   }
 
   clearIndex(): void {
