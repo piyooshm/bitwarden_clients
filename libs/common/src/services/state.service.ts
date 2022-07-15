@@ -56,6 +56,7 @@ export class StateService<
 {
   accounts = new BehaviorSubject<{ [userId: string]: TAccount }>({});
   activeAccount = new BehaviorSubject<string>(null);
+  activeAccountUnlocked = new BehaviorSubject<boolean>(false);
 
   private hasBeenInited = false;
   private isRecoveredSession = false;
@@ -70,7 +71,12 @@ export class StateService<
     protected stateMigrationService: StateMigrationService,
     protected stateFactory: StateFactory<TGlobalState, TAccount>,
     protected useAccountCache: boolean = true
-  ) {}
+  ) {
+    // If the account gets changed, verify the new account is unlocked
+    this.activeAccount.subscribe(async (userId) => {
+      this.activeAccountUnlocked.next((await this.getCryptoMasterKey()) != null);
+    });
+  }
 
   async init(): Promise<void> {
     if (this.hasBeenInited) {
@@ -499,6 +505,10 @@ export class StateService<
       account,
       this.reconcileOptions(options, await this.defaultInMemoryOptions())
     );
+
+    if (options.userId == this.activeAccount.getValue()) {
+      this.activeAccountUnlocked.next(value != null);
+    }
   }
 
   async getCryptoMasterKeyAuto(options?: StorageOptions): Promise<string> {
