@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 
 import { ApiService } from "@bitwarden/common/abstractions/api.service";
@@ -19,6 +19,9 @@ import { OrganizationPlansComponent } from "src/app/settings/organization-plans.
   templateUrl: "./billing.component.html",
 })
 export class BillingComponent extends OrganizationPlansComponent {
+  @Input() orgInfoForm: FormGroup;
+  @Output() previousStep = new EventEmitter();
+
   constructor(
     apiService: ApiService,
     i18nService: I18nService,
@@ -48,6 +51,17 @@ export class BillingComponent extends OrganizationPlansComponent {
   }
 
   async ngOnInit() {
+    this.formGroup.patchValue({
+      name: this.orgInfoForm.get("name")?.value,
+      billingEmail: this.orgInfoForm.get("email")?.value,
+      additionalSeats: 1,
+      plan: this.plan,
+      product: this.product,
+    });
     await super.ngOnInit();
+  }
+
+  stepBack() {
+    this.previousStep.emit(null);
   }
 }

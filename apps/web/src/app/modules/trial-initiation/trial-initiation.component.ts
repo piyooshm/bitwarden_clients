@@ -24,11 +24,7 @@ export class TrialInitiationComponent implements OnInit {
 
   orgInfoFormGroup = this.formBuilder.group({
     name: ["", [Validators.required]],
-    additionalStorage: [0, [Validators.min(0), Validators.max(99)]],
-    additionalSeats: [0, [Validators.min(0), Validators.max(100000)]],
-    businessName: [""],
-    plan: [],
-    product: [],
+    email: [""],
   });
 
   constructor(
@@ -71,6 +67,11 @@ export class TrialInitiationComponent implements OnInit {
 
   createdAccount(email: string) {
     this.email = email;
+    this.orgInfoFormGroup.get("email")?.setValue(email);
     this.verticalStepper.next();
+  }
+
+  previousStep() {
+    this.verticalStepper.previous();
   }
 }

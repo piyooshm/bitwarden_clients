@@ -644,6 +644,9 @@
   "newAccountCreated": {
     "message": "Your new account has been created! You may now log in."
   },
+  "trialAccountCreated": {
+    "message": "Account created successfully."
+  },
   "masterPassSent": {
     "message": "We've sent you an email with your master password hint."
   },
