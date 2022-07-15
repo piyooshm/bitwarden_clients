@@ -28,15 +28,15 @@ export class TabItemComponent {
       "tw-border-solid",
       "tw-cursor-pointer",
       "tw-box-border",
-      "tw-text-main",
+      "!tw-text-main",
       "hover:tw-underline",
-      "hover:tw-text-main",
+      "hover:!tw-text-main",
       "focus:tw-z-10",
       "focus:tw-outline-none",
       "focus:tw-ring-2",
       "focus:tw-ring-primary-700",
       "disabled:tw-bg-secondary-100",
-      "disabled:tw-text-muted",
+      "disabled:!tw-text-muted",
       "disabled:tw-no-underline",
       "disabled:tw-cursor-not-allowed",
     ];
@@ -49,11 +49,11 @@ export class TabItemComponent {
       "tw-border-t-primary-500",
       "tw-border-b-transparent",
       "tw-bg-background",
-      "tw-text-primary-500",
+      "!tw-text-primary-500",
       "hover:tw-border-t-primary-700",
       "hover:!tw-text-primary-700",
       "focus:tw-border-t-primary-700",
-      "focus:tw-text-primary-700",
+      "focus:!tw-text-primary-700",
     ].join(" ");
   }
 }
