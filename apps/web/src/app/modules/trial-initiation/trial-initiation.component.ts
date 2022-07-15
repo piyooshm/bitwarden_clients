@@ -2,7 +2,7 @@ import { StepperSelectionEvent } from "@angular/cdk/stepper";
 import { TitleCasePipe } from "@angular/common";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { first } from "rxjs";
 
 import { VerticalStepperComponent } from "../vertical-stepper/vertical-stepper.component";
@@ -15,6 +15,7 @@ export class TrialInitiationComponent implements OnInit {
   email = "";
   org = "teams";
   orgInfoSubLabel = "";
+  orgId = "";
   @ViewChild("stepper", { static: true }) verticalStepper: VerticalStepperComponent;
 
   orgInfoFormGroup = this.formBuilder.group({
@@ -28,6 +29,7 @@ export class TrialInitiationComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    protected router: Router,
     private formBuilder: FormBuilder,
     private titleCasePipe: TitleCasePipe
   ) {}
@@ -56,5 +58,13 @@ export class TrialInitiationComponent implements OnInit {
   createdAccount(email: string) {
     this.email = email;
     this.verticalStepper.next();
+  }
+
+  navigateToOrgVault() {
+    this.router.navigate(["organizations", this.orgId, "vault"]);
+  }
+
+  navigateToOrgInvite() {
+    this.router.navigate(["organizations", this.orgId, "manage", "people"]);
   }
 }
