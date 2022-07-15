@@ -60,7 +60,7 @@ export class FolderService implements FolderServiceAbstraction {
     return folders.find((folder) => folder.id === id);
   }
 
-  async getAllDecrypted(): Promise<FolderView[]> {
+  async getAllDecryptedFromState(): Promise<FolderView[]> {
     const data = await this.stateService.getEncryptedFolders();
     const folders = Object.values(data || {}).map((f) => new Folder(f));
 

@@ -15,7 +15,7 @@ export abstract class FolderService {
   /**
    * @deprecated Only use in CLI!
    */
-  getAllDecrypted: () => Promise<FolderView[]>;
+  getAllDecryptedFromState: () => Promise<FolderView[]>;
 }
 
 export abstract class InternalFolderService extends FolderService {
