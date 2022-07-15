@@ -28,7 +28,7 @@ const Template: Story<ModalComponent> = (args: ModalComponent) => ({
   template: `
   <bit-modal [modalSize]="modalSize">
     <span bit-modal-title> Modal Title </span>
-    <span bit-modal-body>
+    <span bit-modal-content>
     Modal body text goes here.
     </span>
     <div bit-modal-footer class="tw-flex tw-flex-row tw-gap-2">
@@ -59,7 +59,7 @@ const TemplateScrolling: Story<ModalComponent> = (args: ModalComponent) => ({
   template: `
   <bit-modal [modalSize]="modalSize">
   <span bit-modal-title> Modal Title </span>
-  <span bit-modal-body>
+  <span bit-modal-content>
     Modal body text goes here.<br>
     <ng-container *ngFor="let _ of [].constructor(100)">
       repeating lines of characters <br>

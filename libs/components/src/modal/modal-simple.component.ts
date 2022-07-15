@@ -1,6 +1,6 @@
 import { Component, ContentChild, Directive } from "@angular/core";
 
-@Directive({ selector: "[bit-sm-icon]" })
+@Directive({ selector: "[bit-modal-icon]" })
 export class IconDirective {}
 
 @Component({

@@ -25,11 +25,11 @@ const Template: Story<ModalSimpleComponent> = (args: ModalSimpleComponent) => ({
   props: args,
   template: `
   <bit-simple-modal>
-      <span bit-sm-title> Alert Modal
+      <span bit-modal-title> Alert Modal
       </span>
-      <span bit-sm-message> Message Content
+      <span bit-modal-content> Message Content
       </span>
-      <div bit-sm-footer class="tw-flex tw-flex-row tw-gap-2">
+      <div bit-modal-footer class="tw-flex tw-flex-row tw-gap-2">
         <button bitButton buttonType="primary"> Yes </button>
         <button bitButton buttonType="secondary"> No </button>
       </div>
@@ -43,12 +43,12 @@ const TemplateWithIcon: Story<ModalSimpleComponent> = (args: ModalSimpleComponen
   props: args,
   template: `
   <bit-simple-modal>
-      <i bit-sm-icon class="bwi bwi-star tw-text-3xl tw-text-success" aria-hidden="true"></i>
-      <span bit-sm-title> Premium Subscription Available
+      <i bit-modal-icon class="bwi bwi-star tw-text-3xl tw-text-success" aria-hidden="true"></i>
+      <span bit-modal-title> Premium Subscription Available
       </span>
-      <span bit-sm-message> Message Content
+      <span bit-modal-content> Message Content
       </span>
-      <div bit-sm-footer class="tw-flex tw-flex-row tw-gap-2">
+      <div bit-modal-footer class="tw-flex tw-flex-row tw-gap-2">
         <button bitButton buttonType="primary"> Yes </button>
         <button bitButton buttonType="secondary"> No </button>
       </div>
@@ -62,16 +62,16 @@ const TemplateScroll: Story<ModalSimpleComponent> = (args: ModalSimpleComponent)
   props: args,
   template: `
   <bit-simple-modal>
-      <span bit-sm-title> Alert Modal
+      <span bit-modal-title> Alert Modal
       </span>
-      <span bit-sm-message> Message Content
+      <span bit-modal-content> Message Content
       Message text goes here.<br>
       <ng-container *ngFor="let _ of [].constructor(100)">
       repeating lines of characters <br>
       </ng-container>
       end of sequence!
       </span>
-      <div bit-sm-footer class="tw-flex tw-flex-row tw-gap-2">
+      <div bit-modal-footer class="tw-flex tw-flex-row tw-gap-2">
         <button bitButton buttonType="primary"> Yes </button>
         <button bitButton buttonType="secondary"> No </button>
       </div>
